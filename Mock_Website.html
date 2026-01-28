@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kenya Banditry Incident Database | Open Research Repository</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .nav-link {
+            transition: all 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #dc2626;
+        }
+        .section-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .active-section {
+            border-left: 4px solid #dc2626;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-800">Kenya Banditry Incident Database</h1>
+                    <p class="text-sm text-gray-600">Open-Source Research Repository & Analysis Platform</p>
+                </div>
+                <nav class="hidden md:flex space-x-6">
+                    <a href="#home" class="nav-link text-gray-700 font-medium">Home</a>
+                    <a href="#database" class="nav-link text-gray-700 font-medium">Database</a>
+                    <a href="#dashboard" class="nav-link text-gray-700 font-medium">Dashboard</a>
+                    <a href="#methodology" class="nav-link text-gray-700 font-medium">Methodology</a>
+                    <a href="#materials" class="nav-link text-gray-700 font-medium">Materials</a>
+                    <a href="#about" class="nav-link text-gray-700 font-medium">About</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="bg-gradient-to-r from-red-600 to-red-800 text-white py-20">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl">
+                <h2 class="text-4xl font-bold mb-4">Documenting & Analyzing Banditry in Kenya</h2>
+                <p class="text-xl mb-6 text-red-100">A comprehensive, open-access repository tracking reported banditry incidents across Kenya through systematic media monitoring and analysis.</p>
+                <div class="flex space-x-4">
+                    <a href="#database" class="bg-white text-red-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">Explore Database</a>
+                    <a href="#dashboard" class="border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-red-700 transition">View Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Stats -->
+    <section class="bg-white py-12 shadow-sm">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-red-600" id="totalIncidents">—</div>
+                    <div class="text-gray-600 mt-2">Total Incidents</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-red-600" id="affectedCounties">—</div>
+                    <div class="text-gray-600 mt-2">Affected Counties</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-red-600" id="lastUpdate">—</div>
+                    <div class="text-gray-600 mt-2">Last Updated</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-red-600" id="dataSources">—</div>
+                    <div class="text-gray-600 mt-2">Media Sources</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Database Section -->
+    <section id="database" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8">Incident Database</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <div class="flex flex-wrap gap-4 mb-6">
+                    <input type="text" id="searchBox" placeholder="Search by location, keyword..." class="flex-1 min-w-[200px] px-4 py-2 border rounded-lg">
+                    <select id="countyFilter" class="px-4 py-2 border rounded-lg">
+                        <option value="">All Counties</option>
+                        <option value="Turkana">Turkana</option>
+                        <option value="Baringo">Baringo</option>
+                        <option value="West Pokot">West Pokot</option>
+                        <option value="Samburu">Samburu</option>
+                        <option value="Laikipia">Laikipia</option>
+                        <option value="Elgeyo Marakwet">Elgeyo Marakwet</option>
+                    </select>
+                    <select id="yearFilter" class="px-4 py-2 border rounded-lg">
+                        <option value="">All Years</option>
+                        <option value="2024">2024</option>
+                        <option value="2023">2023</option>
+                        <option value="2022">2022</option>
+                    </select>
+                    <button onclick="exportData()" class="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition">Export CSV</button>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Date</th>
+                                <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">County</th>
+                                <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Location</th>
+                                <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Incident Type</th>
+                                <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Casualties</th>
+                                <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Source</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTable" class="divide-y divide-gray-200">
+                            <!-- Data will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="mt-4 text-sm text-gray-600">
+                    <p>Showing <span id="recordCount">0</span> incidents | <a href="#" class="text-red-600 hover:underline">Download full dataset (CSV)</a> | <a href="#" class="text-red-600 hover:underline">API Access</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8">Analytics Dashboard</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="bg-white border rounded-lg shadow p-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Incidents Over Time</h3>
+                    <canvas id="timeSeriesChart"></canvas>
+                </div>
+                
+                <div class="bg-white border rounded-lg shadow p-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Incidents by County</h3>
+                    <canvas id="countyChart"></canvas>
+                </div>
+                
+                <div class="bg-white border rounded-lg shadow p-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Incident Types Distribution</h3>
+                    <canvas id="incidentTypeChart"></canvas>
+                </div>
+                
+                <div class="bg-white border rounded-lg shadow p-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Casualty Trends</h3>
+                    <canvas id="casualtyChart"></canvas>
+                </div>
+            </div>
+
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                <p class="text-sm text-gray-700"><strong>Interactive Map Coming Soon:</strong> Geographic visualization of incidents across Kenya with filtering capabilities.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Methodology Section -->
+    <section id="methodology" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8">Methodology</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Data Collection</h3>
+                    <p class="text-gray-700 mb-4">Our database systematically tracks banditry incidents reported in Kenyan media sources. We employ a multi-source approach to ensure comprehensive coverage:</p>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Daily monitoring of national and regional newspapers</li>
+                        <li>Online news platforms and digital media outlets</li>
+                        <li>Radio broadcasts in affected regions</li>
+                        <li>Official government reports and press releases</li>
+                        <li>NGO and civil society documentation</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Incident Classification</h3>
+                    <p class="text-gray-700 mb-4">Each incident is coded according to standardized categories:</p>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li><strong>Livestock Raiding:</strong> Theft of cattle, goats, camels, etc.</li>
+                        <li><strong>Armed Attack:</strong> Direct assault on persons or property</li>
+                        <li><strong>Ambush:</strong> Surprise attacks on travelers or vehicles</li>
+                        <li><strong>Abduction:</strong> Kidnapping or hostage-taking</li>
+                        <li><strong>Displacement:</strong> Forced population movement</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Verification Process</h3>
+                    <p class="text-gray-700 mb-4">To ensure data quality and reliability:</p>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Cross-referencing multiple sources for each incident</li>
+                        <li>Verification of geographic locations using GPS coordinates where available</li>
+                        <li>Temporal accuracy checking against published dates</li>
+                        <li>Flagging of unconfirmed or disputed reports</li>
+                        <li>Regular dataset audits and corrections</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Limitations & Caveats</h3>
+                    <p class="text-gray-700 mb-4">Users should be aware of the following limitations:</p>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Media reporting bias toward high-casualty events</li>
+                        <li>Underreporting in remote or marginalized areas</li>
+                        <li>Delays in incident reporting and documentation</li>
+                        <li>Varying levels of detail across sources</li>
+                        <li>Potential for double-counting across sources</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-8 bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Codebook & Variables</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="px-4 py-2 text-left font-semibold">Variable</th>
+                                <th class="px-4 py-2 text-left font-semibold">Type</th>
+                                <th class="px-4 py-2 text-left font-semibold">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y">
+                            <tr><td class="px-4 py-2">incident_id</td><td class="px-4 py-2">String</td><td class="px-4 py-2">Unique identifier for each incident</td></tr>
+                            <tr><td class="px-4 py-2">date</td><td class="px-4 py-2">Date</td><td class="px-4 py-2">Date of incident occurrence</td></tr>
+                            <tr><td class="px-4 py-2">county</td><td class="px-4 py-2">Categorical</td><td class="px-4 py-2">County where incident occurred</td></tr>
+                            <tr><td class="px-4 py-2">location</td><td class="px-4 py-2">String</td><td class="px-4 py-2">Specific location/village name</td></tr>
+                            <tr><td class="px-4 py-2">incident_type</td><td class="px-4 py-2">Categorical</td><td class="px-4 py-2">Type of banditry incident</td></tr>
+                            <tr><td class="px-4 py-2">fatalities</td><td class="px-4 py-2">Integer</td><td class="px-4 py-2">Number of reported deaths</td></tr>
+                            <tr><td class="px-4 py-2">injuries</td><td class="px-4 py-2">Integer</td><td class="px-4 py-2">Number of reported injuries</td></tr>
+                            <tr><td class="px-4 py-2">livestock_stolen</td><td class="px-4 py-2">Integer</td><td class="px-4 py-2">Estimated number of livestock stolen</td></tr>
+                            <tr><td class="px-4 py-2">source_name</td><td class="px-4 py-2">String</td><td class="px-4 py-2">Media outlet reporting incident</td></tr>
+                            <tr><td class="px-4 py-2">source_url</td><td class="px-4 py-2">URL</td><td class="px-4 py-2">Link to original report</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Materials Section -->
+    <section id="materials" class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8">Research Materials</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Reports -->
+                <div class="bg-gray-50 rounded-lg p-6 border">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                        <svg class="w-6 h-6 mr-2 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        Reports & Briefs
+                    </h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-red-600 hover:underline">Annual Report 2024 (PDF)</a></li>
+                        <li><a href="#" class="text-red-600 hover:underline">Quarterly Brief Q4 2024 (PDF)</a></li>
+                        <li><a href="#" class="text-red-600 hover:underline">Regional Analysis: Rift Valley (PDF)</a></li>
+                        <li><a href="#" class="text-red-600 hover:underline">Policy Brief: Security Interventions (PDF)</a></li>
+                        <li><a href="#" class="text-red-600 hover:underline">Case Study: Baringo County (PDF)</a></li>
+                    </ul>
+                </div>
+
+                <!-- Academic Papers -->
+                <div class="bg-gray-50 rounded-lg p-6 border">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                        <svg class="w-6 h-6 mr-2 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
+                        Academic Publications
+                    </h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-red-600 hover:underline">"Patterns of Pastoral Violence in Northern Kenya" (2024)</a></li>
+                        <li><a href="#" class="text-red-600 hover:underline">"Media Coverage and Banditry Incidents" (2023)</a></li>
+                        <li><a href="#" class="text-red-600 hover:underline">"Economic Drivers of Cattle Raiding" (2023)</a></li>
+                        <li><a href="#" class="text-red-600 hover:underline">"State Response to Banditry: An Analysis" (2022)</a></li>
+                    </ul>
+                </div>
+
+                <!-- Data & Documentation -->
+                <div class="bg-gray-50 rounded-lg p-6 border">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                        <svg class="w-6 h-6 mr-2 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" />
+                        </svg>
+                        Data & Documentation
+                    </h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-red-600 hover:underline">Complete Dataset (CSV, 2020-2024)</a></li>
+                        <li><a href="#" class="text-red-600 hover:underline">Codebook & Variables Guide (PDF)</a></li>
+                        <li><a href="#" class="text-red-600 hover:underline">Data Collection Protocol (PDF)</a></li>
+                        <li><a href="#" class="text-red-600 hover:underline">API Documentation (HTML)</a></li>
+                        <li><a href="#" class="text-red-600 hover:underline">Replication Materials (ZIP)</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-8 bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded">
+                <p class="text-sm text-gray-700"><strong>Citation:</strong> When using this database, please cite: [Researcher Names]. (2025). Kenya Banditry Incident Database [Dataset]. Available at: [URL]</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8">About the Project</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h3 class="text-2xl font-semibold text-gray-800 mb-4">Project Overview</h3>
+                <p class="text-gray-700 mb-4">The Kenya Banditry Incident Database is an open-source research initiative dedicated to systematically documenting, analyzing, and disseminating information about banditry incidents in Kenya. By aggregating media reports and official sources, we aim to provide researchers, policymakers, journalists, and the public with reliable, comprehensive data on this critical security challenge.</p>
+                <p class="text-gray-700 mb-4">Banditry—encompassing livestock raiding, armed attacks, and violent conflicts over resources—has profound humanitarian, economic, and political consequences in Kenya's pastoral regions. Yet systematic data collection has been limited, hindering evidence-based responses. This project addresses that gap.</p>
+                <p class="text-gray-700">Our goals include: enhancing transparency around security incidents, enabling empirical research on conflict patterns, supporting evidence-based policymaking, and fostering public awareness and accountability.</p>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h3 class="text-2xl font-semibold text-gray-800 mb-6">Research Team</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="border-l-4 border-red-600 pl-4">
+                        <h4 class="text-lg font-semibold text-gray-800"></h4>
+                        <p class="text-sm text-gray-600 mb-2">Principal Investigator</p>
+                        <p class="text-sm text-gray-700"></p>
+                        <p class="text-sm text-gray-600 mt-2">Email: </p>
+                    </div>
+
+                    <div class="border-l-4 border-red-600 pl-4">
+                        <h4 class="text-lg font-semibold text-gray-800"></h4>
+                        <p class="text-sm text-gray-600 mb-2"></p>
+                        <p class="text-sm text-gray-700"></p>
+                        <p class="text-sm text-gray-600 mt-2">Email:</p>
+                    </div>
+
+                    <div class="border-l-4 border-red-600 pl-4">
+                        <h4 class="text-lg font-semibold text-gray-800"></h4>
+                        <p class="text-sm text-gray-600 mb-2"></p>
+                        <p class="text-sm text-gray-700"></p>
+                        <p class="text-sm text-gray-600 mt-2">Email: </p>
+                    </div>
+
+                    <div class="border-l-4 border-red-600 pl-4">
+                        <h4 class="text-lg font-semibold text-gray-800"></h4>
+                        <p class="text-sm text-gray-600 mb-2"></p>
+                        <p class="text-sm text-gray-700"></p>
+                        <p class="text-sm text-gray-600 mt-2">Email: </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Funding & Partners</h3>
+                    <p class="text-gray-700 mb-4">This project is supported by:</p>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Contact & Collaboration</h3>
+                    <p class="text-gray-700 mb-4">We welcome collaboration, feedback, and data sharing:</p>
+                    <ul class="space-y-2 text-gray-700">
+                        <li><strong>Email:</strong> </li>
+                        <li><strong>Twitter:</strong> </li>
+                        <li><strong>GitHub:</strong> </li>
+                        <li><strong>Newsletter:</strong> <a href="#" class="text-red-600 hover:underline">Subscribe for updates</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Kenya Banditry Database</h4>
+                    <p class="text-gray-400 text-sm">Open-source research repository documenting and analyzing banditry incidents in Kenya.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#database" class="text-gray-400 hover:text-white">Access Database</a></li>
+                        <li><a href="#methodology" class="text-gray-400 hover:text-white">Methodology</a></li>
+                        <li><a href="#materials" class="text-gray-400 hover:text-white">Research Materials</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Terms of Use</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">License</h4>
+                    <p class="text-gray-400 text-sm">This database is licensed under <a href="#" class="text-red-400 hover:underline">Creative Commons BY 4.0</a>. Free to use with attribution.</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-sm text-gray-400">
+                <p>&copy; 2025 Kenya Banditry Incident Database. Last updated: January 28, 2025</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sample data for demonstration
+        const sampleData = [
+            {id: 'KB001', date: '2024-01-15', county: 'Baringo', location: 'Kapedo', type: 'Livestock Raiding', fatalities: 3, injuries: 5, livestock: 200, source: 'Daily Nation', url: '#'},
+            {id: 'KB002', date: '2024-01-20', county: 'Turkana', location: 'Lokiriama', type: 'Armed Attack', fatalities: 2, injuries: 7, livestock: 0, source: 'The Standard', url: '#'},
+            {id: 'KB003', date: '2024-02-05', county: 'West Pokot', location: 'Kacheliba', type: 'Ambush', fatalities: 4, injuries: 3, livestock: 150, source: 'Nation Africa', url: '#'},
+            {id: 'KB004', date: '2024-02-12', county: 'Laikipia', location: 'Ol Moran', type: 'Livestock Raiding', fatalities: 1, injuries: 2, livestock: 300, source: 'Citizen Digital', url: '#'},
+            {id: 'KB005', date: '2024-03-01', county: 'Samburu', location: 'Baragoi', type: 'Armed Attack', fatalities: 5, injuries: 8, livestock: 0, source: 'KBC', url: '#'},
+            {id: 'KB006', date: '2024-03-18', county: 'Baringo', location: 'Tiaty', type: 'Displacement', fatalities: 0, injuries: 0, livestock: 500, source: 'Daily Nation', url: '#'},
+        ];
+
+        // Populate stats
+        document.getElementById('totalIncidents').textContent = '847';
+        document.getElementById('affectedCounties').textContent = '12';
+        document.getElementById('lastUpdate').textContent = 'Jan 28, 2025';
+        document.getElementById('dataSources').textContent = '45';
+
+        // Populate table
+        function populateTable(data = sampleData) {
+            const tbody = document.getElementById('dataTable');
+            tbody.innerHTML = data.map(incident => `
+                <tr class="hover:bg-gray-50">
+                    <td class="px-4 py-3 text-sm">${incident.date}</td>
+                    <td class="px-4 py-3 text-sm">${incident.county}</td>
+                    <td class="px-4 py-3 text-sm">${incident.location}</td>
+                    <td class="px-4 py-3 text-sm">${incident.type}</td>
+                    <td class="px-4 py-3 text-sm">${incident.fatalities} killed, ${incident.injuries} injured</td>
+                    <td class="px-4 py-3 text-sm"><a href="${incident.url}" class="text-red-600 hover:underline">${incident.source}</a></td>
+                </tr>
+            `).join('');
+            document.getElementById('recordCount').textContent = data.length;
+        }
+
+        populateTable();
+
+        // Charts
+        // Time Series Chart
+        const timeCtx = document.getElementById('timeSeriesChart').getContext('2d');
+        new Chart(timeCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [{
+                    label: 'Incidents',
+                    data: [45, 52, 48, 61, 55, 67, 72, 58, 63, 70, 68, 75],
+                    borderColor: 'rgb(220, 38, 38)',
+                    backgroundColor: 'rgba(220, 38, 38, 0.1)',
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+
+        // County Chart
+        const countyCtx = document.getElementById('countyChart').getContext('2d');
+        new Chart(countyCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Baringo', 'Turkana', 'West Pokot', 'Laikipia', 'Samburu', 'Elgeyo Marakwet'],
+                datasets: [{
+                    label: 'Incidents',
+                    data: [182, 165, 143, 98, 87, 72],
+                    backgroundColor: 'rgb(220, 38, 38)'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+
+        // Incident Type Chart
+        const typeCtx = document.getElementById('incidentTypeChart').getContext('2d');
+        new Chart(typeCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Livestock Raiding', 'Armed Attack', 'Ambush', 'Abduction', 'Displacement'],
+                datasets: [{
+                    data: [387, 245, 128, 52, 35],
+                    backgroundColor: ['#dc2626', '#f87171', '#fca5a5', '#fecaca', '#fee2e2']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true
+            }
+        });
+
+        // Casualty Chart
+        const casualtyCtx = document.getElementById('casualtyChart').getContext('2d');
+        new Chart(casualtyCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [{
+                    label: 'Fatalities',
+                    data: [23, 31, 28, 35, 29, 41, 38, 33, 37, 42, 39, 44],
+                    borderColor: 'rgb(220, 38, 38)',
+                    backgroundColor: 'rgba(220, 38, 38, 0.1)'
+                }, {
+                    label: 'Injuries',
+                    data: [45, 58, 52, 67, 61, 73, 69, 64, 71, 78, 75, 82],
+                    borderColor: 'rgb(251, 146, 60)',
+                    backgroundColor: 'rgba(251, 146, 60, 0.1)'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true
+            }
+        });
+
+        // Export function
+        function exportData() {
+            alert('CSV export functionality would download the complete dataset here.');
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
