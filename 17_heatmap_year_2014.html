@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_bf31f2066fa8777de4beef5f3d912c8b {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdn.jsdelivr.net/gh/python-visualization/folium@main/folium/templates/leaflet_heat.min.js"></script>
+</head>
+<body>
+    
+    
+        <h3 align="center" style="font-size:16px"><b>Kenya Event Concentration Heatmap - 2014</b></h3>
+        
+    
+            <div class="folium-map" id="map_bf31f2066fa8777de4beef5f3d912c8b" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_bf31f2066fa8777de4beef5f3d912c8b = L.map(
+                "map_bf31f2066fa8777de4beef5f3d912c8b",
+                {
+                    center: [0.0236, 37.9062],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 6,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+            L.control.scale().addTo(map_bf31f2066fa8777de4beef5f3d912c8b);
+
+            
+
+        
+    
+            var tile_layer_eccc2c3aab6f127285fcc9b90b5c1bd8 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_eccc2c3aab6f127285fcc9b90b5c1bd8.addTo(map_bf31f2066fa8777de4beef5f3d912c8b);
+        
+    
+            var tile_layer_e8fd843b74115c1e5801ef10c5eb6d80 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_e8fd843b74115c1e5801ef10c5eb6d80.addTo(map_bf31f2066fa8777de4beef5f3d912c8b);
+        
+    
+            var tile_layer_343d7fdd23ef244d1a301e81d9b2c07e = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_343d7fdd23ef244d1a301e81d9b2c07e.addTo(map_bf31f2066fa8777de4beef5f3d912c8b);
+        
+    
+            var heat_map_9d558363d4b12140dbf4fc377a16a59c = L.heatLayer(
+                [[1.246325, 35.8742111, 1.0], [0.4834851, 35.9904495, 1.0]],
+                {
+  "minOpacity": 0.35,
+  "maxZoom": 10,
+  "radius": 16,
+  "blur": 12,
+}
+            );
+        
+    
+            heat_map_9d558363d4b12140dbf4fc377a16a59c.addTo(map_bf31f2066fa8777de4beef5f3d912c8b);
+        
+    
+            var layer_control_de1e1901a513e782c1643d51f3b1a037_layers = {
+                base_layers : {
+                    "OpenStreetMap" : tile_layer_eccc2c3aab6f127285fcc9b90b5c1bd8,
+                    "CartoDB Positron" : tile_layer_e8fd843b74115c1e5801ef10c5eb6d80,
+                    "CartoDB Dark Matter" : tile_layer_343d7fdd23ef244d1a301e81d9b2c07e,
+                },
+                overlays :  {
+                    "Events 2014" : heat_map_9d558363d4b12140dbf4fc377a16a59c,
+                },
+            };
+            let layer_control_de1e1901a513e782c1643d51f3b1a037 = L.control.layers(
+                layer_control_de1e1901a513e782c1643d51f3b1a037_layers.base_layers,
+                layer_control_de1e1901a513e782c1643d51f3b1a037_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": true,
+  "autoZIndex": true,
+}
+            ).addTo(map_bf31f2066fa8777de4beef5f3d912c8b);
+
+        
+</script>
+</html>

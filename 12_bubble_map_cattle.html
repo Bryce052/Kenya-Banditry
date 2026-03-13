@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_bc18789ce3da6462c9b2947ccb5ce53e {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+        <h3 align="center" style="font-size:16px"><b>Kenya Bubble Map: Cattle Stolen</b></h3>
+        
+    
+            <div class="folium-map" id="map_bc18789ce3da6462c9b2947ccb5ce53e" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_bc18789ce3da6462c9b2947ccb5ce53e = L.map(
+                "map_bc18789ce3da6462c9b2947ccb5ce53e",
+                {
+                    center: [0.0236, 37.9062],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 6,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+            L.control.scale().addTo(map_bc18789ce3da6462c9b2947ccb5ce53e);
+
+            
+
+        
+    
+            var tile_layer_76b2bda385daa9a5f6916f1447cb888f = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_76b2bda385daa9a5f6916f1447cb888f.addTo(map_bc18789ce3da6462c9b2947ccb5ce53e);
+        
+    
+            var tile_layer_87d5ae4ddd94bfe732e1bd59d226aee5 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_87d5ae4ddd94bfe732e1bd59d226aee5.addTo(map_bc18789ce3da6462c9b2947ccb5ce53e);
+        
+    
+            var tile_layer_5b2fcdce8ee79a9a16eca85b6f1731e7 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_5b2fcdce8ee79a9a16eca85b6f1731e7.addTo(map_bc18789ce3da6462c9b2947ccb5ce53e);
+        
+    
+            var circle_marker_bcb3a37065b89507629c58d52b3af731 = L.circleMarker(
+                [3.0948134, 35.6295045],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.55, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 1}
+            ).addTo(map_bc18789ce3da6462c9b2947ccb5ce53e);
+        
+    
+        var popup_30b09e301870fd1c7808e15947c45b1a = L.popup({
+  "maxWidth": 400,
+});
+
+        
+            
+                var html_901dfccbd1ca6e46c905d277686881f6 = $(`<div id="html_901dfccbd1ca6e46c905d277686881f6" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px;">         <b>Document Code:</b> BED_N111<br>         <b>Year:</b> 2023.0<br>         <b>Month:</b> FEBRUARY<br>         <b>Place:</b> TURKANA;Turkana south<br>         <b>County (inferred):</b> TURKANA<br>         <b>Deaths:</b> 5.0<br>         <b>Injuries:</b> 1.0<br>         <b>Cattle Stolen:</b> 150.0<br>         <b>Abducted:</b> 0.0<br>         <b>Displaced:</b> 0.0<br>         <b>Weapon Type:</b> FIREARM<br>         <b>Weapon Details:</b> 0<br>         <b>Other Crime(s):</b> 0; 0; 0<br>         <b>Media House:</b> CITIZEN DIGITAL<br>         <b>Weblink:</b> https://www.citizen.digital/news/three-people-killed-after-bandits-spray-matatu-with-bullets-in-turkana-n314188<br>     </div>     </div>`)[0];
+                popup_30b09e301870fd1c7808e15947c45b1a.setContent(html_901dfccbd1ca6e46c905d277686881f6);
+            
+        
+
+        circle_marker_bcb3a37065b89507629c58d52b3af731.bindPopup(popup_30b09e301870fd1c7808e15947c45b1a)
+        ;
+
+        
+    
+    
+            circle_marker_bcb3a37065b89507629c58d52b3af731.bindTooltip(
+                `<div>
+                     TURKANA;Turkana south | cattle_stolen: 150.0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_84d228fb7d7093e7b00e34030074f557 = L.circleMarker(
+                [0.2858452, 36.8257711],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.55, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 1}
+            ).addTo(map_bc18789ce3da6462c9b2947ccb5ce53e);
+        
+    
+        var popup_68a4d03a52c0fa5e5ed4e56be265f758 = L.popup({
+  "maxWidth": 400,
+});
+
+        
+            
+                var html_e7f899cbd74338f69785cf19cc142347 = $(`<div id="html_e7f899cbd74338f69785cf19cc142347" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px;">         <b>Document Code:</b> BED_N131<br>         <b>Year:</b> 2021.0<br>         <b>Month:</b> OCTOBER<br>         <b>Place:</b> LAIKIPIA<br>         <b>County (inferred):</b> LAIKIPIA<br>         <b>Deaths:</b> 3.0<br>         <b>Injuries:</b> 1.0<br>         <b>Cattle Stolen:</b> 34.0<br>         <b>Abducted:</b> 0.0<br>         <b>Displaced:</b> 0.0<br>         <b>Weapon Type:</b> FIREARM<br>         <b>Weapon Details:</b> 0<br>         <b>Other Crime(s):</b> 0; 0; 0<br>         <b>Media House:</b> CITIZEN DIGITAL<br>         <b>Weblink:</b> https://www.citizen.digital/news/three-people-killed-another-injured-after-bandits-raid-a-home-in-laikipia-n285118<br>     </div>     </div>`)[0];
+                popup_68a4d03a52c0fa5e5ed4e56be265f758.setContent(html_e7f899cbd74338f69785cf19cc142347);
+            
+        
+
+        circle_marker_84d228fb7d7093e7b00e34030074f557.bindPopup(popup_68a4d03a52c0fa5e5ed4e56be265f758)
+        ;
+
+        
+    
+    
+            circle_marker_84d228fb7d7093e7b00e34030074f557.bindTooltip(
+                `<div>
+                     LAIKIPIA | cattle_stolen: 34.0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8e85e23082e72d0167b1b2ffbb4a7177 = L.circleMarker(
+                [0.2858452, 36.8257711],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.55, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 1}
+            ).addTo(map_bc18789ce3da6462c9b2947ccb5ce53e);
+        
+    
+        var popup_6922536786ff9cd7bbcb787f7cd995e5 = L.popup({
+  "maxWidth": 400,
+});
+
+        
+            
+                var html_041e126cdf298184f76562303de38d03 = $(`<div id="html_041e126cdf298184f76562303de38d03" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px;">         <b>Document Code:</b> BED_N132<br>         <b>Year:</b> 2021.0<br>         <b>Month:</b> SEPTEMBER<br>         <b>Place:</b> LAIKIPIA<br>         <b>County (inferred):</b> LAIKIPIA<br>         <b>Deaths:</b> 1.0<br>         <b>Injuries:</b> 0.0<br>         <b>Cattle Stolen:</b> 30.0<br>         <b>Abducted:</b> 0.0<br>         <b>Displaced:</b> 0.0<br>         <b>Weapon Type:</b> FIREARM<br>         <b>Weapon Details:</b> 0<br>         <b>Other Crime(s):</b> 0; 0; 0<br>         <b>Media House:</b> CITIZEN DIGITAL<br>         <b>Weblink:</b> https://www.citizen.digital/news/tension-after-a-60-year-old-man-shot-dead-in-ol-moran-by-suspected-bandits-13100894<br>     </div>     </div>`)[0];
+                popup_6922536786ff9cd7bbcb787f7cd995e5.setContent(html_041e126cdf298184f76562303de38d03);
+            
+        
+
+        circle_marker_8e85e23082e72d0167b1b2ffbb4a7177.bindPopup(popup_6922536786ff9cd7bbcb787f7cd995e5)
+        ;
+
+        
+    
+    
+            circle_marker_8e85e23082e72d0167b1b2ffbb4a7177.bindTooltip(
+                `<div>
+                     LAIKIPIA | cattle_stolen: 30.0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1c79fe8f73b97b4d5a7c22692f92ad57 = L.circleMarker(
+                [0.471367, 35.98519],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.55, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 1}
+            ).addTo(map_bc18789ce3da6462c9b2947ccb5ce53e);
+        
+    
+        var popup_492ef6cfe43c9a155a81004c9e421c17 = L.popup({
+  "maxWidth": 400,
+});
+
+        
+            
+                var html_81a80a93fcd51787540e2122a3bd3403 = $(`<div id="html_81a80a93fcd51787540e2122a3bd3403" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px;">         <b>Document Code:</b> BED_N138<br>         <b>Year:</b> 2019.0<br>         <b>Month:</b> MAY<br>         <b>Place:</b> BARINGO;Baringo south<br>         <b>County (inferred):</b> BARINGO<br>         <b>Deaths:</b> 0.0<br>         <b>Injuries:</b> 2.0<br>         <b>Cattle Stolen:</b> 300.0<br>         <b>Abducted:</b> 0.0<br>         <b>Displaced:</b> 0.0<br>         <b>Weapon Type:</b> FIREARM<br>         <b>Weapon Details:</b> AK47<br>         <b>Other Crime(s):</b> 0; 0; 0<br>         <b>Media House:</b> CITIZEN DIGITAL<br>         <b>Weblink:</b> https://www.citizen.digital/news/four-schools-closed-as-bandits-reign-terror-in-baringo-248471<br>     </div>     </div>`)[0];
+                popup_492ef6cfe43c9a155a81004c9e421c17.setContent(html_81a80a93fcd51787540e2122a3bd3403);
+            
+        
+
+        circle_marker_1c79fe8f73b97b4d5a7c22692f92ad57.bindPopup(popup_492ef6cfe43c9a155a81004c9e421c17)
+        ;
+
+        
+    
+    
+            circle_marker_1c79fe8f73b97b4d5a7c22692f92ad57.bindTooltip(
+                `<div>
+                     BARINGO;Baringo south | cattle_stolen: 300.0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_282852fc55b60997436bd97957fbb4a7 = L.circleMarker(
+                [0.492698, 35.7416813],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.55, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 1}
+            ).addTo(map_bc18789ce3da6462c9b2947ccb5ce53e);
+        
+    
+        var popup_2c6f6048e6fe18d56396a8f8ae0289d9 = L.popup({
+  "maxWidth": 400,
+});
+
+        
+            
+                var html_e6be532ff9742caa1ab975d7590682ad = $(`<div id="html_e6be532ff9742caa1ab975d7590682ad" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px;">         <b>Document Code:</b> BED_N145<br>         <b>Year:</b> 2017.0<br>         <b>Month:</b> MAY<br>         <b>Place:</b> BARINGO;Marigat<br>         <b>County (inferred):</b> BARINGO<br>         <b>Deaths:</b> 0.0<br>         <b>Injuries:</b> 0.0<br>         <b>Cattle Stolen:</b> 375.0<br>         <b>Abducted:</b> 0.0<br>         <b>Displaced:</b> 0.0<br>         <b>Weapon Type:</b> FIREARM<br>         <b>Weapon Details:</b> 0<br>         <b>Other Crime(s):</b> 0; 0; 0<br>         <b>Media House:</b> CITIZEN DIGITAL<br>         <b>Weblink:</b> https://www.citizen.digital/news/over-300-cows-stolen-as-bandits-strike-baringo-165226<br>     </div>     </div>`)[0];
+                popup_2c6f6048e6fe18d56396a8f8ae0289d9.setContent(html_e6be532ff9742caa1ab975d7590682ad);
+            
+        
+
+        circle_marker_282852fc55b60997436bd97957fbb4a7.bindPopup(popup_2c6f6048e6fe18d56396a8f8ae0289d9)
+        ;
+
+        
+    
+    
+            circle_marker_282852fc55b60997436bd97957fbb4a7.bindTooltip(
+                `<div>
+                     BARINGO;Marigat | cattle_stolen: 375.0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_01c6aa1fed5afda36c30715afb418b38 = L.circleMarker(
+                [3.5258945, 36.0742949],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.55, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 1}
+            ).addTo(map_bc18789ce3da6462c9b2947ccb5ce53e);
+        
+    
+        var popup_cd58e58b72e05d3543209d2fb375d71e = L.popup({
+  "maxWidth": 400,
+});
+
+        
+            
+                var html_f9928de56bc73870fb5a08027a1768ac = $(`<div id="html_f9928de56bc73870fb5a08027a1768ac" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px;">         <b>Document Code:</b> BED_N152<br>         <b>Year:</b> 2017.0<br>         <b>Month:</b> JANUARY<br>         <b>Place:</b> TURKANA;<br>         <b>County (inferred):</b> TURKANA<br>         <b>Deaths:</b> 3.0<br>         <b>Injuries:</b> 0.0<br>         <b>Cattle Stolen:</b> 100.0<br>         <b>Abducted:</b> 0.0<br>         <b>Displaced:</b> 0.0<br>         <b>Weapon Type:</b> FIREARM<br>         <b>Weapon Details:</b> 0<br>         <b>Other Crime(s):</b> 0; 0; 0<br>         <b>Media House:</b> CITIZEN DIGITAL<br>         <b>Weblink:</b> https://www.citizen.digital/news/police-chief-killed-as-bandits-strike-154430<br>     </div>     </div>`)[0];
+                popup_cd58e58b72e05d3543209d2fb375d71e.setContent(html_f9928de56bc73870fb5a08027a1768ac);
+            
+        
+
+        circle_marker_01c6aa1fed5afda36c30715afb418b38.bindPopup(popup_cd58e58b72e05d3543209d2fb375d71e)
+        ;
+
+        
+    
+    
+            circle_marker_01c6aa1fed5afda36c30715afb418b38.bindTooltip(
+                `<div>
+                     TURKANA; | cattle_stolen: 100.0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_32d4dfce7cb7483e79d60feb8c65194e = L.circleMarker(
+                [0.2858452, 36.8257711],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.55, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 1}
+            ).addTo(map_bc18789ce3da6462c9b2947ccb5ce53e);
+        
+    
+        var popup_b00765156e468314d2e74b602d667f71 = L.popup({
+  "maxWidth": 400,
+});
+
+        
+            
+                var html_f9f80685598c0a2d9e921baf38dee5a4 = $(`<div id="html_f9f80685598c0a2d9e921baf38dee5a4" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px;">         <b>Document Code:</b> BED_N159<br>         <b>Year:</b> 2015.0<br>         <b>Month:</b> APRIL<br>         <b>Place:</b> LAIKIPIA<br>         <b>County (inferred):</b> LAIKIPIA<br>         <b>Deaths:</b> 0.0<br>         <b>Injuries:</b> 0.0<br>         <b>Cattle Stolen:</b> 105.0<br>         <b>Abducted:</b> 0.0<br>         <b>Displaced:</b> 0.0<br>         <b>Weapon Type:</b> FIREARM<br>         <b>Weapon Details:</b> 0<br>         <b>Other Crime(s):</b> 0; 0; 0<br>         <b>Media House:</b> CITIZEN DIGITAL<br>         <b>Weblink:</b> https://www.citizen.digital/news/tension-high-in-laikipia-as-bandits-raid-village-68664<br>     </div>     </div>`)[0];
+                popup_b00765156e468314d2e74b602d667f71.setContent(html_f9f80685598c0a2d9e921baf38dee5a4);
+            
+        
+
+        circle_marker_32d4dfce7cb7483e79d60feb8c65194e.bindPopup(popup_b00765156e468314d2e74b602d667f71)
+        ;
+
+        
+    
+    
+            circle_marker_32d4dfce7cb7483e79d60feb8c65194e.bindTooltip(
+                `<div>
+                     LAIKIPIA | cattle_stolen: 105.0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1349d37d65f4d7f07da1e14b6e385ba2 = L.circleMarker(
+                [0.6400169, 37.6615139],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.55, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 1}
+            ).addTo(map_bc18789ce3da6462c9b2947ccb5ce53e);
+        
+    
+        var popup_f1e3cbbc40ed498fd87371e7db62338d = L.popup({
+  "maxWidth": 400,
+});
+
+        
+            
+                var html_49cbb9191dc24bee20f63deb92c15f02 = $(`<div id="html_49cbb9191dc24bee20f63deb92c15f02" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px;">         <b>Document Code:</b> BED_N179<br>         <b>Year:</b> 2023.0<br>         <b>Month:</b> DECEMBER<br>         <b>Place:</b> SAMBURU;Archers<br>         <b>County (inferred):</b> SAMBURU<br>         <b>Deaths:</b> 1.0<br>         <b>Injuries:</b> 0.0<br>         <b>Cattle Stolen:</b> 100.0<br>         <b>Abducted:</b> 0.0<br>         <b>Displaced:</b> 0.0<br>         <b>Weapon Type:</b> FIREARM<br>         <b>Weapon Details:</b> 0<br>         <b>Other Crime(s):</b> 5 POLICE CARS DESTROYED; 0; 0<br>         <b>Media House:</b> THE STAR<br>         <b>Weblink:</b> https://www.the-star.co.ke/news/2023-12-26-police-officer-killed-in-shootout-with-bandits-in-samburu/<br>     </div>     </div>`)[0];
+                popup_f1e3cbbc40ed498fd87371e7db62338d.setContent(html_49cbb9191dc24bee20f63deb92c15f02);
+            
+        
+
+        circle_marker_1349d37d65f4d7f07da1e14b6e385ba2.bindPopup(popup_f1e3cbbc40ed498fd87371e7db62338d)
+        ;
+
+        
+    
+    
+            circle_marker_1349d37d65f4d7f07da1e14b6e385ba2.bindTooltip(
+                `<div>
+                     SAMBURU;Archers | cattle_stolen: 100.0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a1eeecc78477ca469855f40706c823f0 = L.circleMarker(
+                [-0.2802724, 36.0712048],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.55, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 1}
+            ).addTo(map_bc18789ce3da6462c9b2947ccb5ce53e);
+        
+    
+        var popup_d07dc2ab180b16a8f537d61c9074ed91 = L.popup({
+  "maxWidth": 400,
+});
+
+        
+            
+                var html_31038e8e1288a4d616142798fb7d2ec8 = $(`<div id="html_31038e8e1288a4d616142798fb7d2ec8" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px;">         <b>Document Code:</b> BED_N192<br>         <b>Year:</b> 2023.0<br>         <b>Month:</b> JUNE<br>         <b>Place:</b> NAKURU<br>         <b>County (inferred):</b> NAKURU<br>         <b>Deaths:</b> 3.0<br>         <b>Injuries:</b> 0.0<br>         <b>Cattle Stolen:</b> 100.0<br>         <b>Abducted:</b> 0.0<br>         <b>Displaced:</b> 0.0<br>         <b>Weapon Type:</b> FIREARM<br>         <b>Weapon Details:</b> AK47<br>         <b>Other Crime(s):</b> 0; 0; 0<br>         <b>Media House:</b> THE STAR<br>         <b>Weblink:</b> https://www.the-star.co.ke/news/2023-06-06-man-dies-after-arrow-attack-in-subukia-nakuru/<br>     </div>     </div>`)[0];
+                popup_d07dc2ab180b16a8f537d61c9074ed91.setContent(html_31038e8e1288a4d616142798fb7d2ec8);
+            
+        
+
+        circle_marker_a1eeecc78477ca469855f40706c823f0.bindPopup(popup_d07dc2ab180b16a8f537d61c9074ed91)
+        ;
+
+        
+    
+    
+            circle_marker_a1eeecc78477ca469855f40706c823f0.bindTooltip(
+                `<div>
+                     NAKURU | cattle_stolen: 100.0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_acb5c51160eb6a81a618e49f314a56c8 = L.circleMarker(
+                [0.6184995, 36.1182885],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.55, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 1}
+            ).addTo(map_bc18789ce3da6462c9b2947ccb5ce53e);
+        
+    
+        var popup_d2488c2909c722e211dbeb3957d5d856 = L.popup({
+  "maxWidth": 400,
+});
+
+        
+            
+                var html_c0347344185a68e634c515e132c6b23b = $(`<div id="html_c0347344185a68e634c515e132c6b23b" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px;">         <b>Document Code:</b> BED_N198<br>         <b>Year:</b> 2023.0<br>         <b>Month:</b> MARCH<br>         <b>Place:</b> BARINGO;Baringo north<br>         <b>County (inferred):</b> BARINGO<br>         <b>Deaths:</b> 1.0<br>         <b>Injuries:</b> 0.0<br>         <b>Cattle Stolen:</b> 313.0<br>         <b>Abducted:</b> 0.0<br>         <b>Displaced:</b> 0.0<br>         <b>Weapon Type:</b> FIREARM<br>         <b>Weapon Details:</b> 0<br>         <b>Other Crime(s):</b> 0; 0; 0<br>         <b>Media House:</b> THE STAR<br>         <b>Weblink:</b> https://www.the-star.co.ke/news/realtime/2023-03-17-security-team-recovers-livestock-stolen-by-bandits/<br>     </div>     </div>`)[0];
+                popup_d2488c2909c722e211dbeb3957d5d856.setContent(html_c0347344185a68e634c515e132c6b23b);
+            
+        
+
+        circle_marker_acb5c51160eb6a81a618e49f314a56c8.bindPopup(popup_d2488c2909c722e211dbeb3957d5d856)
+        ;
+
+        
+    
+    
+            circle_marker_acb5c51160eb6a81a618e49f314a56c8.bindTooltip(
+                `<div>
+                     BARINGO;Baringo north | cattle_stolen: 313.0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a05da2b703f1215550aeb6338c233b56 = L.circleMarker(
+                [0.2858452, 36.8257711],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.55, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 1}
+            ).addTo(map_bc18789ce3da6462c9b2947ccb5ce53e);
+        
+    
+        var popup_f34fcb1f81314ef7012543fde79447b4 = L.popup({
+  "maxWidth": 400,
+});
+
+        
+            
+                var html_c2ee609c06d1fc92d3c68702ab3338e9 = $(`<div id="html_c2ee609c06d1fc92d3c68702ab3338e9" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px;">         <b>Document Code:</b> BED_N202<br>         <b>Year:</b> 2023.0<br>         <b>Month:</b> MARCH<br>         <b>Place:</b> LAIKIPIA<br>         <b>County (inferred):</b> LAIKIPIA<br>         <b>Deaths:</b> 1.0<br>         <b>Injuries:</b> 0.0<br>         <b>Cattle Stolen:</b> 128.0<br>         <b>Abducted:</b> 0.0<br>         <b>Displaced:</b> 0.0<br>         <b>Weapon Type:</b> FIREARM<br>         <b>Weapon Details:</b> 0<br>         <b>Other Crime(s):</b> 0; 0; 0<br>         <b>Media House:</b> THE STAR<br>         <b>Weblink:</b> https://www.the-star.co.ke/news/realtime/2023-03-13-gunmen-kill-one-in-laikipia-steal-128-cows-and-sheep/<br>     </div>     </div>`)[0];
+                popup_f34fcb1f81314ef7012543fde79447b4.setContent(html_c2ee609c06d1fc92d3c68702ab3338e9);
+            
+        
+
+        circle_marker_a05da2b703f1215550aeb6338c233b56.bindPopup(popup_f34fcb1f81314ef7012543fde79447b4)
+        ;
+
+        
+    
+    
+            circle_marker_a05da2b703f1215550aeb6338c233b56.bindTooltip(
+                `<div>
+                     LAIKIPIA | cattle_stolen: 128.0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d5a8a990f5e6b21e45b84d0c66acb9f0 = L.circleMarker(
+                [3.0948134, 35.6295045],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.55, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 1}
+            ).addTo(map_bc18789ce3da6462c9b2947ccb5ce53e);
+        
+    
+        var popup_6636395cfdec0af01d260b7e6daead5d = L.popup({
+  "maxWidth": 400,
+});
+
+        
+            
+                var html_403c848c7f790ed6e05ac6355d4e16ac = $(`<div id="html_403c848c7f790ed6e05ac6355d4e16ac" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px;">         <b>Document Code:</b> BED_N211<br>         <b>Year:</b> 2023.0<br>         <b>Month:</b> FEBRUARY<br>         <b>Place:</b> TURKANA;Turkana south<br>         <b>County (inferred):</b> TURKANA<br>         <b>Deaths:</b> 8.0<br>         <b>Injuries:</b> 7.0<br>         <b>Cattle Stolen:</b> 150.0<br>         <b>Abducted:</b> 0.0<br>         <b>Displaced:</b> 0.0<br>         <b>Weapon Type:</b> FIREARM<br>         <b>Weapon Details:</b> 0<br>         <b>Other Crime(s):</b> 0; 0; 0<br>         <b>Media House:</b> THE STAR<br>         <b>Weblink:</b> https://www.the-star.co.ke/news/realtime/2023-02-11-three-security-officers-killed-seven-injured-by-suspected-pokot-bandits/<br>     </div>     </div>`)[0];
+                popup_6636395cfdec0af01d260b7e6daead5d.setContent(html_403c848c7f790ed6e05ac6355d4e16ac);
+            
+        
+
+        circle_marker_d5a8a990f5e6b21e45b84d0c66acb9f0.bindPopup(popup_6636395cfdec0af01d260b7e6daead5d)
+        ;
+
+        
+    
+    
+            circle_marker_d5a8a990f5e6b21e45b84d0c66acb9f0.bindTooltip(
+                `<div>
+                     TURKANA;Turkana south | cattle_stolen: 150.0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3e7259843f25dc2a5fec4236ecb7b12c = L.circleMarker(
+                [-0.314933, 38.2215708],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.55, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 1}
+            ).addTo(map_bc18789ce3da6462c9b2947ccb5ce53e);
+        
+    
+        var popup_37cad50264e5a92056972100ee89fa94 = L.popup({
+  "maxWidth": 400,
+});
+
+        
+            
+                var html_52d9ce5a85e8bc833151c5b55af1d698 = $(`<div id="html_52d9ce5a85e8bc833151c5b55af1d698" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px;">         <b>Document Code:</b> BED_N220<br>         <b>Year:</b> 2022.0<br>         <b>Month:</b> NOVEMBER<br>         <b>Place:</b> KITUI;Mwingi North<br>         <b>County (inferred):</b> KITUI<br>         <b>Deaths:</b> 0.0<br>         <b>Injuries:</b> 1.0<br>         <b>Cattle Stolen:</b> 100.0<br>         <b>Abducted:</b> 0.0<br>         <b>Displaced:</b> 0.0<br>         <b>Weapon Type:</b> MACHETE<br>         <b>Weapon Details:</b> SIMI<br>         <b>Other Crime(s):</b> 0; 0; 0<br>         <b>Media House:</b> THE STAR<br>         <b>Weblink:</b> https://www.the-star.co.ke/news/2022-11-13-mwingi-locals-flee-homes-as-violent-camel-herders-invade-villages/<br>     </div>     </div>`)[0];
+                popup_37cad50264e5a92056972100ee89fa94.setContent(html_52d9ce5a85e8bc833151c5b55af1d698);
+            
+        
+
+        circle_marker_3e7259843f25dc2a5fec4236ecb7b12c.bindPopup(popup_37cad50264e5a92056972100ee89fa94)
+        ;
+
+        
+    
+    
+            circle_marker_3e7259843f25dc2a5fec4236ecb7b12c.bindTooltip(
+                `<div>
+                     KITUI;Mwingi North | cattle_stolen: 100.0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_143248d3e5c904e8c68616edf3dde845 = L.circleMarker(
+                [0.2858452, 36.8257711],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.55, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 1}
+            ).addTo(map_bc18789ce3da6462c9b2947ccb5ce53e);
+        
+    
+        var popup_669c5718299ddafc731ba68356a48695 = L.popup({
+  "maxWidth": 400,
+});
+
+        
+            
+                var html_84af0f9a30fff20be9c17312e2bb9e5e = $(`<div id="html_84af0f9a30fff20be9c17312e2bb9e5e" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px;">         <b>Document Code:</b> BED_N221<br>         <b>Year:</b> 2022.0<br>         <b>Month:</b> NOVEMBER<br>         <b>Place:</b> LAIKIPIA<br>         <b>County (inferred):</b> LAIKIPIA<br>         <b>Deaths:</b> 1.0<br>         <b>Injuries:</b> 0.0<br>         <b>Cattle Stolen:</b> 100.0<br>         <b>Abducted:</b> 0.0<br>         <b>Displaced:</b> 0.0<br>         <b>Weapon Type:</b> FIREARM<br>         <b>Weapon Details:</b> 0<br>         <b>Other Crime(s):</b> 0; 0; 0<br>         <b>Media House:</b> THE STAR<br>         <b>Weblink:</b> https://www.the-star.co.ke/news/2022-11-11-bandits-kill-woman-steal-her-100-goats-and-sheep-in-laikipia/<br>     </div>     </div>`)[0];
+                popup_669c5718299ddafc731ba68356a48695.setContent(html_84af0f9a30fff20be9c17312e2bb9e5e);
+            
+        
+
+        circle_marker_143248d3e5c904e8c68616edf3dde845.bindPopup(popup_669c5718299ddafc731ba68356a48695)
+        ;
+
+        
+    
+    
+            circle_marker_143248d3e5c904e8c68616edf3dde845.bindTooltip(
+                `<div>
+                     LAIKIPIA | cattle_stolen: 100.0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_de8781cb685a22ef37438664e69ac49c = L.circleMarker(
+                [0.471367, 35.98519],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.55, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 1}
+            ).addTo(map_bc18789ce3da6462c9b2947ccb5ce53e);
+        
+    
+        var popup_3309758c994a5e3040ca65ff3f846ab5 = L.popup({
+  "maxWidth": 400,
+});
+
+        
+            
+                var html_b6a3f838f1bbf29cb2de81bc35c6b740 = $(`<div id="html_b6a3f838f1bbf29cb2de81bc35c6b740" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px;">         <b>Document Code:</b> BED_N252<br>         <b>Year:</b> 2022.0<br>         <b>Month:</b> MAY<br>         <b>Place:</b> BARINGO;Baringo south<br>         <b>County (inferred):</b> BARINGO<br>         <b>Deaths:</b> 4.0<br>         <b>Injuries:</b> 0.0<br>         <b>Cattle Stolen:</b> 500.0<br>         <b>Abducted:</b> 0.0<br>         <b>Displaced:</b> 0.0<br>         <b>Weapon Type:</b> FIREARM<br>         <b>Weapon Details:</b> 0<br>         <b>Other Crime(s):</b> 0; 0; 0<br>         <b>Media House:</b> THE STAR<br>         <b>Weblink:</b> https://www.the-star.co.ke/counties/2022-05-18-bandity-deaths-hit-20-this-year-baringo-begs-for-help/<br>     </div>     </div>`)[0];
+                popup_3309758c994a5e3040ca65ff3f846ab5.setContent(html_b6a3f838f1bbf29cb2de81bc35c6b740);
+            
+        
+
+        circle_marker_de8781cb685a22ef37438664e69ac49c.bindPopup(popup_3309758c994a5e3040ca65ff3f846ab5)
+        ;
+
+        
+    
+    
+            circle_marker_de8781cb685a22ef37438664e69ac49c.bindTooltip(
+                `<div>
+                     BARINGO;Baringo south | cattle_stolen: 500.0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cd5f83d4a12a349ded2f09c03a505061 = L.circleMarker(
+                [0.6184995, 36.1182885],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.55, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 1}
+            ).addTo(map_bc18789ce3da6462c9b2947ccb5ce53e);
+        
+    
+        var popup_e9c1c2261270039deb25de7e63820523 = L.popup({
+  "maxWidth": 400,
+});
+
+        
+            
+                var html_9d0f9430d4f5d4aac6ba3f97cca793ee = $(`<div id="html_9d0f9430d4f5d4aac6ba3f97cca793ee" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px;">         <b>Document Code:</b> BED_N254<br>         <b>Year:</b> 2022.0<br>         <b>Month:</b> APRIL<br>         <b>Place:</b> BARINGO;Baringo north<br>         <b>County (inferred):</b> BARINGO<br>         <b>Deaths:</b> 4.0<br>         <b>Injuries:</b> 1.0<br>         <b>Cattle Stolen:</b> 89.0<br>         <b>Abducted:</b> 0.0<br>         <b>Displaced:</b> 0.0<br>         <b>Weapon Type:</b> FIREARM<br>         <b>Weapon Details:</b> 0<br>         <b>Other Crime(s):</b> 0; 0; 0<br>         <b>Media House:</b> THE STAR<br>         <b>Weblink:</b> https://www.the-star.co.ke/news/2022-04-28-three-killed-one-injured-in-baringo-banditry-attack/<br>     </div>     </div>`)[0];
+                popup_e9c1c2261270039deb25de7e63820523.setContent(html_9d0f9430d4f5d4aac6ba3f97cca793ee);
+            
+        
+
+        circle_marker_cd5f83d4a12a349ded2f09c03a505061.bindPopup(popup_e9c1c2261270039deb25de7e63820523)
+        ;
+
+        
+    
+    
+            circle_marker_cd5f83d4a12a349ded2f09c03a505061.bindTooltip(
+                `<div>
+                     BARINGO;Baringo north | cattle_stolen: 89.0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cfcd9d23fa30fd0a003f8af3d921c749 = L.circleMarker(
+                [0.471523, 35.98473],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.55, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 1}
+            ).addTo(map_bc18789ce3da6462c9b2947ccb5ce53e);
+        
+    
+        var popup_c337541093e073c2f25df3cf63955db1 = L.popup({
+  "maxWidth": 400,
+});
+
+        
+            
+                var html_797373ed56d4b71ba01aab9cbfdb5f1b = $(`<div id="html_797373ed56d4b71ba01aab9cbfdb5f1b" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px;">         <b>Document Code:</b> BED_N284<br>         <b>Year:</b> 2022.0<br>         <b>Month:</b> JANUARY<br>         <b>Place:</b> BARINGO;Baringo South<br>         <b>County (inferred):</b> BARINGO<br>         <b>Deaths:</b> 1.0<br>         <b>Injuries:</b> 0.0<br>         <b>Cattle Stolen:</b> 48.0<br>         <b>Abducted:</b> 0.0<br>         <b>Displaced:</b> 0.0<br>         <b>Weapon Type:</b> FIREARM<br>         <b>Weapon Details:</b> 0<br>         <b>Other Crime(s):</b> 0; 0; 0<br>         <b>Media House:</b> THE STAR<br>         <b>Weblink:</b> https://www.the-star.co.ke/news/2022-01-12-bandits-raid-baringo-north-village-steal-242-goats-in-fresh-attack/<br>     </div>     </div>`)[0];
+                popup_c337541093e073c2f25df3cf63955db1.setContent(html_797373ed56d4b71ba01aab9cbfdb5f1b);
+            
+        
+
+        circle_marker_cfcd9d23fa30fd0a003f8af3d921c749.bindPopup(popup_c337541093e073c2f25df3cf63955db1)
+        ;
+
+        
+    
+    
+            circle_marker_cfcd9d23fa30fd0a003f8af3d921c749.bindTooltip(
+                `<div>
+                     BARINGO;Baringo South | cattle_stolen: 48.0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f25b1fde253b08012a68f3c16c641e9a = L.circleMarker(
+                [0.0842108, 37.6490179],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.55, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 1}
+            ).addTo(map_bc18789ce3da6462c9b2947ccb5ce53e);
+        
+    
+        var popup_920c2097739df943b5ea062b808cbbf3 = L.popup({
+  "maxWidth": 400,
+});
+
+        
+            
+                var html_8fa2331901c360410cda457bd04150db = $(`<div id="html_8fa2331901c360410cda457bd04150db" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px;">         <b>Document Code:</b> BED_N295<br>         <b>Year:</b> 2021.0<br>         <b>Month:</b> MAY<br>         <b>Place:</b> MERU;Igembe Central<br>         <b>County (inferred):</b> MERU<br>         <b>Deaths:</b> 2.0<br>         <b>Injuries:</b> 0.0<br>         <b>Cattle Stolen:</b> 25.0<br>         <b>Abducted:</b> 0.0<br>         <b>Displaced:</b> 0.0<br>         <b>Weapon Type:</b> FIREARM<br>         <b>Weapon Details:</b> 0<br>         <b>Other Crime(s):</b> 0; 0; 0<br>         <b>Media House:</b> THE STAR<br>         <b>Weblink:</b> https://www.the-star.co.ke/counties/eastern/2020-05-05-two-killed-25-cows-stolen-in-meru-bandit-attack/<br>     </div>     </div>`)[0];
+                popup_920c2097739df943b5ea062b808cbbf3.setContent(html_8fa2331901c360410cda457bd04150db);
+            
+        
+
+        circle_marker_f25b1fde253b08012a68f3c16c641e9a.bindPopup(popup_920c2097739df943b5ea062b808cbbf3)
+        ;
+
+        
+    
+    
+            circle_marker_f25b1fde253b08012a68f3c16c641e9a.bindTooltip(
+                `<div>
+                     MERU;Igembe Central | cattle_stolen: 25.0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_85c53329993a57329ff804d764276ee4 = L.circleMarker(
+                [0.2858452, 36.8257711],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.55, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 1}
+            ).addTo(map_bc18789ce3da6462c9b2947ccb5ce53e);
+        
+    
+        var popup_5a80e3ff07862b8581276765019345d5 = L.popup({
+  "maxWidth": 400,
+});
+
+        
+            
+                var html_1b7e6955d7a4ef685be9a4414174cb2a = $(`<div id="html_1b7e6955d7a4ef685be9a4414174cb2a" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px;">         <b>Document Code:</b> BED_N298<br>         <b>Year:</b> 2021.0<br>         <b>Month:</b> OCTOBER<br>         <b>Place:</b> LAIKIPIA<br>         <b>County (inferred):</b> LAIKIPIA<br>         <b>Deaths:</b> 3.0<br>         <b>Injuries:</b> 1.0<br>         <b>Cattle Stolen:</b> 32.0<br>         <b>Abducted:</b> 0.0<br>         <b>Displaced:</b> 0.0<br>         <b>Weapon Type:</b> FIREARM<br>         <b>Weapon Details:</b> 0<br>         <b>Other Crime(s):</b> 0; 0; 0<br>         <b>Media House:</b> THE STAR<br>         <b>Weblink:</b> https://www.the-star.co.ke/counties/rift-valley/2021-10-11-three-men-fatally-shot-in-laikipia-bandit-attack/<br>     </div>     </div>`)[0];
+                popup_5a80e3ff07862b8581276765019345d5.setContent(html_1b7e6955d7a4ef685be9a4414174cb2a);
+            
+        
+
+        circle_marker_85c53329993a57329ff804d764276ee4.bindPopup(popup_5a80e3ff07862b8581276765019345d5)
+        ;
+
+        
+    
+    
+            circle_marker_85c53329993a57329ff804d764276ee4.bindTooltip(
+                `<div>
+                     LAIKIPIA | cattle_stolen: 32.0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var layer_control_66470c8eb7ed82eb4d9aaa711c8b496c_layers = {
+                base_layers : {
+                    "OpenStreetMap" : tile_layer_76b2bda385daa9a5f6916f1447cb888f,
+                    "CartoDB Positron" : tile_layer_87d5ae4ddd94bfe732e1bd59d226aee5,
+                    "CartoDB Dark Matter" : tile_layer_5b2fcdce8ee79a9a16eca85b6f1731e7,
+                },
+                overlays :  {
+                },
+            };
+            let layer_control_66470c8eb7ed82eb4d9aaa711c8b496c = L.control.layers(
+                layer_control_66470c8eb7ed82eb4d9aaa711c8b496c_layers.base_layers,
+                layer_control_66470c8eb7ed82eb4d9aaa711c8b496c_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": true,
+  "autoZIndex": true,
+}
+            ).addTo(map_bc18789ce3da6462c9b2947ccb5ce53e);
+
+        
+</script>
+</html>

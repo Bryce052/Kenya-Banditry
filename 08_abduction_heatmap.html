@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_5451a1ad7f1b57bd15d8dd6e38b7ab51 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdn.jsdelivr.net/gh/python-visualization/folium@main/folium/templates/leaflet_heat.min.js"></script>
+</head>
+<body>
+    
+    
+        <h3 align="center" style="font-size:16px"><b>Kenya Abduction Heatmap</b></h3>
+        
+    
+            <div class="folium-map" id="map_5451a1ad7f1b57bd15d8dd6e38b7ab51" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_5451a1ad7f1b57bd15d8dd6e38b7ab51 = L.map(
+                "map_5451a1ad7f1b57bd15d8dd6e38b7ab51",
+                {
+                    center: [0.0236, 37.9062],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 6,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+            L.control.scale().addTo(map_5451a1ad7f1b57bd15d8dd6e38b7ab51);
+
+            
+
+        
+    
+            var tile_layer_1823620d191674a01184e642c3e1ec2f = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_1823620d191674a01184e642c3e1ec2f.addTo(map_5451a1ad7f1b57bd15d8dd6e38b7ab51);
+        
+    
+            var tile_layer_932cf3d5fbe1568ed58aacbff45e8594 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_932cf3d5fbe1568ed58aacbff45e8594.addTo(map_5451a1ad7f1b57bd15d8dd6e38b7ab51);
+        
+    
+            var tile_layer_181dd11448dbb52f71769209ba5022fe = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_181dd11448dbb52f71769209ba5022fe.addTo(map_5451a1ad7f1b57bd15d8dd6e38b7ab51);
+        
+    
+            var heat_map_00868737c8a5ad724bcd35621c0fa18f = L.heatLayer(
+                [[3.0948134, 35.6295045, 0.0], [0.6184995, 36.1182885, 0.0], [2.7612005, 36.7117335, 0.0], [0.0396778, 36.3553187, 0.0], [0.0396778, 36.3553187, 0.0], [0.2858452, 36.8257711, 0.0], [0.2858452, 36.8257711, 0.0], [0.2858452, 36.8257711, 0.0], [0.471367, 35.98519, 0.0], [0.2858452, 36.8257711, 0.0], [0.3338966, 37.577027, 0.0], [0.492698, 35.7416813, 0.0], [0.0381626, 36.3651202, 0.0], [0.492698, 35.7416813, 0.0], [3.5258945, 36.0742949, 0.0], [0.2858452, 36.8257711, 0.0], [1.246325, 35.8742111, 0.0], [0.4834851, 35.9904495, 0.0], [0.4834851, 35.9904495, 0.0], [0.2858452, 36.8257711, 0.0], [0.0165704, 37.0786532, 0.0], [0.6400169, 37.6615139, 0.0], [-0.2802724, 36.0712048, 0.0], [3.0948134, 35.6295045, 0.0], [3.0948134, 35.6295045, 0.0], [0.6184995, 36.1182885, 0.0], [0.2858452, 36.8257711, 0.0], [2.7612005, 36.7117335, 0.0], [3.0948134, 35.6295045, 0.0], [0.6184995, 36.1182885, 0.0], [-0.314933, 38.2215708, 0.0], [-0.314933, 38.2215708, 0.0], [0.2858452, 36.8257711, 0.0], [0.8673914, 36.8063815, 0.0], [0.471367, 35.98519, 0.0], [0.6184995, 36.1182885, 0.0], [0.3338966, 37.577027, 0.0], [0.1540228, 37.8964921, 0.0], [0.471367, 35.98519, 0.0], [0.471367, 35.98519, 0.0], [0.2858452, 36.8257711, 0.0], [0.471523, 35.98473, 0.0], [0.1540228, 37.8964921, 0.0], [0.6184995, 36.1182885, 0.0], [-2.2675396, 40.9010641, 0.0], [0.0842108, 37.6490179, 0.0], [0.2858452, 36.8257711, 0.0], [0.2858452, 36.8257711, 0.0], [0.2858452, 36.8257711, 0.0], [0.2858452, 36.8257711, 0.0], [0.2858452, 36.8257711, 0.0], [-1.335386, 36.6726399, 0.0], [2.7612005, 36.7117335, 0.0]],
+                {
+  "minOpacity": 0.35,
+  "maxZoom": 10,
+  "radius": 18,
+  "blur": 14,
+}
+            );
+        
+    
+            heat_map_00868737c8a5ad724bcd35621c0fa18f.addTo(map_5451a1ad7f1b57bd15d8dd6e38b7ab51);
+        
+    
+            var layer_control_832c288a2c4af1bf9dc8db6e1b05e8e3_layers = {
+                base_layers : {
+                    "OpenStreetMap" : tile_layer_1823620d191674a01184e642c3e1ec2f,
+                    "CartoDB Positron" : tile_layer_932cf3d5fbe1568ed58aacbff45e8594,
+                    "CartoDB Dark Matter" : tile_layer_181dd11448dbb52f71769209ba5022fe,
+                },
+                overlays :  {
+                    "Kenya Abduction Heatmap" : heat_map_00868737c8a5ad724bcd35621c0fa18f,
+                },
+            };
+            let layer_control_832c288a2c4af1bf9dc8db6e1b05e8e3 = L.control.layers(
+                layer_control_832c288a2c4af1bf9dc8db6e1b05e8e3_layers.base_layers,
+                layer_control_832c288a2c4af1bf9dc8db6e1b05e8e3_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": true,
+  "autoZIndex": true,
+}
+            ).addTo(map_5451a1ad7f1b57bd15d8dd6e38b7ab51);
+
+        
+</script>
+</html>

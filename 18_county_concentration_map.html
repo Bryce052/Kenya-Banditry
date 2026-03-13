@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_0b887d895c84c9dd71ea4b0fc0683d24 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+</head>
+<body>
+    
+    
+        <h3 align="center" style="font-size:16px"><b>Kenya County Concentration Summary</b></h3>
+        
+    
+            <div class="folium-map" id="map_0b887d895c84c9dd71ea4b0fc0683d24" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_0b887d895c84c9dd71ea4b0fc0683d24 = L.map(
+                "map_0b887d895c84c9dd71ea4b0fc0683d24",
+                {
+                    center: [0.0236, 37.9062],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 6,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+            L.control.scale().addTo(map_0b887d895c84c9dd71ea4b0fc0683d24);
+
+            
+
+        
+    
+            var tile_layer_2637b8d2424541136793904832a7b1ef = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_2637b8d2424541136793904832a7b1ef.addTo(map_0b887d895c84c9dd71ea4b0fc0683d24);
+        
+    
+            var tile_layer_1c6e5e4978a9749749775ffce14b779f = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_1c6e5e4978a9749749775ffce14b779f.addTo(map_0b887d895c84c9dd71ea4b0fc0683d24);
+        
+    
+            var tile_layer_1f91e227e261cea3a1f1367cd3aa0e25 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_1f91e227e261cea3a1f1367cd3aa0e25.addTo(map_0b887d895c84c9dd71ea4b0fc0683d24);
+        
+    
+            var circle_marker_df68b40d4bfc13de1ca2d1be4d0d1acd = L.circleMarker(
+                [0.536240375, 36.000024591666666],
+                {"bubblingMouseEvents": true, "color": "#f03423ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#f03423ff", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12.0, "stroke": true, "weight": 1}
+            ).addTo(map_0b887d895c84c9dd71ea4b0fc0683d24);
+        
+    
+        var popup_dcfad1910dbb8be2bed8019c4528f3c8 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_4900426feebf07fceb21ee5e7a09017f = $(`<div id="html_4900426feebf07fceb21ee5e7a09017f" style="width: 100.0%; height: 100.0%;">             <div style="width:260px">                 <b>County:</b> BARINGO<br>                 <b>Incidents:</b> 12<br>                 <b>Total Deaths:</b> 15.0<br>                 <b>Total Injuries:</b> 22.0<br>                 <b>Total Cattle Stolen:</b> 1625.0<br>                 <b>Total Abducted:</b> 0.0<br>                 <b>Total Displaced:</b> 0.0<br>                 <b>Mean Severity:</b> 11.79<br>             </div>             </div>`)[0];
+                popup_dcfad1910dbb8be2bed8019c4528f3c8.setContent(html_4900426feebf07fceb21ee5e7a09017f);
+            
+        
+
+        circle_marker_df68b40d4bfc13de1ca2d1be4d0d1acd.bindPopup(popup_dcfad1910dbb8be2bed8019c4528f3c8)
+        ;
+
+        
+    
+    
+            circle_marker_df68b40d4bfc13de1ca2d1be4d0d1acd.bindTooltip(
+                `<div>
+                     BARINGO | Incidents: 12
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_825b67650dd5acf22a934b31ae0ffb59 = L.circleMarker(
+                [1.246325, 35.8742111],
+                {"bubblingMouseEvents": true, "color": "#ffffccff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffccff", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.5, "stroke": true, "weight": 1}
+            ).addTo(map_0b887d895c84c9dd71ea4b0fc0683d24);
+        
+    
+        var popup_b381c52099f564ad9732e2fc89574886 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_d5b52a31aac2cc587fb0c17e6a05ae40 = $(`<div id="html_d5b52a31aac2cc587fb0c17e6a05ae40" style="width: 100.0%; height: 100.0%;">             <div style="width:260px">                 <b>County:</b> EAST POKOT<br>                 <b>Incidents:</b> 1<br>                 <b>Total Deaths:</b> 0.0<br>                 <b>Total Injuries:</b> 0.0<br>                 <b>Total Cattle Stolen:</b> 0.0<br>                 <b>Total Abducted:</b> 0.0<br>                 <b>Total Displaced:</b> 0.0<br>                 <b>Mean Severity:</b> 0.0<br>             </div>             </div>`)[0];
+                popup_b381c52099f564ad9732e2fc89574886.setContent(html_d5b52a31aac2cc587fb0c17e6a05ae40);
+            
+        
+
+        circle_marker_825b67650dd5acf22a934b31ae0ffb59.bindPopup(popup_b381c52099f564ad9732e2fc89574886)
+        ;
+
+        
+    
+    
+            circle_marker_825b67650dd5acf22a934b31ae0ffb59.bindTooltip(
+                `<div>
+                     EAST POKOT | Incidents: 1
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_425afde9a4989253bcd1f78c8ad7954a = L.circleMarker(
+                [-0.314933, 38.2215708],
+                {"bubblingMouseEvents": true, "color": "#fff6b6ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#fff6b6ff", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.0, "stroke": true, "weight": 1}
+            ).addTo(map_0b887d895c84c9dd71ea4b0fc0683d24);
+        
+    
+        var popup_e906de869dc1f714a5f556639d3eb454 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_b21d635f6fdcbbb82fca8ffc9e085b99 = $(`<div id="html_b21d635f6fdcbbb82fca8ffc9e085b99" style="width: 100.0%; height: 100.0%;">             <div style="width:260px">                 <b>County:</b> KITUI<br>                 <b>Incidents:</b> 2<br>                 <b>Total Deaths:</b> 2.0<br>                 <b>Total Injuries:</b> 2.0<br>                 <b>Total Cattle Stolen:</b> 100.0<br>                 <b>Total Abducted:</b> 0.0<br>                 <b>Total Displaced:</b> 0.0<br>                 <b>Mean Severity:</b> 6.6<br>             </div>             </div>`)[0];
+                popup_e906de869dc1f714a5f556639d3eb454.setContent(html_b21d635f6fdcbbb82fca8ffc9e085b99);
+            
+        
+
+        circle_marker_425afde9a4989253bcd1f78c8ad7954a.bindPopup(popup_e906de869dc1f714a5f556639d3eb454)
+        ;
+
+        
+    
+    
+            circle_marker_425afde9a4989253bcd1f78c8ad7954a.bindTooltip(
+                `<div>
+                     KITUI | Incidents: 2
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_826221acdc58a5a6eb470179e3a277ad = L.circleMarker(
+                [0.24104463529411765, 36.78529917647058],
+                {"bubblingMouseEvents": true, "color": "#800026ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#800026ff", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 14.5, "stroke": true, "weight": 1}
+            ).addTo(map_0b887d895c84c9dd71ea4b0fc0683d24);
+        
+    
+        var popup_74612fe7faa184216d5f38c4d6e8fd13 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_b7538caf4c6c1db9ba057ff260e3e0d7 = $(`<div id="html_b7538caf4c6c1db9ba057ff260e3e0d7" style="width: 100.0%; height: 100.0%;">             <div style="width:260px">                 <b>County:</b> LAIKIPIA<br>                 <b>Incidents:</b> 17<br>                 <b>Total Deaths:</b> 35.0<br>                 <b>Total Injuries:</b> 12.0<br>                 <b>Total Cattle Stolen:</b> 429.0<br>                 <b>Total Abducted:</b> 0.0<br>                 <b>Total Displaced:</b> 150.0<br>                 <b>Mean Severity:</b> 8.39<br>             </div>             </div>`)[0];
+                popup_74612fe7faa184216d5f38c4d6e8fd13.setContent(html_b7538caf4c6c1db9ba057ff260e3e0d7);
+            
+        
+
+        circle_marker_826221acdc58a5a6eb470179e3a277ad.bindPopup(popup_74612fe7faa184216d5f38c4d6e8fd13)
+        ;
+
+        
+    
+    
+            circle_marker_826221acdc58a5a6eb470179e3a277ad.bindTooltip(
+                `<div>
+                     LAIKIPIA | Incidents: 17
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2a1e516ee922ca6767ec16740ed7ebd5 = L.circleMarker(
+                [0.0381626, 36.3651202],
+                {"bubblingMouseEvents": true, "color": "#ffffccff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffccff", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.5, "stroke": true, "weight": 1}
+            ).addTo(map_0b887d895c84c9dd71ea4b0fc0683d24);
+        
+    
+        var popup_6609d092567c2227aef3bb5c576d37cc = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_df9006a84a725a2083923c58c451f55b = $(`<div id="html_df9006a84a725a2083923c58c451f55b" style="width: 100.0%; height: 100.0%;">             <div style="width:260px">                 <b>County:</b> LAIKIPIA:NYAHURURU<br>                 <b>Incidents:</b> 1<br>                 <b>Total Deaths:</b> 0.0<br>                 <b>Total Injuries:</b> 2.0<br>                 <b>Total Cattle Stolen:</b> 0.0<br>                 <b>Total Abducted:</b> 0.0<br>                 <b>Total Displaced:</b> 0.0<br>                 <b>Mean Severity:</b> 4.0<br>             </div>             </div>`)[0];
+                popup_6609d092567c2227aef3bb5c576d37cc.setContent(html_df9006a84a725a2083923c58c451f55b);
+            
+        
+
+        circle_marker_2a1e516ee922ca6767ec16740ed7ebd5.bindPopup(popup_6609d092567c2227aef3bb5c576d37cc)
+        ;
+
+        
+    
+    
+            circle_marker_2a1e516ee922ca6767ec16740ed7ebd5.bindTooltip(
+                `<div>
+                     LAIKIPIA:NYAHURURU | Incidents: 1
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6240d9bd2d31a3c7c6f4044c95b86334 = L.circleMarker(
+                [-2.2675396, 40.9010641],
+                {"bubblingMouseEvents": true, "color": "#ffffccff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffccff", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.5, "stroke": true, "weight": 1}
+            ).addTo(map_0b887d895c84c9dd71ea4b0fc0683d24);
+        
+    
+        var popup_b3d99416ffa531f23ebbf7fb97d2fe95 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_5e01f86f99882ebb174cfb00327b916f = $(`<div id="html_5e01f86f99882ebb174cfb00327b916f" style="width: 100.0%; height: 100.0%;">             <div style="width:260px">                 <b>County:</b> LAMU<br>                 <b>Incidents:</b> 1<br>                 <b>Total Deaths:</b> 0.0<br>                 <b>Total Injuries:</b> 0.0<br>                 <b>Total Cattle Stolen:</b> 0.0<br>                 <b>Total Abducted:</b> 0.0<br>                 <b>Total Displaced:</b> 0.0<br>                 <b>Mean Severity:</b> 0.0<br>             </div>             </div>`)[0];
+                popup_b3d99416ffa531f23ebbf7fb97d2fe95.setContent(html_5e01f86f99882ebb174cfb00327b916f);
+            
+        
+
+        circle_marker_6240d9bd2d31a3c7c6f4044c95b86334.bindPopup(popup_b3d99416ffa531f23ebbf7fb97d2fe95)
+        ;
+
+        
+    
+    
+            circle_marker_6240d9bd2d31a3c7c6f4044c95b86334.bindTooltip(
+                `<div>
+                     LAMU | Incidents: 1
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9a9032e3d3d845d9ee4dd5f2242dd337 = L.circleMarker(
+                [2.7612004999999997, 36.7117335],
+                {"bubblingMouseEvents": true, "color": "#ffeda0ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffeda0ff", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.5, "stroke": true, "weight": 1}
+            ).addTo(map_0b887d895c84c9dd71ea4b0fc0683d24);
+        
+    
+        var popup_6cb33688d16f83a687bde9ecb0ed6718 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_681bfa8666965378717a7dcfcb54e60c = $(`<div id="html_681bfa8666965378717a7dcfcb54e60c" style="width: 100.0%; height: 100.0%;">             <div style="width:260px">                 <b>County:</b> MARSABIT<br>                 <b>Incidents:</b> 3<br>                 <b>Total Deaths:</b> 27.0<br>                 <b>Total Injuries:</b> 6.0<br>                 <b>Total Cattle Stolen:</b> 0.0<br>                 <b>Total Abducted:</b> 0.0<br>                 <b>Total Displaced:</b> 0.0<br>                 <b>Mean Severity:</b> 34.0<br>             </div>             </div>`)[0];
+                popup_6cb33688d16f83a687bde9ecb0ed6718.setContent(html_681bfa8666965378717a7dcfcb54e60c);
+            
+        
+
+        circle_marker_9a9032e3d3d845d9ee4dd5f2242dd337.bindPopup(popup_6cb33688d16f83a687bde9ecb0ed6718)
+        ;
+
+        
+    
+    
+            circle_marker_9a9032e3d3d845d9ee4dd5f2242dd337.bindTooltip(
+                `<div>
+                     MARSABIT | Incidents: 3
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_16451ceffde0dc58b2f83d45f69d6ef3 = L.circleMarker(
+                [0.13075213333333333, 37.8140007],
+                {"bubblingMouseEvents": true, "color": "#ffeda0ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffeda0ff", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.5, "stroke": true, "weight": 1}
+            ).addTo(map_0b887d895c84c9dd71ea4b0fc0683d24);
+        
+    
+        var popup_afdacb212ff27b7eaf4d83eda29696fd = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_32c7d843f2f305db0556205a1137e57c = $(`<div id="html_32c7d843f2f305db0556205a1137e57c" style="width: 100.0%; height: 100.0%;">             <div style="width:260px">                 <b>County:</b> MERU<br>                 <b>Incidents:</b> 3<br>                 <b>Total Deaths:</b> 26.0<br>                 <b>Total Injuries:</b> 1.0<br>                 <b>Total Cattle Stolen:</b> 25.0<br>                 <b>Total Abducted:</b> 0.0<br>                 <b>Total Displaced:</b> 0.0<br>                 <b>Mean Severity:</b> 26.83<br>             </div>             </div>`)[0];
+                popup_afdacb212ff27b7eaf4d83eda29696fd.setContent(html_32c7d843f2f305db0556205a1137e57c);
+            
+        
+
+        circle_marker_16451ceffde0dc58b2f83d45f69d6ef3.bindPopup(popup_afdacb212ff27b7eaf4d83eda29696fd)
+        ;
+
+        
+    
+    
+            circle_marker_16451ceffde0dc58b2f83d45f69d6ef3.bindTooltip(
+                `<div>
+                     MERU | Incidents: 3
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b9887fef5db2f357e8045aa1243f85f9 = L.circleMarker(
+                [0.3338966, 37.577027],
+                {"bubblingMouseEvents": true, "color": "#fff6b6ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#fff6b6ff", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.0, "stroke": true, "weight": 1}
+            ).addTo(map_0b887d895c84c9dd71ea4b0fc0683d24);
+        
+    
+        var popup_c9eb6cd83595b5434e7e7ba03a421a8e = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_c63d26cdd69aa6647c76a1aca2625b6f = $(`<div id="html_c63d26cdd69aa6647c76a1aca2625b6f" style="width: 100.0%; height: 100.0%;">             <div style="width:260px">                 <b>County:</b> MERU:ISIOLO<br>                 <b>Incidents:</b> 2<br>                 <b>Total Deaths:</b> 7.0<br>                 <b>Total Injuries:</b> 0.0<br>                 <b>Total Cattle Stolen:</b> 0.0<br>                 <b>Total Abducted:</b> 0.0<br>                 <b>Total Displaced:</b> 0.0<br>                 <b>Mean Severity:</b> 11.4<br>             </div>             </div>`)[0];
+                popup_c9eb6cd83595b5434e7e7ba03a421a8e.setContent(html_c63d26cdd69aa6647c76a1aca2625b6f);
+            
+        
+
+        circle_marker_b9887fef5db2f357e8045aa1243f85f9.bindPopup(popup_c9eb6cd83595b5434e7e7ba03a421a8e)
+        ;
+
+        
+    
+    
+            circle_marker_b9887fef5db2f357e8045aa1243f85f9.bindTooltip(
+                `<div>
+                     MERU:ISIOLO | Incidents: 2
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0c003b96552fc5c835dc2d6641935418 = L.circleMarker(
+                [-0.2802724, 36.0712048],
+                {"bubblingMouseEvents": true, "color": "#ffffccff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffccff", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.5, "stroke": true, "weight": 1}
+            ).addTo(map_0b887d895c84c9dd71ea4b0fc0683d24);
+        
+    
+        var popup_951f02d7c2064fe2025591b43f012a89 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_31b96fe5c428ef2bf5a87eefb0a73302 = $(`<div id="html_31b96fe5c428ef2bf5a87eefb0a73302" style="width: 100.0%; height: 100.0%;">             <div style="width:260px">                 <b>County:</b> NAKURU<br>                 <b>Incidents:</b> 1<br>                 <b>Total Deaths:</b> 3.0<br>                 <b>Total Injuries:</b> 0.0<br>                 <b>Total Cattle Stolen:</b> 100.0<br>                 <b>Total Abducted:</b> 0.0<br>                 <b>Total Displaced:</b> 0.0<br>                 <b>Mean Severity:</b> 15.0<br>             </div>             </div>`)[0];
+                popup_951f02d7c2064fe2025591b43f012a89.setContent(html_31b96fe5c428ef2bf5a87eefb0a73302);
+            
+        
+
+        circle_marker_0c003b96552fc5c835dc2d6641935418.bindPopup(popup_951f02d7c2064fe2025591b43f012a89)
+        ;
+
+        
+    
+    
+            circle_marker_0c003b96552fc5c835dc2d6641935418.bindTooltip(
+                `<div>
+                     NAKURU | Incidents: 1
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_333e1cb6120c0dee889782cbe83f4c40 = L.circleMarker(
+                [-1.335386, 36.6726399],
+                {"bubblingMouseEvents": true, "color": "#ffffccff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffccff", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.5, "stroke": true, "weight": 1}
+            ).addTo(map_0b887d895c84c9dd71ea4b0fc0683d24);
+        
+    
+        var popup_9c24b99b7e5715451cb7de3e7e7026dd = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_7231ca9a2677743b455ed7903112b9c7 = $(`<div id="html_7231ca9a2677743b455ed7903112b9c7" style="width: 100.0%; height: 100.0%;">             <div style="width:260px">                 <b>County:</b> NORTH RIFT<br>                 <b>Incidents:</b> 1<br>                 <b>Total Deaths:</b> 0.0<br>                 <b>Total Injuries:</b> 0.0<br>                 <b>Total Cattle Stolen:</b> 0.0<br>                 <b>Total Abducted:</b> 0.0<br>                 <b>Total Displaced:</b> 0.0<br>                 <b>Mean Severity:</b> 0.0<br>             </div>             </div>`)[0];
+                popup_9c24b99b7e5715451cb7de3e7e7026dd.setContent(html_7231ca9a2677743b455ed7903112b9c7);
+            
+        
+
+        circle_marker_333e1cb6120c0dee889782cbe83f4c40.bindPopup(popup_9c24b99b7e5715451cb7de3e7e7026dd)
+        ;
+
+        
+    
+    
+            circle_marker_333e1cb6120c0dee889782cbe83f4c40.bindTooltip(
+                `<div>
+                     NORTH RIFT | Incidents: 1
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_15b88418df2ab8128a873c83f9820754 = L.circleMarker(
+                [0.75370415, 37.2339477],
+                {"bubblingMouseEvents": true, "color": "#fff6b6ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#fff6b6ff", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.0, "stroke": true, "weight": 1}
+            ).addTo(map_0b887d895c84c9dd71ea4b0fc0683d24);
+        
+    
+        var popup_b82257a4edfec0408129df0a9a18dcb0 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_5ab8e72a608ce3baa021be9f1efdfce3 = $(`<div id="html_5ab8e72a608ce3baa021be9f1efdfce3" style="width: 100.0%; height: 100.0%;">             <div style="width:260px">                 <b>County:</b> SAMBURU<br>                 <b>Incidents:</b> 2<br>                 <b>Total Deaths:</b> 1.0<br>                 <b>Total Injuries:</b> 0.0<br>                 <b>Total Cattle Stolen:</b> 100.0<br>                 <b>Total Abducted:</b> 0.0<br>                 <b>Total Displaced:</b> 0.0<br>                 <b>Mean Severity:</b> 2.5<br>             </div>             </div>`)[0];
+                popup_b82257a4edfec0408129df0a9a18dcb0.setContent(html_5ab8e72a608ce3baa021be9f1efdfce3);
+            
+        
+
+        circle_marker_15b88418df2ab8128a873c83f9820754.bindPopup(popup_b82257a4edfec0408129df0a9a18dcb0)
+        ;
+
+        
+    
+    
+            circle_marker_15b88418df2ab8128a873c83f9820754.bindTooltip(
+                `<div>
+                     SAMBURU | Incidents: 2
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0c1aa00c7caebc7e3488a98fd1ef9ce8 = L.circleMarker(
+                [3.18102962, 35.71846258000001],
+                {"bubblingMouseEvents": true, "color": "#fed976ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#fed976ff", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.5, "stroke": true, "weight": 1}
+            ).addTo(map_0b887d895c84c9dd71ea4b0fc0683d24);
+        
+    
+        var popup_cb7ecceebb4f18dee98f504de860bb93 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_a5ac0759c5852823fe02c513fe5dfdaa = $(`<div id="html_a5ac0759c5852823fe02c513fe5dfdaa" style="width: 100.0%; height: 100.0%;">             <div style="width:260px">                 <b>County:</b> TURKANA<br>                 <b>Incidents:</b> 5<br>                 <b>Total Deaths:</b> 19.0<br>                 <b>Total Injuries:</b> 15.0<br>                 <b>Total Cattle Stolen:</b> 400.0<br>                 <b>Total Abducted:</b> 0.0<br>                 <b>Total Displaced:</b> 0.0<br>                 <b>Mean Severity:</b> 23.12<br>             </div>             </div>`)[0];
+                popup_cb7ecceebb4f18dee98f504de860bb93.setContent(html_a5ac0759c5852823fe02c513fe5dfdaa);
+            
+        
+
+        circle_marker_0c1aa00c7caebc7e3488a98fd1ef9ce8.bindPopup(popup_cb7ecceebb4f18dee98f504de860bb93)
+        ;
+
+        
+    
+    
+            circle_marker_0c1aa00c7caebc7e3488a98fd1ef9ce8.bindTooltip(
+                `<div>
+                     TURKANA | Incidents: 5
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_76e80683b95f4a104c0f2ac69e6a4bc3 = L.circleMarker(
+                [0.4834851, 35.9904495],
+                {"bubblingMouseEvents": true, "color": "#fff6b6ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#fff6b6ff", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.0, "stroke": true, "weight": 1}
+            ).addTo(map_0b887d895c84c9dd71ea4b0fc0683d24);
+        
+    
+        var popup_906422f1850746c9935bf044f973202b = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_e99aa1393d2564e51930ccb2f6121e6b = $(`<div id="html_e99aa1393d2564e51930ccb2f6121e6b" style="width: 100.0%; height: 100.0%;">             <div style="width:260px">                 <b>County:</b> TURKANA:BARINGO<br>                 <b>Incidents:</b> 2<br>                 <b>Total Deaths:</b> 26.0<br>                 <b>Total Injuries:</b> 0.0<br>                 <b>Total Cattle Stolen:</b> 0.0<br>                 <b>Total Abducted:</b> 0.0<br>                 <b>Total Displaced:</b> 0.0<br>                 <b>Mean Severity:</b> 39.0<br>             </div>             </div>`)[0];
+                popup_906422f1850746c9935bf044f973202b.setContent(html_e99aa1393d2564e51930ccb2f6121e6b);
+            
+        
+
+        circle_marker_76e80683b95f4a104c0f2ac69e6a4bc3.bindPopup(popup_906422f1850746c9935bf044f973202b)
+        ;
+
+        
+    
+    
+            circle_marker_76e80683b95f4a104c0f2ac69e6a4bc3.bindTooltip(
+                `<div>
+                     TURKANA:BARINGO | Incidents: 2
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+    var color_map_5d28ce2f06024b385bb0366647e04147 = {};
+
+    
+    color_map_5d28ce2f06024b385bb0366647e04147.color = d3.scale.threshold()
+              .domain([1.0, 1.032064128256513, 1.0641282565130261, 1.0961923847695392, 1.128256513026052, 1.160320641282565, 1.1923847695390781, 1.2244488977955912, 1.2565130260521042, 1.2885771543086173, 1.3206412825651301, 1.3527054108216432, 1.3847695390781563, 1.4168336673346693, 1.4488977955911824, 1.4809619238476954, 1.5130260521042085, 1.5450901803607215, 1.5771543086172346, 1.6092184368737477, 1.6412825651302605, 1.6733466933867736, 1.7054108216432866, 1.7374749498997994, 1.7695390781563125, 1.8016032064128256, 1.8336673346693386, 1.8657314629258517, 1.8977955911823647, 1.9298597194388778, 1.9619238476953909, 1.993987975951904, 2.026052104208417, 2.05811623246493, 2.090180360721443, 2.122244488977956, 2.154308617234469, 2.1863727454909823, 2.2184368737474953, 2.250501002004008, 2.282565130260521, 2.314629258517034, 2.346693386773547, 2.37875751503006, 2.4108216432865732, 2.4428857715430863, 2.474949899799599, 2.507014028056112, 2.539078156312625, 2.571142284569138, 2.603206412825651, 2.635270541082164, 2.6673346693386772, 2.6993987975951903, 2.7314629258517034, 2.7635270541082164, 2.7955911823647295, 2.8276553106212425, 2.8597194388777556, 2.8917835671342687, 2.9238476953907817, 2.9559118236472948, 2.987975951903808, 3.0200400801603204, 3.0521042084168335, 3.0841683366733466, 3.1162324649298596, 3.1482965931863727, 3.1803607214428857, 3.212424849699399, 3.244488977955912, 3.276553106212425, 3.308617234468938, 3.340681362725451, 3.372745490981964, 3.404809619238477, 3.43687374749499, 3.468937875751503, 3.501002004008016, 3.533066132264529, 3.565130260521042, 3.597194388777555, 3.629258517034068, 3.661322645290581, 3.693386773547094, 3.7254509018036073, 3.7575150300601203, 3.7895791583166334, 3.8216432865731464, 3.8537074148296595, 3.8857715430861726, 3.917835671342685, 3.9498997995991982, 3.9819639278557113, 4.014028056112224, 4.046092184368737, 4.07815631262525, 4.110220440881763, 4.142284569138276, 4.174348697394789, 4.206412825651302, 4.238476953907815, 4.270541082164328, 4.302605210420841, 4.3346693386773545, 4.3667334669338675, 4.398797595190381, 4.430861723446894, 4.462925851703407, 4.49498997995992, 4.527054108216433, 4.559118236472946, 4.591182364729459, 4.623246492985972, 4.655310621242485, 4.687374749498998, 4.719438877755511, 4.751503006012024, 4.783567134268537, 4.81563126252505, 4.847695390781563, 4.8797595190380765, 4.9118236472945895, 4.943887775551103, 4.975951903807616, 5.008016032064128, 5.040080160320641, 5.072144288577154, 5.104208416833667, 5.13627254509018, 5.168336673346693, 5.200400801603206, 5.232464929859719, 5.264529058116232, 5.296593186372745, 5.328657314629258, 5.3607214428857715, 5.3927855711422845, 5.424849699398798, 5.456913827655311, 5.488977955911824, 5.521042084168337, 5.55310621242485, 5.585170340681363, 5.617234468937876, 5.649298597194389, 5.681362725450902, 5.713426853707415, 5.745490981963928, 5.777555110220441, 5.809619238476954, 5.841683366733467, 5.87374749498998, 5.905811623246493, 5.937875751503006, 5.969939879759519, 6.002004008016032, 6.034068136272545, 6.066132264529058, 6.098196392785571, 6.130260521042084, 6.162324649298597, 6.19438877755511, 6.226452905811623, 6.258517034068136, 6.290581162324649, 6.322645290581162, 6.354709418837675, 6.386773547094188, 6.4188376753507015, 6.4509018036072145, 6.482965931863728, 6.515030060120241, 6.547094188376754, 6.579158316633267, 6.61122244488978, 6.643286573146293, 6.675350701402806, 6.707414829659319, 6.739478957915832, 6.771543086172345, 6.803607214428857, 6.83567134268537, 6.867735470941883, 6.8997995991983965, 6.9318637274549095, 6.963927855711423, 6.995991983967936, 7.028056112224449, 7.060120240480962, 7.092184368737475, 7.124248496993988, 7.156312625250501, 7.188376753507014, 7.220440881763527, 7.25250501002004, 7.284569138276553, 7.316633266533066, 7.348697394789579, 7.380761523046092, 7.412825651302605, 7.4448897795591185, 7.4769539078156315, 7.509018036072145, 7.541082164328658, 7.573146292585171, 7.605210420841684, 7.637274549098197, 7.669338677354709, 7.701402805611222, 7.733466933867735, 7.765531062124248, 7.797595190380761, 7.829659318637274, 7.861723446893787, 7.8937875751503, 7.925851703406813, 7.9579158316633265, 7.98997995991984, 8.022044088176353, 8.054108216432866, 8.086172344689379, 8.118236472945892, 8.150300601202405, 8.182364729458918, 8.214428857715431, 8.246492985971944, 8.278557114228457, 8.31062124248497, 8.342685370741483, 8.374749498997996, 8.40681362725451, 8.438877755511022, 8.470941883767535, 8.503006012024048, 8.535070140280562, 8.567134268537075, 8.599198396793586, 8.6312625250501, 8.663326653306612, 8.695390781563127, 8.727454909819638, 8.759519038076153, 8.791583166332664, 8.823647294589179, 8.85571142284569, 8.887775551102205, 8.919839679358716, 8.951903807615231, 8.983967935871743, 9.016032064128256, 9.048096192384769, 9.080160320641282, 9.112224448897795, 9.144288577154308, 9.176352705410821, 9.208416833667334, 9.240480961923847, 9.27254509018036, 9.304609218436873, 9.336673346693386, 9.3687374749499, 9.400801603206412, 9.432865731462925, 9.464929859719438, 9.496993987975952, 9.529058116232465, 9.561122244488978, 9.59318637274549, 9.625250501002004, 9.657314629258517, 9.68937875751503, 9.721442885771543, 9.753507014028056, 9.785571142284569, 9.817635270541082, 9.849699398797595, 9.881763527054108, 9.913827655310621, 9.945891783567134, 9.977955911823647, 10.01002004008016, 10.042084168336673, 10.074148296593187, 10.1062124248497, 10.138276553106213, 10.170340681362726, 10.202404809619239, 10.234468937875752, 10.266533066132265, 10.298597194388778, 10.330661322645291, 10.362725450901804, 10.394789579158317, 10.42685370741483, 10.458917835671343, 10.490981963927856, 10.52304609218437, 10.555110220440882, 10.587174348697395, 10.619238476953909, 10.651302605210422, 10.683366733466935, 10.715430861723448, 10.74749498997996, 10.779559118236472, 10.811623246492985, 10.843687374749498, 10.875751503006011, 10.907815631262524, 10.939879759519037, 10.97194388777555, 11.004008016032063, 11.036072144288577, 11.06813627254509, 11.100200400801603, 11.132264529058116, 11.164328657314629, 11.196392785571142, 11.228456913827655, 11.260521042084168, 11.292585170340681, 11.324649298597194, 11.356713426853707, 11.38877755511022, 11.420841683366733, 11.452905811623246, 11.48496993987976, 11.517034068136272, 11.549098196392785, 11.581162324649299, 11.613226452905812, 11.645290581162325, 11.677354709418838, 11.70941883767535, 11.741482965931864, 11.773547094188377, 11.80561122244489, 11.837675350701403, 11.869739478957916, 11.901803607214429, 11.933867735470942, 11.965931863727455, 11.997995991983968, 12.030060120240481, 12.062124248496994, 12.094188376753507, 12.12625250501002, 12.158316633266534, 12.190380761523047, 12.22244488977956, 12.254509018036073, 12.286573146292586, 12.318637274549099, 12.350701402805612, 12.382765531062125, 12.414829659318638, 12.446893787575151, 12.478957915831664, 12.511022044088177, 12.54308617234469, 12.575150300601202, 12.607214428857715, 12.639278557114228, 12.67134268537074, 12.703406813627254, 12.735470941883767, 12.76753507014028, 12.799599198396793, 12.831663326653306, 12.863727454909819, 12.895791583166332, 12.927855711422845, 12.959919839679358, 12.991983967935871, 13.024048096192384, 13.056112224448897, 13.08817635270541, 13.120240480961924, 13.152304609218437, 13.18436873747495, 13.216432865731463, 13.248496993987976, 13.280561122244489, 13.312625250501002, 13.344689378757515, 13.376753507014028, 13.408817635270541, 13.440881763527054, 13.472945891783567, 13.50501002004008, 13.537074148296593, 13.569138276553106, 13.60120240480962, 13.633266533066132, 13.665330661322646, 13.697394789579159, 13.729458917835672, 13.761523046092185, 13.793587174348698, 13.82565130260521, 13.857715430861724, 13.889779559118237, 13.92184368737475, 13.953907815631263, 13.985971943887776, 14.01803607214429, 14.050100200400802, 14.082164328657315, 14.114228456913828, 14.146292585170341, 14.178356713426854, 14.210420841683367, 14.24248496993988, 14.274549098196394, 14.306613226452907, 14.338677354709418, 14.370741482965931, 14.402805611222444, 14.434869739478957, 14.46693386773547, 14.498997995991983, 14.531062124248496, 14.56312625250501, 14.595190380761522, 14.627254509018035, 14.659318637274549, 14.691382765531062, 14.723446893787575, 14.755511022044088, 14.7875751503006, 14.819639278557114, 14.851703406813627, 14.88376753507014, 14.915831663326653, 14.947895791583166, 14.97995991983968, 15.012024048096192, 15.044088176352705, 15.076152304609218, 15.108216432865731, 15.140280561122244, 15.172344689378757, 15.20440881763527, 15.236472945891784, 15.268537074148297, 15.30060120240481, 15.332665330661323, 15.364729458917836, 15.396793587174349, 15.428857715430862, 15.460921843687375, 15.492985971943888, 15.525050100200401, 15.557114228456914, 15.589178356713427, 15.62124248496994, 15.653306613226453, 15.685370741482966, 15.71743486973948, 15.749498997995993, 15.781563126252506, 15.813627254509019, 15.845691382765532, 15.877755511022045, 15.909819639278558, 15.94188376753507, 15.973947895791584, 16.006012024048097, 16.038076152304612, 16.070140280561123, 16.102204408817634, 16.13426853707415, 16.16633266533066, 16.19839679358717, 16.230460921843687, 16.2625250501002, 16.294589178356713, 16.326653306613224, 16.35871743486974, 16.390781563126254, 16.422845691382765, 16.454909819639276, 16.48697394789579, 16.519038076152306, 16.551102204408817, 16.58316633266533, 16.615230460921843, 16.647294589178358, 16.67935871743487, 16.71142284569138, 16.743486973947896, 16.77555110220441, 16.80761523046092, 16.839679358717433, 16.871743486973948, 16.903807615230463, 16.935871743486974, 16.967935871743485, 17.0])
+              .range(['#ffffccff', '#ffffccff', '#ffffcbff', '#ffffcaff', '#fffec9ff', '#fffec9ff', '#fffec8ff', '#fffdc7ff', '#fffdc7ff', '#fffdc6ff', '#fffdc5ff', '#fffcc5ff', '#fffcc4ff', '#fffcc3ff', '#fffbc2ff', '#fffbc2ff', '#fffbc1ff', '#fffbc0ff', '#fffac0ff', '#fffabfff', '#fffabeff', '#fff9bdff', '#fff9bdff', '#fff9bcff', '#fff9bbff', '#fff8bbff', '#fff8baff', '#fff8b9ff', '#fff7b8ff', '#fff7b8ff', '#fff7b7ff', '#fff7b6ff', '#fff6b6ff', '#fff6b5ff', '#fff6b4ff', '#fff5b4ff', '#fff5b3ff', '#fff5b2ff', '#fff4b1ff', '#fff4b1ff', '#fff4b0ff', '#fff4afff', '#fff3afff', '#fff3aeff', '#fff3adff', '#fff2acff', '#fff2acff', '#fff2abff', '#fff2aaff', '#fff1aaff', '#fff1a9ff', '#fff1a8ff', '#fff0a7ff', '#fff0a7ff', '#fff0a6ff', '#fff0a5ff', '#ffefa5ff', '#ffefa4ff', '#ffefa3ff', '#ffeea3ff', '#ffeea2ff', '#ffeea1ff', '#ffeea0ff', '#ffeda0ff', '#ffed9fff', '#ffed9eff', '#ffec9eff', '#ffec9dff', '#ffec9cff', '#ffeb9cff', '#ffeb9bff', '#ffeb9aff', '#ffea9aff', '#ffea99ff', '#ffea98ff', '#ffe998ff', '#ffe997ff', '#ffe996ff', '#ffe896ff', '#ffe895ff', '#ffe894ff', '#ffe794ff', '#ffe793ff', '#ffe792ff', '#ffe692ff', '#ffe691ff', '#ffe690ff', '#ffe68fff', '#ffe58fff', '#ffe58eff', '#ffe58dff', '#ffe48dff', '#ffe48cff', '#ffe48bff', '#ffe38bff', '#ffe38aff', '#ffe389ff', '#ffe289ff', '#ffe288ff', '#ffe287ff', '#ffe187ff', '#ffe186ff', '#ffe185ff', '#ffe085ff', '#ffe084ff', '#ffe083ff', '#ffdf83ff', '#ffdf82ff', '#ffdf81ff', '#ffde81ff', '#ffde80ff', '#ffde7fff', '#ffdd7fff', '#ffdd7eff', '#ffdd7dff', '#ffdc7dff', '#ffdc7cff', '#ffdc7bff', '#ffdc7bff', '#ffdb7aff', '#ffdb79ff', '#ffdb78ff', '#ffda78ff', '#ffda77ff', '#ffda76ff', '#fed976ff', '#fed975ff', '#fed874ff', '#fed774ff', '#fed773ff', '#fed672ff', '#fed572ff', '#fed571ff', '#fed470ff', '#fed470ff', '#fed36fff', '#fed26eff', '#fed26eff', '#fed16dff', '#fed06cff', '#fed06cff', '#fecf6bff', '#fecf6aff', '#fece6aff', '#fecd69ff', '#fecd68ff', '#fecc68ff', '#fecb67ff', '#fecb66ff', '#feca66ff', '#feca65ff', '#fec964ff', '#fec864ff', '#fec863ff', '#fec762ff', '#fec662ff', '#fec661ff', '#fec560ff', '#fec45fff', '#fec45fff', '#fec35eff', '#fec35dff', '#fec25dff', '#fec15cff', '#fec15bff', '#fec05bff', '#febf5aff', '#febf59ff', '#febe59ff', '#febe58ff', '#febd57ff', '#febc57ff', '#febc56ff', '#febb55ff', '#feba55ff', '#feba54ff', '#feb953ff', '#feb953ff', '#feb852ff', '#feb751ff', '#feb751ff', '#feb650ff', '#feb54fff', '#feb54fff', '#feb44eff', '#feb44dff', '#feb34dff', '#feb24cff', '#feb24cff', '#feb14bff', '#feb04bff', '#feb04bff', '#feaf4bff', '#feaf4aff', '#feae4aff', '#feae4aff', '#fead4aff', '#feac49ff', '#feac49ff', '#feab49ff', '#feab48ff', '#feaa48ff', '#fea948ff', '#fea948ff', '#fea847ff', '#fea847ff', '#fea747ff', '#fea647ff', '#fea646ff', '#fea546ff', '#fea546ff', '#fea446ff', '#fea345ff', '#fea345ff', '#fea245ff', '#fea245ff', '#fea144ff', '#fea044ff', '#fea044ff', '#fe9f44ff', '#fe9f43ff', '#fe9e43ff', '#fe9d43ff', '#fe9d43ff', '#fe9c42ff', '#fe9c42ff', '#fe9b42ff', '#fe9a42ff', '#fe9a41ff', '#fe9941ff', '#fe9941ff', '#fe9840ff', '#fe9740ff', '#fe9740ff', '#fe9640ff', '#fe963fff', '#fe953fff', '#fe943fff', '#fe943fff', '#fe933eff', '#fe933eff', '#fe923eff', '#fe923eff', '#fe913dff', '#fe903dff', '#fe903dff', '#fe8f3dff', '#fe8f3cff', '#fe8e3cff', '#fe8d3cff', '#fd8d3cff', '#fd8c3bff', '#fd8b3bff', '#fd8a3bff', '#fd883aff', '#fd873aff', '#fd863aff', '#fd853aff', '#fd8439ff', '#fd8339ff', '#fd8239ff', '#fd8138ff', '#fd8038ff', '#fd7f38ff', '#fd7e38ff', '#fd7d37ff', '#fd7c37ff', '#fd7b37ff', '#fd7a36ff', '#fd7936ff', '#fd7836ff', '#fd7736ff', '#fd7635ff', '#fd7535ff', '#fd7435ff', '#fd7334ff', '#fd7234ff', '#fd7134ff', '#fd7033ff', '#fd6f33ff', '#fd6e33ff', '#fd6d33ff', '#fd6c32ff', '#fd6b32ff', '#fd6a32ff', '#fd6931ff', '#fd6831ff', '#fd6731ff', '#fd6631ff', '#fd6530ff', '#fd6430ff', '#fd6330ff', '#fd622fff', '#fd612fff', '#fd602fff', '#fd5f2fff', '#fd5e2eff', '#fd5d2eff', '#fd5c2eff', '#fd5b2dff', '#fd5a2dff', '#fd592dff', '#fd582dff', '#fd572cff', '#fd562cff', '#fd552cff', '#fd542bff', '#fd532bff', '#fd522bff', '#fd512aff', '#fd502aff', '#fd4f2aff', '#fc4e2aff', '#fc4d29ff', '#fc4c29ff', '#fb4b29ff', '#fb4a29ff', '#fa4a29ff', '#fa4928ff', '#fa4828ff', '#f94728ff', '#f94628ff', '#f84527ff', '#f84427ff', '#f84427ff', '#f74327ff', '#f74226ff', '#f64126ff', '#f64026ff', '#f63f26ff', '#f53f26ff', '#f53e25ff', '#f43d25ff', '#f43c25ff', '#f43b25ff', '#f33a24ff', '#f33a24ff', '#f23924ff', '#f23824ff', '#f23724ff', '#f13623ff', '#f13523ff', '#f03523ff', '#f03423ff', '#f03322ff', '#ef3222ff', '#ef3122ff', '#ee3022ff', '#ee3022ff', '#ee2f21ff', '#ed2e21ff', '#ed2d21ff', '#ec2c21ff', '#ec2b20ff', '#ec2b20ff', '#eb2a20ff', '#eb2920ff', '#ea281fff', '#ea271fff', '#ea261fff', '#e9261fff', '#e9251fff', '#e8241eff', '#e8231eff', '#e8221eff', '#e7211eff', '#e7211dff', '#e6201dff', '#e61f1dff', '#e61e1dff', '#e51d1dff', '#e51c1cff', '#e41b1cff', '#e41b1cff', '#e31a1cff', '#e3191cff', '#e2191cff', '#e2181cff', '#e1181cff', '#e0181cff', '#e0171dff', '#df171dff', '#df161dff', '#de161dff', '#dd161dff', '#dd151dff', '#dc151eff', '#dc141eff', '#db141eff', '#da131eff', '#da131eff', '#d9131eff', '#d9121eff', '#d8121fff', '#d7111fff', '#d7111fff', '#d6111fff', '#d5101fff', '#d5101fff', '#d40f20ff', '#d40f20ff', '#d30e20ff', '#d20e20ff', '#d20e20ff', '#d10d20ff', '#d10d21ff', '#d00c21ff', '#cf0c21ff', '#cf0b21ff', '#ce0b21ff', '#ce0b21ff', '#cd0a22ff', '#cc0a22ff', '#cc0922ff', '#cb0922ff', '#ca0922ff', '#ca0822ff', '#c90822ff', '#c90723ff', '#c80723ff', '#c70623ff', '#c70623ff', '#c60623ff', '#c60523ff', '#c50524ff', '#c40424ff', '#c40424ff', '#c30424ff', '#c30324ff', '#c20324ff', '#c10225ff', '#c10225ff', '#c00125ff', '#bf0125ff', '#bf0125ff', '#be0025ff', '#be0026ff', '#bd0026ff', '#bc0026ff', '#bb0026ff', '#ba0026ff', '#b90026ff', '#b80026ff', '#b70026ff', '#b60026ff', '#b50026ff', '#b40026ff', '#b30026ff', '#b20026ff', '#b10026ff', '#b00026ff', '#af0026ff', '#ae0026ff', '#ad0026ff', '#ac0026ff', '#ab0026ff', '#aa0026ff', '#a90026ff', '#a80026ff', '#a70026ff', '#a60026ff', '#a50026ff', '#a40026ff', '#a30026ff', '#a20026ff', '#a10026ff', '#a00026ff', '#9f0026ff', '#9e0026ff', '#9d0026ff', '#9c0026ff', '#9b0026ff', '#9b0026ff', '#9a0026ff', '#990026ff', '#980026ff', '#970026ff', '#960026ff', '#950026ff', '#940026ff', '#930026ff', '#920026ff', '#910026ff', '#900026ff', '#8f0026ff', '#8e0026ff', '#8d0026ff', '#8c0026ff', '#8b0026ff', '#8a0026ff', '#890026ff', '#880026ff', '#870026ff', '#860026ff', '#850026ff', '#840026ff', '#830026ff', '#820026ff', '#810026ff', '#800026ff']);
+    
+
+    color_map_5d28ce2f06024b385bb0366647e04147.x = d3.scale.linear()
+              .domain([1.0, 17.0])
+              .range([0, 450 - 50]);
+
+    color_map_5d28ce2f06024b385bb0366647e04147.legend = L.control({position: 'topright'});
+    color_map_5d28ce2f06024b385bb0366647e04147.legend.onAdd = function (map) {var div = L.DomUtil.create('div', 'legend'); return div};
+    color_map_5d28ce2f06024b385bb0366647e04147.legend.addTo(map_0b887d895c84c9dd71ea4b0fc0683d24);
+
+    color_map_5d28ce2f06024b385bb0366647e04147.xAxis = d3.svg.axis()
+        .scale(color_map_5d28ce2f06024b385bb0366647e04147.x)
+        .orient("top")
+        .tickSize(1)
+        .tickValues([1.0, 3.0, 5.0, 7.0, 9.0, 11.0, 13.0, 15.0, 17.0]);
+
+    color_map_5d28ce2f06024b385bb0366647e04147.svg = d3.select(".legend.leaflet-control").append("svg")
+        .attr("id", 'legend')
+        .attr("width", 450)
+        .attr("height", 40);
+
+    color_map_5d28ce2f06024b385bb0366647e04147.g = color_map_5d28ce2f06024b385bb0366647e04147.svg.append("g")
+        .attr("class", "key")
+        .attr("fill", "black")
+        .attr("transform", "translate(25,16)");
+
+    color_map_5d28ce2f06024b385bb0366647e04147.g.selectAll("rect")
+        .data(color_map_5d28ce2f06024b385bb0366647e04147.color.range().map(function(d, i) {
+          return {
+            x0: i ? color_map_5d28ce2f06024b385bb0366647e04147.x(color_map_5d28ce2f06024b385bb0366647e04147.color.domain()[i - 1]) : color_map_5d28ce2f06024b385bb0366647e04147.x.range()[0],
+            x1: i < color_map_5d28ce2f06024b385bb0366647e04147.color.domain().length ? color_map_5d28ce2f06024b385bb0366647e04147.x(color_map_5d28ce2f06024b385bb0366647e04147.color.domain()[i]) : color_map_5d28ce2f06024b385bb0366647e04147.x.range()[1],
+            z: d
+          };
+        }))
+      .enter().append("rect")
+        .attr("height", 40 - 30)
+        .attr("x", function(d) { return d.x0; })
+        .attr("width", function(d) { return d.x1 - d.x0; })
+        .style("fill", function(d) { return d.z; });
+
+    color_map_5d28ce2f06024b385bb0366647e04147.g.call(color_map_5d28ce2f06024b385bb0366647e04147.xAxis).append("text")
+        .attr("class", "caption")
+        .attr("y", 21)
+        .attr("fill", "black")
+        .text("Incident Count by Inferred County");
+    
+            var layer_control_12a9ad5de966f59b028abc3d163fcc7d_layers = {
+                base_layers : {
+                    "OpenStreetMap" : tile_layer_2637b8d2424541136793904832a7b1ef,
+                    "CartoDB Positron" : tile_layer_1c6e5e4978a9749749775ffce14b779f,
+                    "CartoDB Dark Matter" : tile_layer_1f91e227e261cea3a1f1367cd3aa0e25,
+                },
+                overlays :  {
+                },
+            };
+            let layer_control_12a9ad5de966f59b028abc3d163fcc7d = L.control.layers(
+                layer_control_12a9ad5de966f59b028abc3d163fcc7d_layers.base_layers,
+                layer_control_12a9ad5de966f59b028abc3d163fcc7d_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": true,
+  "autoZIndex": true,
+}
+            ).addTo(map_0b887d895c84c9dd71ea4b0fc0683d24);
+
+        
+</script>
+</html>
