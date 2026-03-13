@@ -1,0 +1,1587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kenya Banditry Incident Repository — Enhanced</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/vis-network@9.1.9/dist/vis-network.min.js"></script>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/vis-network@9.1.9/dist/dist/vis-network.min.css" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: '#0f172a',
+            panel: '#111827',
+            ember: '#b91c1c',
+            sand: '#f8fafc',
+            accent: '#dc2626',
+            gold: '#f59e0b'
+          },
+          boxShadow: {
+            soft: '0 10px 30px rgba(15, 23, 42, 0.08)',
+            glow: '0 12px 40px rgba(220, 38, 38, 0.12)'
+          },
+          backgroundImage: {
+            grid: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.06) 1px, transparent 0)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11'; }
+    .glass {
+      backdrop-filter: blur(16px);
+      background: rgba(255,255,255,0.82);
+    }
+    .hero-overlay {
+      background:
+        radial-gradient(circle at top left, rgba(239,68,68,0.35), transparent 28%),
+        radial-gradient(circle at top right, rgba(245,158,11,0.18), transparent 24%),
+        linear-gradient(135deg, #0f172a 0%, #111827 40%, #7f1d1d 100%);
+    }
+    .metric-card::after {
+      content: '';
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 3px;
+      background: linear-gradient(90deg, #dc2626, #f59e0b);
+      border-bottom-left-radius: 1rem;
+      border-bottom-right-radius: 1rem;
+      opacity: 0.75;
+    }
+    .table-scroll::-webkit-scrollbar,
+    .codebook-scroll::-webkit-scrollbar {
+      height: 10px;
+      width: 10px;
+    }
+    .table-scroll::-webkit-scrollbar-thumb,
+    .codebook-scroll::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    .active-tab {
+      background: #111827;
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(15,23,42,0.12);
+    }
+    .pill {
+      display:inline-flex;
+      align-items:center;
+      border-radius:9999px;
+      padding:0.25rem 0.65rem;
+      font-size:0.75rem;
+      font-weight:600;
+    }
+    .nav-link.active {
+      color: white;
+      position: relative;
+    }
+    .nav-link.active::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -0.5rem;
+      height: 2px;
+      border-radius: 9999px;
+      background: linear-gradient(90deg, #dc2626, #f59e0b);
+    }
+    .leaflet-popup-content-wrapper {
+      border-radius: 1rem;
+    }
+    #incidentMap, #networkGraph {
+      min-height: 460px;
+    }
+    .section-anchor-offset {
+      scroll-margin-top: 100px;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+  <header class="sticky top-0 z-50 border-b border-white/10 bg-slate-950/85 text-white backdrop-blur-xl">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
+      <div class="flex items-center gap-4">
+        <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-red-600 shadow-glow">
+          <i data-lucide="shield-alert" class="h-5 w-5"></i>
+        </div>
+        <div>
+          <div class="text-lg font-semibold tracking-tight">Kenya Banditry Incident Repository</div>
+          <div class="text-xs text-slate-300">Interactive database, dashboard, SNA, GIS, codebook, and research portal</div>
+        </div>
+      </div>
+      <nav class="hidden items-center gap-6 text-sm font-medium lg:flex">
+        <a href="#overview" class="nav-link text-slate-200 transition hover:text-white">Overview</a>
+        <a href="#dashboard" class="nav-link text-slate-200 transition hover:text-white">Dashboard</a>
+        <a href="#analysis-hub" class="nav-link text-slate-200 transition hover:text-white">Analysis Hub</a>
+        <a href="#explorer" class="nav-link text-slate-200 transition hover:text-white">Data Explorer</a>
+        <a href="#codebook" class="nav-link text-slate-200 transition hover:text-white">Codebook</a>
+        <a href="#methods" class="nav-link text-slate-200 transition hover:text-white">Methods</a>
+        <a href="#downloads" class="nav-link text-slate-200 transition hover:text-white">Downloads</a>
+      </nav>
+    </div>
+  </header>
+
+  <section id="overview" class="section-anchor-offset hero-overlay relative overflow-hidden text-white">
+    <div class="absolute inset-0 bg-grid bg-[length:22px_22px] opacity-20"></div>
+    <div class="relative mx-auto grid max-w-7xl gap-10 px-6 py-20 lg:grid-cols-[1.2fr_0.8fr] lg:px-8 lg:py-24">
+      <div class="max-w-3xl">
+        <div class="mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-red-100">
+          <i data-lucide="database-zap" class="h-4 w-4"></i>
+          Open research infrastructure for incident tracking in Kenya
+        </div>
+        <h1 class="text-4xl font-semibold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
+          A more intuitive research portal for documenting, exploring, mapping, and modeling <span class="text-red-300">banditry incidents</span> in Kenya.
+        </h1>
+        <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-200">
+          This enhanced version adds a structured analysis hub, fully clickable resource links, a filter-aware GIS map in Leaflet, and a social network analysis panel that updates with the dashboard state.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-4">
+          <a href="#dashboard" class="rounded-2xl bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-soft transition hover:-translate-y-0.5 hover:bg-slate-100">Open dashboard</a>
+          <a href="#analysis-hub" class="rounded-2xl border border-white/20 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10">Open SNA & GIS hub</a>
+          <a href="#downloads" class="rounded-2xl border border-red-300/20 bg-red-500/10 px-6 py-3 text-sm font-semibold text-red-100 transition hover:bg-red-500/20">Open downloads</a>
+        </div>
+        <div class="mt-10 grid gap-4 sm:grid-cols-3">
+          <div class="rounded-2xl border border-white/10 bg-white/10 p-4">
+            <div class="text-xs uppercase tracking-[0.18em] text-slate-300">Coverage</div>
+            <div id="heroYears" class="mt-2 text-2xl font-semibold">2000–2024</div>
+          </div>
+          <div class="rounded-2xl border border-white/10 bg-white/10 p-4">
+            <div class="text-xs uppercase tracking-[0.18em] text-slate-300">Core unit</div>
+            <div class="mt-2 text-2xl font-semibold">Incident report</div>
+          </div>
+          <div class="rounded-2xl border border-white/10 bg-white/10 p-4">
+            <div class="text-xs uppercase tracking-[0.18em] text-slate-300">Analysis layers</div>
+            <div class="mt-2 text-2xl font-semibold">Charts + GIS + SNA</div>
+          </div>
+        </div>
+      </div>
+      <div class="glass rounded-[2rem] border border-white/20 p-6 shadow-glow">
+        <div class="mb-5 flex items-center justify-between">
+          <div>
+            <div class="text-sm font-semibold text-slate-900">Repository snapshot</div>
+            <div class="text-xs text-slate-500">Auto-populated from the loaded dataset</div>
+          </div>
+          <div class="rounded-full bg-red-50 px-3 py-1 text-xs font-semibold text-red-700">Dynamic demo</div>
+        </div>
+        <div class="grid gap-4 sm:grid-cols-2">
+          <div class="rounded-2xl bg-slate-900 p-5 text-white">
+            <div class="text-xs uppercase tracking-[0.16em] text-slate-400">Total incidents</div>
+            <div id="statTotalIncidents" class="mt-3 text-4xl font-semibold">—</div>
+          </div>
+          <div class="rounded-2xl bg-white p-5 ring-1 ring-slate-200">
+            <div class="text-xs uppercase tracking-[0.16em] text-slate-500">Unique places</div>
+            <div id="statPlaces" class="mt-3 text-4xl font-semibold text-slate-900">—</div>
+          </div>
+          <div class="rounded-2xl bg-white p-5 ring-1 ring-slate-200">
+            <div class="text-xs uppercase tracking-[0.16em] text-slate-500">Media houses</div>
+            <div id="statMedia" class="mt-3 text-4xl font-semibold text-slate-900">—</div>
+          </div>
+          <div class="rounded-2xl bg-white p-5 ring-1 ring-slate-200">
+            <div class="text-xs uppercase tracking-[0.16em] text-slate-500">Years covered</div>
+            <div id="statYears" class="mt-3 text-4xl font-semibold text-slate-900">—</div>
+          </div>
+        </div>
+        <div class="mt-5 rounded-2xl bg-amber-50 p-4 text-sm text-amber-900 ring-1 ring-amber-100">
+          The layout is reorganized around <span class="font-semibold">overview, filters, analytics, GIS, SNA, records, codebook, methods, and downloads</span> so users can move from summary to evidence with fewer clicks.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="-mt-8 relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+      <div class="metric-card relative rounded-[1.5rem] bg-white p-6 shadow-soft ring-1 ring-slate-200">
+        <div class="flex items-center justify-between">
+          <div>
+            <div class="text-sm font-medium text-slate-500">Total deaths</div>
+            <div id="quickDeaths" class="mt-2 text-3xl font-semibold text-slate-900">—</div>
+          </div>
+          <div class="rounded-2xl bg-red-50 p-3 text-red-600"><i data-lucide="skull" class="h-5 w-5"></i></div>
+        </div>
+      </div>
+      <div class="metric-card relative rounded-[1.5rem] bg-white p-6 shadow-soft ring-1 ring-slate-200">
+        <div class="flex items-center justify-between">
+          <div>
+            <div class="text-sm font-medium text-slate-500">Total injuries</div>
+            <div id="quickInjuries" class="mt-2 text-3xl font-semibold text-slate-900">—</div>
+          </div>
+          <div class="rounded-2xl bg-orange-50 p-3 text-orange-600"><i data-lucide="heart-pulse" class="h-5 w-5"></i></div>
+        </div>
+      </div>
+      <div class="metric-card relative rounded-[1.5rem] bg-white p-6 shadow-soft ring-1 ring-slate-200">
+        <div class="flex items-center justify-between">
+          <div>
+            <div class="text-sm font-medium text-slate-500">People displaced</div>
+            <div id="quickDisplaced" class="mt-2 text-3xl font-semibold text-slate-900">—</div>
+          </div>
+          <div class="rounded-2xl bg-sky-50 p-3 text-sky-600"><i data-lucide="users" class="h-5 w-5"></i></div>
+        </div>
+      </div>
+      <div class="metric-card relative rounded-[1.5rem] bg-white p-6 shadow-soft ring-1 ring-slate-200">
+        <div class="flex items-center justify-between">
+          <div>
+            <div class="text-sm font-medium text-slate-500">Cattle stolen</div>
+            <div id="quickCattle" class="mt-2 text-3xl font-semibold text-slate-900">—</div>
+          </div>
+          <div class="rounded-2xl bg-emerald-50 p-3 text-emerald-600"><i data-lucide="beef" class="h-5 w-5"></i></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="dashboard" class="section-anchor-offset mx-auto max-w-7xl px-6 py-16 lg:px-8">
+    <div class="mb-8 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+      <div>
+        <div class="text-sm font-semibold uppercase tracking-[0.18em] text-red-600">Dashboard</div>
+        <h2 class="mt-2 text-3xl font-semibold tracking-tight text-slate-900">Interactive analytics tailored to the incident dataframe</h2>
+        <p class="mt-2 max-w-3xl text-slate-600">All filters update the KPIs, charts, table, GIS layers, social network graph, and downloadable filtered assets together.</p>
+      </div>
+      <div class="rounded-2xl bg-white px-4 py-3 text-sm text-slate-600 shadow-soft ring-1 ring-slate-200">
+        <span class="font-semibold text-slate-900">Tip:</span> click a map marker or a network node to focus the dashboard on that selection.
+      </div>
+    </div>
+
+    <div class="mb-8 grid gap-4 rounded-[2rem] bg-white p-5 shadow-soft ring-1 ring-slate-200 xl:grid-cols-7">
+      <label class="block xl:col-span-2">
+        <span class="mb-2 block text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Search</span>
+        <input id="searchBox" type="text" placeholder="Search place, comment, source, weapon..." class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-red-300 focus:bg-white focus:ring-4 focus:ring-red-100" />
+      </label>
+      <label class="block">
+        <span class="mb-2 block text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Year</span>
+        <select id="yearFilter" class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-red-300 focus:bg-white focus:ring-4 focus:ring-red-100"></select>
+      </label>
+      <label class="block">
+        <span class="mb-2 block text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Month</span>
+        <select id="monthFilter" class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-red-300 focus:bg-white focus:ring-4 focus:ring-red-100"></select>
+      </label>
+      <label class="block">
+        <span class="mb-2 block text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">County / place stem</span>
+        <select id="countyFilter" class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-red-300 focus:bg-white focus:ring-4 focus:ring-red-100"></select>
+      </label>
+      <label class="block">
+        <span class="mb-2 block text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Media house</span>
+        <select id="mediaFilter" class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-red-300 focus:bg-white focus:ring-4 focus:ring-red-100"></select>
+      </label>
+      <div class="flex items-end gap-3">
+        <button id="resetFilters" class="w-full rounded-2xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white transition hover:bg-slate-800">Reset</button>
+        <button id="exportCsvBtn" class="rounded-2xl bg-red-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-red-700">CSV</button>
+      </div>
+    </div>
+
+    <div class="grid gap-6 xl:grid-cols-[1.25fr_0.75fr]">
+      <div class="grid gap-6 lg:grid-cols-2">
+        <div class="rounded-[1.75rem] bg-white p-6 shadow-soft ring-1 ring-slate-200">
+          <div class="mb-4 flex items-center justify-between">
+            <div>
+              <h3 class="text-lg font-semibold text-slate-900">Incidents by year</h3>
+              <p class="text-sm text-slate-500">Trend across incident records</p>
+            </div>
+            <span class="pill bg-red-50 text-red-700">Temporal</span>
+          </div>
+          <canvas id="yearChart" height="140"></canvas>
+        </div>
+        <div class="rounded-[1.75rem] bg-white p-6 shadow-soft ring-1 ring-slate-200">
+          <div class="mb-4 flex items-center justify-between">
+            <div>
+              <h3 class="text-lg font-semibold text-slate-900">Monthly seasonality</h3>
+              <p class="text-sm text-slate-500">Jan–Dec incident concentration</p>
+            </div>
+            <span class="pill bg-orange-50 text-orange-700">Seasonal</span>
+          </div>
+          <canvas id="monthChart" height="140"></canvas>
+        </div>
+        <div class="rounded-[1.75rem] bg-white p-6 shadow-soft ring-1 ring-slate-200">
+          <div class="mb-4 flex items-center justify-between">
+            <div>
+              <h3 class="text-lg font-semibold text-slate-900">Top places</h3>
+              <p class="text-sm text-slate-500">Frequency by inferred county / first place token</p>
+            </div>
+            <span class="pill bg-sky-50 text-sky-700">Spatial proxy</span>
+          </div>
+          <canvas id="placeChart" height="160"></canvas>
+        </div>
+        <div class="rounded-[1.75rem] bg-white p-6 shadow-soft ring-1 ring-slate-200">
+          <div class="mb-4 flex items-center justify-between">
+            <div>
+              <h3 class="text-lg font-semibold text-slate-900">Weapons used</h3>
+              <p class="text-sm text-slate-500">Weapon type composition</p>
+            </div>
+            <span class="pill bg-purple-50 text-purple-700">Operational</span>
+          </div>
+          <canvas id="weaponChart" height="160"></canvas>
+        </div>
+      </div>
+      <div class="space-y-6">
+        <div class="rounded-[1.75rem] bg-white p-6 shadow-soft ring-1 ring-slate-200">
+          <div class="mb-4 flex items-center justify-between">
+            <div>
+              <h3 class="text-lg font-semibold text-slate-900">Outcome profile</h3>
+              <p class="text-sm text-slate-500">Deaths, injuries, abductions, displacement</p>
+            </div>
+            <span class="pill bg-emerald-50 text-emerald-700">Impact</span>
+          </div>
+          <canvas id="outcomesChart" height="220"></canvas>
+        </div>
+        <div class="rounded-[1.75rem] bg-slate-900 p-6 text-white shadow-soft">
+          <div class="mb-4 flex items-center justify-between">
+            <div>
+              <h3 class="text-lg font-semibold">Data quality signals</h3>
+              <p class="text-sm text-slate-300">Coding completeness for key variables</p>
+            </div>
+            <i data-lucide="badge-info" class="h-5 w-5 text-slate-300"></i>
+          </div>
+          <div class="space-y-4 text-sm">
+            <div>
+              <div class="mb-1 flex justify-between"><span>Weapon type present</span><span id="dqWeapon">—</span></div>
+              <div class="h-2 rounded-full bg-slate-700"><div id="dqWeaponBar" class="h-2 rounded-full bg-red-500"></div></div>
+            </div>
+            <div>
+              <div class="mb-1 flex justify-between"><span>Media house present</span><span id="dqMedia">—</span></div>
+              <div class="h-2 rounded-full bg-slate-700"><div id="dqMediaBar" class="h-2 rounded-full bg-orange-400"></div></div>
+            </div>
+            <div>
+              <div class="mb-1 flex justify-between"><span>Comments present</span><span id="dqComments">—</span></div>
+              <div class="h-2 rounded-full bg-slate-700"><div id="dqCommentsBar" class="h-2 rounded-full bg-sky-400"></div></div>
+            </div>
+            <div>
+              <div class="mb-1 flex justify-between"><span>Facility coded</span><span id="dqFacility">—</span></div>
+              <div class="h-2 rounded-full bg-slate-700"><div id="dqFacilityBar" class="h-2 rounded-full bg-emerald-400"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="rounded-[1.75rem] border border-slate-200 bg-white p-6 shadow-soft">
+          <div class="mb-4 flex items-center justify-between">
+            <div>
+              <h3 class="text-lg font-semibold text-slate-900">Live selection state</h3>
+              <p class="text-sm text-slate-500">Active focus from table, map, or network</p>
+            </div>
+            <span class="pill bg-slate-100 text-slate-700">Context</span>
+          </div>
+          <div id="selectionSummary" class="rounded-2xl bg-slate-50 p-4 text-sm leading-7 text-slate-600 ring-1 ring-slate-200">
+            No row, marker, or network node selected.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="analysis-hub" class="section-anchor-offset bg-white py-16">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="mb-8 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+        <div>
+          <div class="text-sm font-semibold uppercase tracking-[0.18em] text-red-600">Analysis hub</div>
+          <h2 class="mt-2 text-3xl font-semibold tracking-tight text-slate-900">Integrated GIS and social network analysis</h2>
+          <p class="mt-2 max-w-3xl text-slate-600">Both panels are live, filter-aware, and export-ready. The map uses Leaflet. The network graph links counties, media houses, weapons, and facilities based on the filtered incidents.</p>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <button id="downloadGeoJsonBtn" class="rounded-2xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white transition hover:bg-slate-800">Download GeoJSON</button>
+          <button id="downloadNetworkBtn" class="rounded-2xl bg-red-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-red-700">Download network JSON</button>
+        </div>
+      </div>
+
+      <div class="grid gap-6 xl:grid-cols-2">
+        <div class="rounded-[1.75rem] border border-slate-200 bg-white p-6 shadow-soft">
+          <div class="mb-4 flex items-center justify-between">
+            <div>
+              <h3 class="text-lg font-semibold text-slate-900">GIS incident map</h3>
+              <p class="text-sm text-slate-500">Markers size by deaths and color by severity</p>
+            </div>
+            <span class="pill bg-sky-50 text-sky-700">Leaflet</span>
+          </div>
+          <div id="incidentMap" class="overflow-hidden rounded-2xl ring-1 ring-slate-200"></div>
+          <div class="mt-4 grid gap-3 md:grid-cols-3">
+            <div class="rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-200">
+              <div class="text-xs uppercase tracking-[0.16em] text-slate-500">Mapped incidents</div>
+              <div id="mapCount" class="mt-2 text-2xl font-semibold text-slate-900">0</div>
+            </div>
+            <div class="rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-200">
+              <div class="text-xs uppercase tracking-[0.16em] text-slate-500">Visible counties</div>
+              <div id="mapCounties" class="mt-2 text-2xl font-semibold text-slate-900">0</div>
+            </div>
+            <div class="rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-200">
+              <div class="text-xs uppercase tracking-[0.16em] text-slate-500">Max severity</div>
+              <div id="mapSeverity" class="mt-2 text-2xl font-semibold text-slate-900">0</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rounded-[1.75rem] border border-slate-200 bg-white p-6 shadow-soft">
+          <div class="mb-4 flex items-center justify-between">
+            <div>
+              <h3 class="text-lg font-semibold text-slate-900">Incident relationship graph</h3>
+              <p class="text-sm text-slate-500">County, media, weapon, and facility co-occurrence network</p>
+            </div>
+            <span class="pill bg-purple-50 text-purple-700">SNA</span>
+          </div>
+          <div id="networkGraph" class="rounded-2xl ring-1 ring-slate-200"></div>
+          <div class="mt-4 grid gap-3 md:grid-cols-3">
+            <div class="rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-200">
+              <div class="text-xs uppercase tracking-[0.16em] text-slate-500">Nodes</div>
+              <div id="networkNodes" class="mt-2 text-2xl font-semibold text-slate-900">0</div>
+            </div>
+            <div class="rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-200">
+              <div class="text-xs uppercase tracking-[0.16em] text-slate-500">Edges</div>
+              <div id="networkEdges" class="mt-2 text-2xl font-semibold text-slate-900">0</div>
+            </div>
+            <div class="rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-200">
+              <div class="text-xs uppercase tracking-[0.16em] text-slate-500">Top degree node</div>
+              <div id="networkTopNode" class="mt-2 text-lg font-semibold text-slate-900">—</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="explorer" class="section-anchor-offset bg-slate-50 py-16">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="mb-8 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+        <div>
+          <div class="text-sm font-semibold uppercase tracking-[0.18em] text-red-600">Data explorer</div>
+          <h2 class="mt-2 text-3xl font-semibold tracking-tight text-slate-900">Incident table designed around your dataframe columns</h2>
+          <p class="mt-2 max-w-3xl text-slate-600">Every row now contains working links, contextual actions, and selection controls that synchronize with the GIS and network views.</p>
+        </div>
+        <div class="flex flex-wrap gap-3 text-sm">
+          <div class="rounded-2xl bg-white px-4 py-2 text-slate-700 ring-1 ring-slate-200">Showing <span id="recordCount" class="font-semibold text-slate-900">0</span> records</div>
+          <div class="rounded-2xl bg-red-50 px-4 py-2 text-red-700">Filtered live</div>
+        </div>
+      </div>
+
+      <div class="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-soft">
+        <div class="table-scroll overflow-x-auto">
+          <table class="min-w-full text-left text-sm">
+            <thead class="sticky top-0 bg-slate-900 text-xs uppercase tracking-[0.16em] text-slate-300">
+              <tr>
+                <th class="px-4 py-4">Select</th>
+                <th class="px-4 py-4">Doc code</th>
+                <th class="px-4 py-4">Year</th>
+                <th class="px-4 py-4">Month</th>
+                <th class="px-4 py-4">Place</th>
+                <th class="px-4 py-4">Deaths</th>
+                <th class="px-4 py-4">Injuries</th>
+                <th class="px-4 py-4">Displaced</th>
+                <th class="px-4 py-4">Abducted</th>
+                <th class="px-4 py-4">Cattle</th>
+                <th class="px-4 py-4">Weapon</th>
+                <th class="px-4 py-4">Facility</th>
+                <th class="px-4 py-4">Media house</th>
+                <th class="px-4 py-4">Source</th>
+              </tr>
+            </thead>
+            <tbody id="dataTable" class="divide-y divide-slate-100 bg-white"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="codebook" class="section-anchor-offset bg-white py-16">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="mb-8">
+        <div class="text-sm font-semibold uppercase tracking-[0.18em] text-red-600">Codebook</div>
+        <h2 class="mt-2 text-3xl font-semibold tracking-tight text-slate-900">A cleaner, research-facing variable dictionary</h2>
+        <p class="mt-2 max-w-3xl text-slate-600">Organized into logical groups so users understand what is measured, how it is coded, and how fields relate to incident severity, actors, outcomes, and sourcing.</p>
+      </div>
+
+      <div class="mb-6 flex flex-wrap gap-3" id="codebookTabs">
+        <button class="tab-btn active-tab rounded-2xl px-4 py-2 text-sm font-semibold" data-tab="identity">Identity & time</button>
+        <button class="tab-btn rounded-2xl bg-white px-4 py-2 text-sm font-semibold text-slate-700 ring-1 ring-slate-200" data-tab="location">Location</button>
+        <button class="tab-btn rounded-2xl bg-white px-4 py-2 text-sm font-semibold text-slate-700 ring-1 ring-slate-200" data-tab="outcomes">Outcomes</button>
+        <button class="tab-btn rounded-2xl bg-white px-4 py-2 text-sm font-semibold text-slate-700 ring-1 ring-slate-200" data-tab="crime">Crime & weapons</button>
+        <button class="tab-btn rounded-2xl bg-white px-4 py-2 text-sm font-semibold text-slate-700 ring-1 ring-slate-200" data-tab="source">Source & notes</button>
+      </div>
+
+      <div class="codebook-scroll overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-soft">
+        <div class="overflow-x-auto">
+          <table class="min-w-full text-left text-sm">
+            <thead class="bg-slate-900 text-xs uppercase tracking-[0.16em] text-slate-300">
+              <tr>
+                <th class="px-4 py-4">Variable</th>
+                <th class="px-4 py-4">Type</th>
+                <th class="px-4 py-4">Group</th>
+                <th class="px-4 py-4">Description</th>
+                <th class="px-4 py-4">Example / coding note</th>
+              </tr>
+            </thead>
+            <tbody id="codebookTable" class="divide-y divide-slate-100"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="methods" class="section-anchor-offset py-16">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="mb-8">
+        <div class="text-sm font-semibold uppercase tracking-[0.18em] text-red-600">Methods</div>
+        <h2 class="mt-2 text-3xl font-semibold tracking-tight text-slate-900">Transparent methodology and repository logic</h2>
+      </div>
+      <div class="grid gap-6 lg:grid-cols-4">
+        <article class="rounded-[1.75rem] bg-white p-6 shadow-soft ring-1 ring-slate-200">
+          <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-red-50 text-red-600"><i data-lucide="scan-search" class="h-5 w-5"></i></div>
+          <h3 class="text-lg font-semibold text-slate-900">Systematic media coding</h3>
+          <p class="mt-3 text-sm leading-7 text-slate-600">Records are structured at the incident-report level, with document code, timing, place, casualties, theft, co-occurring crime, weapons, facilities, and source attribution.</p>
+        </article>
+        <article class="rounded-[1.75rem] bg-white p-6 shadow-soft ring-1 ring-slate-200">
+          <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-sky-50 text-sky-600"><i data-lucide="badge-check" class="h-5 w-5"></i></div>
+          <h3 class="text-lg font-semibold text-slate-900">Verification and normalization</h3>
+          <p class="mt-3 text-sm leading-7 text-slate-600">Place strings, unknown values, year-month consistency, and count variables should be standardized before dashboard publication.</p>
+        </article>
+        <article class="rounded-[1.75rem] bg-white p-6 shadow-soft ring-1 ring-slate-200">
+          <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-purple-50 text-purple-600"><i data-lucide="share-2" class="h-5 w-5"></i></div>
+          <h3 class="text-lg font-semibold text-slate-900">Social network analysis</h3>
+          <p class="mt-3 text-sm leading-7 text-slate-600">The SNA layer builds a relationship graph from shared incident attributes, helping identify recurring county–source–weapon–facility patterns.</p>
+        </article>
+        <article class="rounded-[1.75rem] bg-white p-6 shadow-soft ring-1 ring-slate-200">
+          <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-600"><i data-lucide="map" class="h-5 w-5"></i></div>
+          <h3 class="text-lg font-semibold text-slate-900">GIS mapping and export</h3>
+          <p class="mt-3 text-sm leading-7 text-slate-600">The GIS layer supports filter-aware mapping, point inspection, and export of a filtered GeoJSON product for downstream workflows.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="downloads" class="section-anchor-offset bg-slate-950 py-16 text-white">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="mb-8 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+        <div>
+          <div class="text-sm font-semibold uppercase tracking-[0.18em] text-red-400">Downloads & repository materials</div>
+          <h2 class="mt-2 text-3xl font-semibold tracking-tight">Everything a researcher needs in one place</h2>
+        </div>
+        <div class="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-300">Links below are real anchors. Replace config URLs once your files are hosted.</div>
+      </div>
+      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+        <a id="datasetLink" href="#" target="_blank" rel="noopener noreferrer" class="group rounded-[1.75rem] border border-white/10 bg-white/5 p-6 transition hover:-translate-y-1 hover:border-white/20 hover:bg-white/10">
+          <h3 class="text-lg font-semibold">Dataset</h3>
+          <p class="mt-3 text-sm leading-7 text-slate-300">Full incident CSV, cleaned analysis-ready CSV, and filtered public release version.</p>
+          <span class="mt-5 inline-flex rounded-2xl bg-white px-4 py-2 text-sm font-semibold text-slate-900">Open dataset</span>
+        </a>
+        <a id="codebookLink" href="#" target="_blank" rel="noopener noreferrer" class="group rounded-[1.75rem] border border-white/10 bg-white/5 p-6 transition hover:-translate-y-1 hover:border-white/20 hover:bg-white/10">
+          <h3 class="text-lg font-semibold">Codebook</h3>
+          <p class="mt-3 text-sm leading-7 text-slate-300">Variable guide with coding assumptions, missing-value logic, and category definitions.</p>
+          <span class="mt-5 inline-flex rounded-2xl bg-white px-4 py-2 text-sm font-semibold text-slate-900">Open PDF</span>
+        </a>
+        <a id="assetsLink" href="#analysis-hub" class="group rounded-[1.75rem] border border-white/10 bg-white/5 p-6 transition hover:-translate-y-1 hover:border-white/20 hover:bg-white/10">
+          <h3 class="text-lg font-semibold">Maps & dashboard assets</h3>
+          <p class="mt-3 text-sm leading-7 text-slate-300">Leaflet outputs, exported GeoJSON, chart-ready summaries, and downloadable network JSON.</p>
+          <span class="mt-5 inline-flex rounded-2xl bg-white px-4 py-2 text-sm font-semibold text-slate-900">Go to assets</span>
+        </a>
+        <a id="replicationLink" href="#" target="_blank" rel="noopener noreferrer" class="group rounded-[1.75rem] border border-white/10 bg-white/5 p-6 transition hover:-translate-y-1 hover:border-white/20 hover:bg-white/10">
+          <h3 class="text-lg font-semibold">Replication package</h3>
+          <p class="mt-3 text-sm leading-7 text-slate-300">Python scripts for cleaning, exploratory analysis, SNA, GIS, and web publication.</p>
+          <span class="mt-5 inline-flex rounded-2xl bg-white px-4 py-2 text-sm font-semibold text-slate-900">Open package</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="border-t border-slate-200 bg-white">
+    <div class="mx-auto flex max-w-7xl flex-col gap-6 px-6 py-10 text-sm text-slate-500 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+      <div>
+        <div class="font-semibold text-slate-900">Kenya Banditry Incident Repository</div>
+        <div class="mt-1">A polished front-end shell for incident records, dashboards, codebook, GIS outputs, and network analysis.</div>
+      </div>
+      <div class="flex flex-wrap gap-5">
+        <a href="#dashboard" class="transition hover:text-slate-900">Dashboard</a>
+        <a href="#analysis-hub" class="transition hover:text-slate-900">Analysis hub</a>
+        <a href="#explorer" class="transition hover:text-slate-900">Explorer</a>
+        <a href="#downloads" class="transition hover:text-slate-900">Downloads</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const ASSET_LINKS = {
+      dataset: 'data/kenya_banditry_incidents.csv',
+      codebook: 'docs/kenya_banditry_codebook.pdf',
+      replication: 'downloads/kenya_banditry_replication_package.zip'
+    };
+
+    const countyCoordinates = {
+      'TURKANA': [3.1167, 35.6000],
+      'BARINGO': [0.4667, 35.9667],
+      'WEST POKOT': [1.2389, 35.1114],
+      'SAMBURU': [1.2150, 37.1250],
+      'LAIKIPIA': [0.3606, 36.7819],
+      'ELGEYO MARAKWET': [0.8870, 35.5350]
+    };
+
+    const records = [
+      {
+        doc_code: 'BED_N001',
+        year: 2015,
+        month: 'MAY',
+        place_name: 'TURKANA;EAST POKOT',
+        county_inferred: 'TURKANA',
+        total_deaths: 47,
+        total_injuries: 10,
+        people_displaced: 0,
+        people_abducted: 0,
+        cattle_stolen: 0,
+        weapon_type: 'UNKNOWN',
+        facility_attacked: '',
+        media_house: 'ANADOLU AJANSI TURKEY',
+        weblink: 'https://www.aa.com.tr/en/archive/47-killed-in-bandits-attack-in-kenya/50662',
+        comments: 'A semi-colon separates 2 counties',
+        other_crime_1: '',
+        other_crime_2: '',
+        other_crime_3: ''
+      },
+      {
+        doc_code: 'BED_N002',
+        year: 2020,
+        month: 'JAN',
+        place_name: 'BARINGO;TIATY',
+        county_inferred: 'BARINGO',
+        total_deaths: 3,
+        total_injuries: 4,
+        people_displaced: 150,
+        people_abducted: 0,
+        cattle_stolen: 200,
+        weapon_type: 'FIREARMS',
+        facility_attacked: 'SCHOOL',
+        media_house: 'DAILY NATION',
+        weblink: 'https://nation.africa/',
+        comments: 'School closed after attack',
+        other_crime_1: 'ARSON',
+        other_crime_2: '',
+        other_crime_3: ''
+      },
+      {
+        doc_code: 'BED_N003',
+        year: 2021,
+        month: 'AUG',
+        place_name: 'WEST POKOT;KACHELIBA',
+        county_inferred: 'WEST POKOT',
+        total_deaths: 6,
+        total_injuries: 2,
+        people_displaced: 0,
+        people_abducted: 3,
+        cattle_stolen: 65,
+        weapon_type: 'BOW & ARROW',
+        facility_attacked: '',
+        media_house: 'THE STANDARD',
+        weblink: 'https://www.standardmedia.co.ke/',
+        comments: 'Abduction reported by local authorities',
+        other_crime_1: 'KIDNAPPING',
+        other_crime_2: '',
+        other_crime_3: ''
+      },
+      {
+        doc_code: 'BED_N004',
+        year: 2022,
+        month: 'NOV',
+        place_name: 'SAMBURU;BARAGOI',
+        county_inferred: 'SAMBURU',
+        total_deaths: 1,
+        total_injuries: 5,
+        people_displaced: 220,
+        people_abducted: 0,
+        cattle_stolen: 310,
+        weapon_type: 'FIREARMS',
+        facility_attacked: 'POLICE STATION',
+        media_house: 'CITIZEN DIGITAL',
+        weblink: 'https://www.citizen.digital/',
+        comments: 'Police station attacked during raid',
+        other_crime_1: 'THEFT OF CAR',
+        other_crime_2: '',
+        other_crime_3: ''
+      },
+      {
+        doc_code: 'BED_N005',
+        year: 2023,
+        month: 'APR',
+        place_name: 'LAIKIPIA;OL MORAN',
+        county_inferred: 'LAIKIPIA',
+        total_deaths: 2,
+        total_injuries: 1,
+        people_displaced: 40,
+        people_abducted: 1,
+        cattle_stolen: 120,
+        weapon_type: 'MACHETE',
+        facility_attacked: '',
+        media_house: 'KBC',
+        weblink: 'https://www.kbc.co.ke/',
+        comments: 'Attack near grazing corridor',
+        other_crime_1: 'ARSON',
+        other_crime_2: 'KIDNAPPING',
+        other_crime_3: ''
+      },
+      {
+        doc_code: 'BED_N006',
+        year: 2024,
+        month: 'DEC',
+        place_name: 'ELGEYO MARAKWET;KERIO VALLEY',
+        county_inferred: 'ELGEYO MARAKWET',
+        total_deaths: 8,
+        total_injuries: 7,
+        people_displaced: 500,
+        people_abducted: 4,
+        cattle_stolen: 450,
+        weapon_type: 'FIREARMS',
+        facility_attacked: 'GOVERNMENT OFFICE',
+        media_house: 'NATION AFRICA',
+        weblink: 'https://nation.africa/',
+        comments: 'Large-scale displacement after repeated attacks',
+        other_crime_1: 'ARSON',
+        other_crime_2: 'KIDNAPPING',
+        other_crime_3: 'RAPE'
+      }
+    ];
+
+    const codebook = [
+      { variable: 'doc_code', type: 'String', group: 'identity', description: 'Unique code for the source document or coded incident record.', note: 'Example: BED_N001' },
+      { variable: 'year', type: 'Integer', group: 'identity', description: 'Calendar year of the incident.', note: 'Used for time-series analysis.' },
+      { variable: 'month', type: 'Categorical', group: 'identity', description: 'Month of the incident using standardized abbreviations.', note: 'JAN, FEB, MAR ... DEC' },
+      { variable: 'place_name', type: 'String', group: 'location', description: 'Place or location string, sometimes containing multiple areas separated by semicolons.', note: 'Example: TURKANA;EAST POKOT' },
+      { variable: 'county_inferred', type: 'Derived categorical', group: 'location', description: 'First place token used as a county proxy for dashboard grouping.', note: 'Derived from place_name' },
+      { variable: 'total_deaths', type: 'Integer', group: 'outcomes', description: 'Total deaths across police, locals, and suspected bandits.', note: '0 or more' },
+      { variable: 'total_injuries', type: 'Integer', group: 'outcomes', description: 'Total injuries across police, locals, and suspected bandits.', note: '0 or more' },
+      { variable: 'people_displaced', type: 'Integer', group: 'outcomes', description: 'Number of people displaced by the incident.', note: 'May be blank or unknown' },
+      { variable: 'people_abducted', type: 'Integer', group: 'outcomes', description: 'Number of people abducted.', note: '0 if none reported' },
+      { variable: 'cattle_stolen', type: 'Integer', group: 'outcomes', description: 'Reported number of cattle stolen.', note: 'Unknown should be standardized before use' },
+      { variable: 'other_crime_1', type: 'Categorical', group: 'crime', description: 'Primary co-occurring crime field.', note: 'Examples: ARSON, KIDNAPPING' },
+      { variable: 'other_crime_2', type: 'Categorical', group: 'crime', description: 'Secondary co-occurring crime field.', note: 'Optional' },
+      { variable: 'other_crime_3', type: 'Categorical', group: 'crime', description: 'Tertiary co-occurring crime field.', note: 'Optional' },
+      { variable: 'weapon_type', type: 'Categorical', group: 'crime', description: 'Broad weapon classification.', note: 'FIREARMS, BOW & ARROW, MACHETE' },
+      { variable: 'facility_attacked', type: 'Categorical', group: 'crime', description: 'Facility type attacked, if any.', note: 'May contain multiple values separated by semicolons' },
+      { variable: 'media_house', type: 'String', group: 'source', description: 'Media house or source outlet that published the report.', note: 'Used for source concentration analysis' },
+      { variable: 'weblink', type: 'URL', group: 'source', description: 'Source article URL.', note: 'Linked directly in the data explorer and map popups' },
+      { variable: 'comments', type: 'Text', group: 'source', description: 'Additional coding notes, caveats, or clarifications.', note: 'Useful for qualitative review' }
+    ];
+
+    const monthOrder = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+
+    let filteredRecords = [...records];
+    let charts = {};
+    let activeCodebookTab = 'identity';
+    let mapInstance = null;
+    let mapLayerGroup = null;
+    let networkInstance = null;
+    let activeSelection = null;
+
+    const els = {
+      searchBox: document.getElementById('searchBox'),
+      yearFilter: document.getElementById('yearFilter'),
+      monthFilter: document.getElementById('monthFilter'),
+      countyFilter: document.getElementById('countyFilter'),
+      mediaFilter: document.getElementById('mediaFilter'),
+      dataTable: document.getElementById('dataTable'),
+      recordCount: document.getElementById('recordCount')
+    };
+
+    function uniqueValues(arr, key) {
+      return [...new Set(arr.map(d => d[key]).filter(Boolean))];
+    }
+
+    function sum(arr, key) {
+      return arr.reduce((acc, item) => acc + (Number(item[key]) || 0), 0);
+    }
+
+    function pct(part, total) {
+      return total === 0 ? '0%' : `${Math.round((part / total) * 100)}%`;
+    }
+
+    function fillSelect(select, values, placeholder) {
+      select.innerHTML = `<option value="">${placeholder}</option>` + values.map(v => `<option value="${escapeHtml(String(v))}">${escapeHtml(String(v))}</option>`).join('');
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+                .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#39;');
+    }
+
+    function safeText(value, fallback = '—') {
+      if (value === null || value === undefined || value === '') return fallback;
+      return escapeHtml(String(value));
+    }
+
+    function normalizeText(value) {
+      return String(value || '').trim().toUpperCase();
+    }
+
+    function downloadTextFile(filename, content, mimeType = 'text/plain;charset=utf-8') {
+      const blob = new Blob([content], { type: mimeType });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function csvEscape(value) {
+      const str = String(value ?? '');
+      return `"${str.replace(/"/g, '""')}"`;
+    }
+
+    function toCsv(rows) {
+      if (!rows.length) return '';
+      const headers = Object.keys(rows[0]);
+      const lines = [
+        headers.map(csvEscape).join(','),
+        ...rows.map(row => headers.map(key => csvEscape(row[key])).join(','))
+      ];
+      return lines.join('\n');
+    }
+
+    function severityScore(record) {
+      return (
+        (Number(record.total_deaths) || 0) * 5 +
+        (Number(record.total_injuries) || 0) * 2 +
+        (Number(record.people_abducted) || 0) * 3 +
+        Math.round((Number(record.people_displaced) || 0) / 25) +
+        Math.round((Number(record.cattle_stolen) || 0) / 50)
+      );
+    }
+
+    function severityLabel(score) {
+      if (score >= 80) return 'Extreme';
+      if (score >= 30) return 'High';
+      if (score >= 10) return 'Moderate';
+      return 'Low';
+    }
+
+    function severityColor(score) {
+      if (score >= 80) return '#7f1d1d';
+      if (score >= 30) return '#dc2626';
+      if (score >= 10) return '#f59e0b';
+      return '#0ea5e9';
+    }
+
+    function getSearchHaystack(record) {
+      return [
+        record.doc_code,
+        record.year,
+        record.month,
+        record.place_name,
+        record.county_inferred,
+        record.weapon_type,
+        record.facility_attacked,
+        record.media_house,
+        record.comments,
+        record.other_crime_1,
+        record.other_crime_2,
+        record.other_crime_3,
+        record.weblink
+      ].join(' ').toLowerCase();
+    }
+
+    function buildGeoJson(rows) {
+      return {
+        type: 'FeatureCollection',
+        features: rows
+          .filter(row => countyCoordinates[row.county_inferred])
+          .map(row => {
+            const coords = countyCoordinates[row.county_inferred];
+            return {
+              type: 'Feature',
+              properties: {
+                doc_code: row.doc_code,
+                year: row.year,
+                month: row.month,
+                place_name: row.place_name,
+                county_inferred: row.county_inferred,
+                total_deaths: row.total_deaths,
+                total_injuries: row.total_injuries,
+                people_displaced: row.people_displaced,
+                people_abducted: row.people_abducted,
+                cattle_stolen: row.cattle_stolen,
+                weapon_type: row.weapon_type,
+                facility_attacked: row.facility_attacked,
+                media_house: row.media_house,
+                weblink: row.weblink,
+                comments: row.comments,
+                severity_score: severityScore(row),
+                severity_label: severityLabel(severityScore(row))
+              },
+              geometry: {
+                type: 'Point',
+                coordinates: [coords[1], coords[0]]
+              }
+            };
+          })
+      };
+    }
+
+    function buildNetworkData(rows) {
+      const nodesMap = new Map();
+      const edgesMap = new Map();
+
+      function ensureNode(id, label, group) {
+        if (!id) return;
+        if (!nodesMap.has(id)) {
+          const groupStyle = {
+            county: { color: '#dc2626', size: 28 },
+            media: { color: '#2563eb', size: 24 },
+            weapon: { color: '#7c3aed', size: 22 },
+            facility: { color: '#059669', size: 22 }
+          }[group] || { color: '#64748b', size: 20 };
+
+          nodesMap.set(id, {
+            id,
+            label,
+            group,
+            value: 1,
+            color: groupStyle.color,
+            font: { color: '#0f172a', face: 'Inter, system-ui, sans-serif' },
+            scaling: { min: 14, max: 32 },
+            size: groupStyle.size
+          });
+        } else {
+          nodesMap.get(id).value += 1;
+        }
+      }
+
+      function addEdge(from, to) {
+        if (!from || !to || from === to) return;
+        const key = [from, to].sort().join('||');
+        if (!edgesMap.has(key)) {
+          edgesMap.set(key, { from, to, value: 1, width: 1 });
+        } else {
+          const edge = edgesMap.get(key);
+          edge.value += 1;
+          edge.width = 1 + edge.value * 0.4;
+        }
+      }
+
+      rows.forEach(row => {
+        const countyId = row.county_inferred ? `county:${row.county_inferred}` : '';
+        const mediaId = row.media_house ? `media:${row.media_house}` : '';
+        const weaponId = row.weapon_type ? `weapon:${row.weapon_type}` : '';
+        const facilityId = row.facility_attacked ? `facility:${row.facility_attacked}` : '';
+
+        ensureNode(countyId, row.county_inferred, 'county');
+        ensureNode(mediaId, row.media_house, 'media');
+        ensureNode(weaponId, row.weapon_type, 'weapon');
+        ensureNode(facilityId, row.facility_attacked, 'facility');
+
+        [mediaId, weaponId, facilityId].forEach(target => addEdge(countyId, target));
+        addEdge(mediaId, weaponId);
+        addEdge(mediaId, facilityId);
+        addEdge(weaponId, facilityId);
+      });
+
+      const nodes = Array.from(nodesMap.values());
+      const edges = Array.from(edgesMap.values());
+      return { nodes, edges };
+    }
+
+    function getTopNodeLabel(networkData) {
+      if (!networkData.nodes.length) return '—';
+      const degreeMap = new Map(networkData.nodes.map(node => [node.id, 0]));
+      networkData.edges.forEach(edge => {
+        degreeMap.set(edge.from, (degreeMap.get(edge.from) || 0) + edge.value);
+        degreeMap.set(edge.to, (degreeMap.get(edge.to) || 0) + edge.value);
+      });
+
+      let best = null;
+      networkData.nodes.forEach(node => {
+        const degree = degreeMap.get(node.id) || 0;
+        if (!best || degree > best.degree) {
+          best = { label: node.label, degree };
+        }
+      });
+      return best ? `${best.label} (${best.degree})` : '—';
+    }
+
+    function setActiveSelection(payload) {
+      activeSelection = payload;
+      const container = document.getElementById('selectionSummary');
+
+      if (!payload) {
+        container.innerHTML = 'No row, marker, or network node selected.';
+        return;
+      }
+
+      if (payload.type === 'record') {
+        container.innerHTML = `
+          <div class="space-y-2">
+            <div><span class="font-semibold text-slate-900">Record:</span> ${safeText(payload.record.doc_code)}</div>
+            <div><span class="font-semibold text-slate-900">Place:</span> ${safeText(payload.record.place_name)}</div>
+            <div><span class="font-semibold text-slate-900">County:</span> ${safeText(payload.record.county_inferred)}</div>
+            <div><span class="font-semibold text-slate-900">Impact:</span> ${safeText(payload.record.total_deaths)} deaths, ${safeText(payload.record.total_injuries)} injuries, ${safeText(payload.record.people_displaced)} displaced</div>
+            <div><span class="font-semibold text-slate-900">Source:</span> ${safeText(payload.record.media_house)}</div>
+          </div>
+        `;
+        return;
+      }
+
+      if (payload.type === 'network-node') {
+        container.innerHTML = `
+          <div class="space-y-2">
+            <div><span class="font-semibold text-slate-900">Network node:</span> ${safeText(payload.node.label)}</div>
+            <div><span class="font-semibold text-slate-900">Group:</span> ${safeText(payload.node.group)}</div>
+            <div><span class="font-semibold text-slate-900">Weighted count:</span> ${safeText(payload.node.value)}</div>
+            <div><span class="font-semibold text-slate-900">Action:</span> dashboard filters were updated to this node where possible.</div>
+          </div>
+        `;
+      }
+    }
+
+    function populateFilterOptions() {
+      const years = uniqueValues(records, 'year').sort((a, b) => a - b);
+      const months = monthOrder.filter(month => uniqueValues(records, 'month').includes(month));
+      const counties = uniqueValues(records, 'county_inferred').sort();
+      const mediaHouses = uniqueValues(records, 'media_house').sort();
+
+      fillSelect(els.yearFilter, years, 'All years');
+      fillSelect(els.monthFilter, months, 'All months');
+      fillSelect(els.countyFilter, counties, 'All counties');
+      fillSelect(els.mediaFilter, mediaHouses, 'All media houses');
+    }
+
+    function updateHeroStats() {
+      const totalIncidents = records.length;
+      const places = new Set(records.map(r => r.place_name)).size;
+      const media = new Set(records.map(r => r.media_house)).size;
+      const years = uniqueValues(records, 'year').sort((a, b) => a - b);
+
+      document.getElementById('statTotalIncidents').textContent = totalIncidents.toLocaleString();
+      document.getElementById('statPlaces').textContent = places.toLocaleString();
+      document.getElementById('statMedia').textContent = media.toLocaleString();
+      document.getElementById('statYears').textContent = years.length.toLocaleString();
+      document.getElementById('heroYears').textContent = `${years[0]}–${years[years.length - 1]}`;
+
+      document.getElementById('datasetLink').href = ASSET_LINKS.dataset;
+      document.getElementById('codebookLink').href = ASSET_LINKS.codebook;
+      document.getElementById('replicationLink').href = ASSET_LINKS.replication;
+    }
+
+    function filterRecords() {
+      const search = els.searchBox.value.trim().toLowerCase();
+      const year = els.yearFilter.value;
+      const month = els.monthFilter.value;
+      const county = els.countyFilter.value;
+      const media = els.mediaFilter.value;
+
+      filteredRecords = records.filter(record => {
+        const matchesSearch = !search || getSearchHaystack(record).includes(search);
+        const matchesYear = !year || String(record.year) === year;
+        const matchesMonth = !month || record.month === month;
+        const matchesCounty = !county || record.county_inferred === county;
+        const matchesMedia = !media || record.media_house === media;
+        return matchesSearch && matchesYear && matchesMonth && matchesCounty && matchesMedia;
+      });
+
+      renderAll();
+    }
+
+    function resetFilters() {
+      els.searchBox.value = '';
+      els.yearFilter.value = '';
+      els.monthFilter.value = '';
+      els.countyFilter.value = '';
+      els.mediaFilter.value = '';
+      activeSelection = null;
+      filterRecords();
+    }
+
+    function updateKpis(rows) {
+      document.getElementById('quickDeaths').textContent = sum(rows, 'total_deaths').toLocaleString();
+      document.getElementById('quickInjuries').textContent = sum(rows, 'total_injuries').toLocaleString();
+      document.getElementById('quickDisplaced').textContent = sum(rows, 'people_displaced').toLocaleString();
+      document.getElementById('quickCattle').textContent = sum(rows, 'cattle_stolen').toLocaleString();
+      els.recordCount.textContent = rows.length.toLocaleString();
+    }
+
+    function getCountsBy(rows, key, order = null, topN = null) {
+      const map = new Map();
+      rows.forEach(row => {
+        const value = row[key];
+        if (!value) return;
+        map.set(value, (map.get(value) || 0) + 1);
+      });
+
+      let entries = Array.from(map.entries());
+
+      if (order) {
+        entries.sort((a, b) => order.indexOf(a[0]) - order.indexOf(b[0]));
+      } else {
+        entries.sort((a, b) => b[1] - a[1]);
+      }
+
+      if (topN) entries = entries.slice(0, topN);
+
+      return {
+        labels: entries.map(([label]) => label),
+        values: entries.map(([, value]) => value)
+      };
+    }
+
+    function createOrUpdateChart(key, canvasId, config) {
+      if (charts[key]) charts[key].destroy();
+      const ctx = document.getElementById(canvasId).getContext('2d');
+      charts[key] = new Chart(ctx, config);
+    }
+
+    function renderCharts(rows) {
+      const yearCounts = getCountsBy(rows, 'year');
+      const monthCounts = getCountsBy(rows, 'month', monthOrder);
+      const placeCounts = getCountsBy(rows, 'county_inferred', null, 8);
+      const weaponCounts = getCountsBy(rows, 'weapon_type', null, 8);
+
+      createOrUpdateChart('yearChart', 'yearChart', {
+        type: 'line',
+        data: {
+          labels: yearCounts.labels,
+          datasets: [{
+            label: 'Incidents',
+            data: yearCounts.values,
+            borderColor: '#dc2626',
+            backgroundColor: 'rgba(220,38,38,0.12)',
+            fill: true,
+            tension: 0.35,
+            pointRadius: 4
+          }]
+        },
+        options: chartOptions()
+      });
+
+      createOrUpdateChart('monthChart', 'monthChart', {
+        type: 'bar',
+        data: {
+          labels: monthCounts.labels,
+          datasets: [{
+            label: 'Incidents',
+            data: monthCounts.values,
+            backgroundColor: '#f59e0b',
+            borderRadius: 10
+          }]
+        },
+        options: chartOptions()
+      });
+
+      createOrUpdateChart('placeChart', 'placeChart', {
+        type: 'bar',
+        data: {
+          labels: placeCounts.labels,
+          datasets: [{
+            label: 'Incidents',
+            data: placeCounts.values,
+            backgroundColor: '#0ea5e9',
+            borderRadius: 10
+          }]
+        },
+        options: {
+          ...chartOptions(),
+          indexAxis: 'y'
+        }
+      });
+
+      createOrUpdateChart('weaponChart', 'weaponChart', {
+        type: 'doughnut',
+        data: {
+          labels: weaponCounts.labels.length ? weaponCounts.labels : ['No data'],
+          datasets: [{
+            data: weaponCounts.values.length ? weaponCounts.values : [1],
+            backgroundColor: weaponCounts.values.length
+              ? ['#dc2626', '#7c3aed', '#0ea5e9', '#f59e0b', '#10b981', '#64748b', '#fb7185', '#a855f7']
+              : ['#cbd5e1'],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'bottom' }
+          }
+        }
+      });
+
+      const outcomes = [
+        sum(rows, 'total_deaths'),
+        sum(rows, 'total_injuries'),
+        sum(rows, 'people_abducted'),
+        sum(rows, 'people_displaced')
+      ];
+
+      createOrUpdateChart('outcomesChart', 'outcomesChart', {
+        type: 'bar',
+        data: {
+          labels: ['Deaths', 'Injuries', 'Abducted', 'Displaced'],
+          datasets: [{
+            label: 'Count',
+            data: outcomes,
+            backgroundColor: ['#dc2626', '#f59e0b', '#8b5cf6', '#10b981'],
+            borderRadius: 12
+          }]
+        },
+        options: chartOptions()
+      });
+    }
+
+    function chartOptions() {
+      return {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          x: {
+            ticks: { color: '#475569' },
+            grid: { color: 'rgba(148,163,184,0.15)' }
+          },
+          y: {
+            beginAtZero: true,
+            ticks: { color: '#475569' },
+            grid: { color: 'rgba(148,163,184,0.15)' }
+          }
+        }
+      };
+    }
+
+    function updateDataQuality(rows) {
+      const total = rows.length || 1;
+      const withWeapon = rows.filter(r => r.weapon_type).length;
+      const withMedia = rows.filter(r => r.media_house).length;
+      const withComments = rows.filter(r => r.comments).length;
+      const withFacility = rows.filter(r => r.facility_attacked).length;
+
+      const metrics = [
+        ['dqWeapon', 'dqWeaponBar', withWeapon],
+        ['dqMedia', 'dqMediaBar', withMedia],
+        ['dqComments', 'dqCommentsBar', withComments],
+        ['dqFacility', 'dqFacilityBar', withFacility]
+      ];
+
+      metrics.forEach(([textId, barId, count]) => {
+        const percent = Math.round((count / total) * 100);
+        document.getElementById(textId).textContent = `${percent}%`;
+        document.getElementById(barId).style.width = `${percent}%`;
+      });
+    }
+
+    function renderTable(rows) {
+      if (!rows.length) {
+        els.dataTable.innerHTML = `
+          <tr>
+            <td colspan="14" class="px-4 py-10 text-center text-slate-500">No records match the current filters.</td>
+          </tr>
+        `;
+        return;
+      }
+
+      els.dataTable.innerHTML = rows.map(record => {
+        const selected = activeSelection?.type === 'record' && activeSelection.record.doc_code === record.doc_code;
+        return `
+          <tr class="${selected ? 'bg-red-50' : 'hover:bg-slate-50'} transition">
+            <td class="px-4 py-4">
+              <button data-doc="${escapeHtml(record.doc_code)}" class="select-record rounded-xl border border-slate-200 px-3 py-1.5 text-xs font-semibold text-slate-700 transition hover:border-red-200 hover:bg-red-50 hover:text-red-700">
+                Focus
+              </button>
+            </td>
+            <td class="px-4 py-4 font-medium text-slate-900">${safeText(record.doc_code)}</td>
+            <td class="px-4 py-4">${safeText(record.year)}</td>
+            <td class="px-4 py-4">${safeText(record.month)}</td>
+            <td class="px-4 py-4">${safeText(record.place_name)}</td>
+            <td class="px-4 py-4">${safeText(record.total_deaths)}</td>
+            <td class="px-4 py-4">${safeText(record.total_injuries)}</td>
+            <td class="px-4 py-4">${safeText(record.people_displaced)}</td>
+            <td class="px-4 py-4">${safeText(record.people_abducted)}</td>
+            <td class="px-4 py-4">${safeText(record.cattle_stolen)}</td>
+            <td class="px-4 py-4">${safeText(record.weapon_type)}</td>
+            <td class="px-4 py-4">${safeText(record.facility_attacked)}</td>
+            <td class="px-4 py-4">${safeText(record.media_house)}</td>
+            <td class="px-4 py-4">
+              ${record.weblink
+                ? `<a href="${record.weblink}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-slate-800">
+                    Open <i data-lucide="external-link" class="h-3.5 w-3.5"></i>
+                  </a>`
+                : '<span class="text-slate-400">—</span>'}
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      document.querySelectorAll('.select-record').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const docCode = btn.getAttribute('data-doc');
+          const record = filteredRecords.find(r => r.doc_code === docCode);
+          if (record) {
+            setActiveSelection({ type: 'record', record });
+            highlightMapRecord(record);
+            renderTable(filteredRecords);
+          }
+        });
+      });
+
+      lucide.createIcons();
+    }
+
+    function initMap() {
+      if (mapInstance) return;
+
+      mapInstance = L.map('incidentMap', {
+        zoomControl: true,
+        scrollWheelZoom: false
+      }).setView([1.4, 36.8], 6);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+      }).addTo(mapInstance);
+
+      mapLayerGroup = L.layerGroup().addTo(mapInstance);
+
+      setTimeout(() => mapInstance.invalidateSize(), 150);
+    }
+
+    function highlightMapRecord(record) {
+      if (!mapInstance || !countyCoordinates[record.county_inferred]) return;
+      const coords = countyCoordinates[record.county_inferred];
+      mapInstance.flyTo(coords, 8, { duration: 0.75 });
+    }
+
+    function renderMap(rows) {
+      initMap();
+      mapLayerGroup.clearLayers();
+
+      let maxSeverity = 0;
+      const mappedRows = rows.filter(row => countyCoordinates[row.county_inferred]);
+      const visibleCounties = new Set();
+
+      mappedRows.forEach(row => {
+        const coords = countyCoordinates[row.county_inferred];
+        const score = severityScore(row);
+        const radius = Math.max(8, Math.min(26, 8 + (Number(row.total_deaths) || 0)));
+        maxSeverity = Math.max(maxSeverity, score);
+        visibleCounties.add(row.county_inferred);
+
+        const marker = L.circleMarker(coords, {
+          radius,
+          fillColor: severityColor(score),
+          color: '#fff',
+          weight: 2,
+          opacity: 1,
+          fillOpacity: 0.8
+        });
+
+        marker.bindPopup(`
+          <div class="space-y-2">
+            <div class="text-sm font-semibold">${safeText(row.doc_code)}</div>
+            <div><strong>Place:</strong> ${safeText(row.place_name)}</div>
+            <div><strong>Deaths:</strong> ${safeText(row.total_deaths)} | <strong>Injuries:</strong> ${safeText(row.total_injuries)}</div>
+            <div><strong>Displaced:</strong> ${safeText(row.people_displaced)} | <strong>Abducted:</strong> ${safeText(row.people_abducted)}</div>
+            <div><strong>Weapon:</strong> ${safeText(row.weapon_type)}</div>
+            <div><strong>Source:</strong> ${safeText(row.media_house)}</div>
+            <div><strong>Severity:</strong> ${severityLabel(score)} (${score})</div>
+            ${row.weblink ? `<div><a href="${row.weblink}" target="_blank" rel="noopener noreferrer">Open source article</a></div>` : ''}
+          </div>
+        `);
+
+        marker.on('click', () => {
+          setActiveSelection({ type: 'record', record: row });
+          renderTable(filteredRecords);
+        });
+
+        marker.addTo(mapLayerGroup);
+      });
+
+      if (mappedRows.length) {
+        const bounds = L.latLngBounds(mappedRows.map(row => countyCoordinates[row.county_inferred]));
+        mapInstance.fitBounds(bounds.pad(0.25));
+      }
+
+      document.getElementById('mapCount').textContent = mappedRows.length.toLocaleString();
+      document.getElementById('mapCounties').textContent = visibleCounties.size.toLocaleString();
+      document.getElementById('mapSeverity').textContent = maxSeverity.toLocaleString();
+    }
+
+    function renderNetwork(rows) {
+      const networkData = buildNetworkData(rows);
+      const container = document.getElementById('networkGraph');
+
+      if (networkInstance) {
+        networkInstance.destroy();
+      }
+
+      networkInstance = new vis.Network(
+        container,
+        {
+          nodes: new vis.DataSet(networkData.nodes),
+          edges: new vis.DataSet(networkData.edges)
+        },
+        {
+          autoResize: true,
+          interaction: {
+            hover: true,
+            tooltipDelay: 150
+          },
+          physics: {
+            stabilization: true,
+            barnesHut: {
+              gravitationalConstant: -4500,
+              springLength: 130,
+              springConstant: 0.03
+            }
+          },
+          edges: {
+            color: { color: '#cbd5e1', highlight: '#94a3b8' },
+            smooth: true
+          },
+          nodes: {
+            shape: 'dot',
+            borderWidth: 1.5
+          }
+        }
+      );
+
+      networkInstance.on('click', params => {
+        if (!params.nodes.length) return;
+        const nodeId = params.nodes[0];
+        const node = networkData.nodes.find(n => n.id === nodeId);
+        if (!node) return;
+
+        setActiveSelection({ type: 'network-node', node });
+
+        const [group, value] = node.id.split(':');
+        if (group === 'county') els.countyFilter.value = value;
+        if (group === 'media') els.mediaFilter.value = value;
+
+        if (group === 'weapon') {
+          els.searchBox.value = value;
+        }
+
+        if (group === 'facility') {
+          els.searchBox.value = value;
+        }
+
+        filterRecords();
+      });
+
+      document.getElementById('networkNodes').textContent = networkData.nodes.length.toLocaleString();
+      document.getElementById('networkEdges').textContent = networkData.edges.length.toLocaleString();
+      document.getElementById('networkTopNode').textContent = getTopNodeLabel(networkData);
+    }
+
+    function renderCodebook() {
+      const rows = codebook.filter(item => item.group === activeCodebookTab);
+      document.getElementById('codebookTable').innerHTML = rows.map(item => `
+        <tr class="hover:bg-slate-50">
+          <td class="px-4 py-4 font-semibold text-slate-900">${safeText(item.variable)}</td>
+          <td class="px-4 py-4">${safeText(item.type)}</td>
+          <td class="px-4 py-4">
+            <span class="pill bg-slate-100 text-slate-700">${safeText(item.group)}</span>
+          </td>
+          <td class="px-4 py-4 text-slate-600">${safeText(item.description)}</td>
+          <td class="px-4 py-4 text-slate-500">${safeText(item.note)}</td>
+        </tr>
+      `).join('');
+    }
+
+    function setupCodebookTabs() {
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          activeCodebookTab = btn.dataset.tab;
+
+          document.querySelectorAll('.tab-btn').forEach(tab => {
+            tab.classList.remove('active-tab');
+            tab.classList.add('bg-white', 'text-slate-700', 'ring-1', 'ring-slate-200');
+          });
+
+          btn.classList.add('active-tab');
+          btn.classList.remove('bg-white', 'text-slate-700', 'ring-1', 'ring-slate-200');
+
+          renderCodebook();
+        });
+      });
+    }
+
+    function setActiveNav() {
+      const sections = [...document.querySelectorAll('section[id]')];
+      const navLinks = [...document.querySelectorAll('.nav-link')];
+
+      function update() {
+        let current = '';
+        sections.forEach(section => {
+          const top = section.offsetTop - 140;
+          const bottom = top + section.offsetHeight;
+          if (window.scrollY >= top && window.scrollY < bottom) {
+            current = section.id;
+          }
+        });
+
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
+        });
+      }
+
+      update();
+      window.addEventListener('scroll', update, { passive: true });
+    }
+
+    function exportFilteredCsv() {
+      const csv = toCsv(filteredRecords);
+      downloadTextFile('kenya_banditry_filtered.csv', csv, 'text/csv;charset=utf-8');
+    }
+
+    function exportGeoJson() {
+      const geoJson = buildGeoJson(filteredRecords);
+      downloadTextFile('kenya_banditry_filtered.geojson', JSON.stringify(geoJson, null, 2), 'application/geo+json');
+    }
+
+    function exportNetworkJson() {
+      const networkData = buildNetworkData(filteredRecords);
+      downloadTextFile('kenya_banditry_network.json', JSON.stringify(networkData, null, 2), 'application/json');
+    }
+
+    function renderAll() {
+      updateKpis(filteredRecords);
+      renderCharts(filteredRecords);
+      updateDataQuality(filteredRecords);
+      renderTable(filteredRecords);
+      renderMap(filteredRecords);
+      renderNetwork(filteredRecords);
+
+      if (!activeSelection) {
+        setActiveSelection(null);
+      }
+    }
+
+    function bindEvents() {
+      els.searchBox.addEventListener('input', filterRecords);
+      els.yearFilter.addEventListener('change', filterRecords);
+      els.monthFilter.addEventListener('change', filterRecords);
+      els.countyFilter.addEventListener('change', filterRecords);
+      els.mediaFilter.addEventListener('change', filterRecords);
+
+      document.getElementById('resetFilters').addEventListener('click', resetFilters);
+      document.getElementById('exportCsvBtn').addEventListener('click', exportFilteredCsv);
+      document.getElementById('downloadGeoJsonBtn').addEventListener('click', exportGeoJson);
+      document.getElementById('downloadNetworkBtn').addEventListener('click', exportNetworkJson);
+    }
+
+    function init() {
+      populateFilterOptions();
+      updateHeroStats();
+      setupCodebookTabs();
+      renderCodebook();
+      bindEvents();
+      setActiveNav();
+      renderAll();
+      lucide.createIcons();
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>
