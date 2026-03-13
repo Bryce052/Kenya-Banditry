@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_4cc751ff5bc49baabd6ef2818dcf90bc {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.Default.css"/>
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_4cc751ff5bc49baabd6ef2818dcf90bc" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_4cc751ff5bc49baabd6ef2818dcf90bc = L.map(
+                "map_4cc751ff5bc49baabd6ef2818dcf90bc",
+                {
+                    center: [0.9019380714285715, 36.852348875000004],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 6,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_ba12db40d75a87cd1e14d776f0ddc920 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_ba12db40d75a87cd1e14d776f0ddc920.addTo(map_4cc751ff5bc49baabd6ef2818dcf90bc);
+        
+    
+            var marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32 = L.markerClusterGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_07d27f3aca16593ff730791caa7c0ee6 = L.circleMarker(
+                [0.7686729, 35.7980348],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.8, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_c433ce265b2310d9e9278a4f04456f4f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_75527463f759f0191d99179c6a613f4e = $(`<div id="html_75527463f759f0191d99179c6a613f4e" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N002<br><b>Year:</b> 2024.0<br><b>Month:</b> JAN<br><b>Place:</b> BARINGO NORTH<br><b>Deaths:</b> 3.0<br><b>Injuries:</b> 5.0<br><b>Severity:</b> 19.0</div>`)[0];
+                popup_c433ce265b2310d9e9278a4f04456f4f.setContent(html_75527463f759f0191d99179c6a613f4e);
+            
+        
+
+        circle_marker_07d27f3aca16593ff730791caa7c0ee6.bindPopup(popup_c433ce265b2310d9e9278a4f04456f4f)
+        ;
+
+        
+    
+    
+            var circle_marker_4cb1ea57973cbaa8fc60a97c267955b8 = L.circleMarker(
+                [0.7686729, 35.7980348],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_279dc8eb3395ac3bde8fc9c2c2c0440f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b66281e210043f6f8ff6121e2dc85a6c = $(`<div id="html_b66281e210043f6f8ff6121e2dc85a6c" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N004<br><b>Year:</b> 2024.0<br><b>Month:</b> FEB<br><b>Place:</b> BARINGO NORTH<br><b>Deaths:</b> 1.0<br><b>Injuries:</b> 1.0<br><b>Severity:</b> 5.0</div>`)[0];
+                popup_279dc8eb3395ac3bde8fc9c2c2c0440f.setContent(html_b66281e210043f6f8ff6121e2dc85a6c);
+            
+        
+
+        circle_marker_4cb1ea57973cbaa8fc60a97c267955b8.bindPopup(popup_279dc8eb3395ac3bde8fc9c2c2c0440f)
+        ;
+
+        
+    
+    
+            var circle_marker_6ca1e47d296bdcce21b7a1145b366557 = L.circleMarker(
+                [1.8798608, 35.210613],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.9, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_356ea45d60a658a09c195804b88df090 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_84121f739e7cf3a05b28b78e9d94c8c9 = $(`<div id="html_84121f739e7cf3a05b28b78e9d94c8c9" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N011<br><b>Year:</b> 2023.0<br><b>Month:</b> MAY<br><b>Place:</b> WEST POKOT<br><b>Deaths:</b> 1.0<br><b>Injuries:</b> 2.0<br><b>Severity:</b> 9.5</div>`)[0];
+                popup_356ea45d60a658a09c195804b88df090.setContent(html_84121f739e7cf3a05b28b78e9d94c8c9);
+            
+        
+
+        circle_marker_6ca1e47d296bdcce21b7a1145b366557.bindPopup(popup_356ea45d60a658a09c195804b88df090)
+        ;
+
+        
+    
+    
+            var circle_marker_d4d906e435cdf801b1588a63cd1dc2ae = L.circleMarker(
+                [0.3338966, 37.577027],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.1, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_3b8dabe991d4fd00d3c64ac7deefbe3a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_923524dfa19a74d11fcccc5a7172294e = $(`<div id="html_923524dfa19a74d11fcccc5a7172294e" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N012<br><b>Year:</b> 2023.0<br><b>Month:</b> NOV<br><b>Place:</b> MARSABIT;ISIOLO<br><b>Deaths:</b> 1.0<br><b>Injuries:</b> 1.0<br><b>Severity:</b> 5.5</div>`)[0];
+                popup_3b8dabe991d4fd00d3c64ac7deefbe3a.setContent(html_923524dfa19a74d11fcccc5a7172294e);
+            
+        
+
+        circle_marker_d4d906e435cdf801b1588a63cd1dc2ae.bindPopup(popup_3b8dabe991d4fd00d3c64ac7deefbe3a)
+        ;
+
+        
+    
+    
+            var circle_marker_7403b0c5fc4008cbcd50e09f24355500 = L.circleMarker(
+                [0.71401, 36.0172739],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.0, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_7b787631b815e8db04208dba35d6039e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_02d1bf797480197f2eaaf737a90d0dd8 = $(`<div id="html_02d1bf797480197f2eaaf737a90d0dd8" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N014<br><b>Year:</b> 2014.0<br><b>Month:</b> NOV<br><b>Place:</b> BARINGO<br><b>Deaths:</b> 5.0<br><b>Injuries:</b> 0.0<br><b>Severity:</b> 15.0</div>`)[0];
+                popup_7b787631b815e8db04208dba35d6039e.setContent(html_02d1bf797480197f2eaaf737a90d0dd8);
+            
+        
+
+        circle_marker_7403b0c5fc4008cbcd50e09f24355500.bindPopup(popup_7b787631b815e8db04208dba35d6039e)
+        ;
+
+        
+    
+    
+            var circle_marker_d19a73ec927b23451767ea4fc71bd80f = L.circleMarker(
+                [1.0060601, 38.7478954],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_15ec9db61a29069ec32110b78db72d83 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ff11404da42529a5a227b3db136d5629 = $(`<div id="html_ff11404da42529a5a227b3db136d5629" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N015<br><b>Year:</b> 2011.0<br><b>Month:</b> MAY<br><b>Place:</b> ISIOLO<br><b>Deaths:</b> 0.0<br><b>Injuries:</b> 1.0<br><b>Severity:</b> 2.6</div>`)[0];
+                popup_15ec9db61a29069ec32110b78db72d83.setContent(html_ff11404da42529a5a227b3db136d5629);
+            
+        
+
+        circle_marker_d19a73ec927b23451767ea4fc71bd80f.bindPopup(popup_15ec9db61a29069ec32110b78db72d83)
+        ;
+
+        
+    
+    
+            var circle_marker_3c683d9c34d93ca8bb8ea5c2e0640e0c = L.circleMarker(
+                [0.471367, 35.98519],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.4, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_7faa682203c45a0cb75401213a8b04a1 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e104dfdcab097b55203d9ded031fa1e5 = $(`<div id="html_e104dfdcab097b55203d9ded031fa1e5" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N016<br><b>Year:</b> 2024.0<br><b>Month:</b> MAR<br><b>Place:</b> BARINGO SOUTH<br><b>Deaths:</b> 0.0<br><b>Injuries:</b> 0.0<br><b>Severity:</b> 22.0</div>`)[0];
+                popup_7faa682203c45a0cb75401213a8b04a1.setContent(html_e104dfdcab097b55203d9ded031fa1e5);
+            
+        
+
+        circle_marker_3c683d9c34d93ca8bb8ea5c2e0640e0c.bindPopup(popup_7faa682203c45a0cb75401213a8b04a1)
+        ;
+
+        
+    
+    
+            var circle_marker_60da19fd55c4c3e81667e915c98e81ca = L.circleMarker(
+                [1.8311076, 35.7677381],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 13.0, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_3dec617b0d48e91523e793ae18b41bc1 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_96ef3f206afc8eeb486c9e0934bdf3b0 = $(`<div id="html_96ef3f206afc8eeb486c9e0934bdf3b0" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N020<br><b>Year:</b> 2023.0<br><b>Month:</b> FEB<br><b>Place:</b> TURKANA-SOUTH<br><b>Deaths:</b> 4.0<br><b>Injuries:</b> 19.0<br><b>Severity:</b> 50.0</div>`)[0];
+                popup_3dec617b0d48e91523e793ae18b41bc1.setContent(html_96ef3f206afc8eeb486c9e0934bdf3b0);
+            
+        
+
+        circle_marker_60da19fd55c4c3e81667e915c98e81ca.bindPopup(popup_3dec617b0d48e91523e793ae18b41bc1)
+        ;
+
+        
+    
+    
+            var circle_marker_7df13ef8cb9c501bc2ce78f732d4a573 = L.circleMarker(
+                [0.71401, 36.0172739],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.0, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_8e53cc4ab1b17fb9bf0f200999083a40 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3e4f4c8e778436107adbcc8b3d99271a = $(`<div id="html_3e4f4c8e778436107adbcc8b3d99271a" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N030<br><b>Year:</b> 2014.0<br><b>Month:</b> JAN<br><b>Place:</b> BARINGO<br><b>Deaths:</b> 10.0<br><b>Injuries:</b> 0.0<br><b>Severity:</b> 30.0</div>`)[0];
+                popup_8e53cc4ab1b17fb9bf0f200999083a40.setContent(html_3e4f4c8e778436107adbcc8b3d99271a);
+            
+        
+
+        circle_marker_7df13ef8cb9c501bc2ce78f732d4a573.bindPopup(popup_8e53cc4ab1b17fb9bf0f200999083a40)
+        ;
+
+        
+    
+    
+            var circle_marker_8f4f8d92cb68e9d1859ab12987914974 = L.circleMarker(
+                [0.71401, 36.0172739],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.0, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_7eb863ed24f56a5b2ed8a484526a941c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_110df704a03c49b5f588a2523a24bd13 = $(`<div id="html_110df704a03c49b5f588a2523a24bd13" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N036<br><b>Year:</b> 2023.0<br><b>Month:</b> MAY<br><b>Place:</b> BARINGO<br><b>Deaths:</b> 4.0<br><b>Injuries:</b> 0.0<br><b>Severity:</b> 20.0</div>`)[0];
+                popup_7eb863ed24f56a5b2ed8a484526a941c.setContent(html_110df704a03c49b5f588a2523a24bd13);
+            
+        
+
+        circle_marker_8f4f8d92cb68e9d1859ab12987914974.bindPopup(popup_7eb863ed24f56a5b2ed8a484526a941c)
+        ;
+
+        
+    
+    
+            var circle_marker_715deac9474a0d6a0b7a07cc4bc023d3 = L.circleMarker(
+                [1.0060601, 38.7478954],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.28, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_26c425bb16f0f4c5859d5860c17616ce = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3316b07f68c2af16693d66b8894bfd6c = $(`<div id="html_3316b07f68c2af16693d66b8894bfd6c" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N038<br><b>Year:</b> 2024.0<br><b>Month:</b> APR<br><b>Place:</b> ISIOLO<br><b>Deaths:</b> 1.0<br><b>Injuries:</b> 0.0<br><b>Severity:</b> 6.4</div>`)[0];
+                popup_26c425bb16f0f4c5859d5860c17616ce.setContent(html_3316b07f68c2af16693d66b8894bfd6c);
+            
+        
+
+        circle_marker_715deac9474a0d6a0b7a07cc4bc023d3.bindPopup(popup_26c425bb16f0f4c5859d5860c17616ce)
+        ;
+
+        
+    
+    
+            var circle_marker_fca632338a3b8d92fc6fe74bd0d2b80e = L.circleMarker(
+                [0.71401, 36.0172739],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.1240000000000006, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_722d168400dfb09d6edbc0394d1eca2e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9c768b15133b806f3682ba18c3f833ad = $(`<div id="html_9c768b15133b806f3682ba18c3f833ad" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N043<br><b>Year:</b> 2019.0<br><b>Month:</b> MAY<br><b>Place:</b> BARINGO<br><b>Deaths:</b> 0.0<br><b>Injuries:</b> 2.0<br><b>Severity:</b> 5.62</div>`)[0];
+                popup_722d168400dfb09d6edbc0394d1eca2e.setContent(html_9c768b15133b806f3682ba18c3f833ad);
+            
+        
+
+        circle_marker_fca632338a3b8d92fc6fe74bd0d2b80e.bindPopup(popup_722d168400dfb09d6edbc0394d1eca2e)
+        ;
+
+        
+    
+    
+            var circle_marker_67644d34846761f10a23a25f1317d29f = L.circleMarker(
+                [1.0060601, 38.7478954],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_18a1cf5a18af60c13b716d7602da8b35 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d2d589357c628a3270c9887462939f57 = $(`<div id="html_d2d589357c628a3270c9887462939f57" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N049<br><b>Year:</b> 2019.0<br><b>Month:</b> AUG<br><b>Place:</b> ISIOLO<br><b>Deaths:</b> 1.0<br><b>Injuries:</b> 1.0<br><b>Severity:</b> 5.0</div>`)[0];
+                popup_18a1cf5a18af60c13b716d7602da8b35.setContent(html_d2d589357c628a3270c9887462939f57);
+            
+        
+
+        circle_marker_67644d34846761f10a23a25f1317d29f.bindPopup(popup_18a1cf5a18af60c13b716d7602da8b35)
+        ;
+
+        
+    
+    
+            var circle_marker_e56b63c45bfb15b4bbb3af8e6f47f72c = L.circleMarker(
+                [0.71401, 36.0172739],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_6be8d44b312ea549dcfd9ce37612a4b0 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e3299ff0bc67f1cea369a5722b9172a5 = $(`<div id="html_e3299ff0bc67f1cea369a5722b9172a5" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N050<br><b>Year:</b> 2019.0<br><b>Month:</b> AUG<br><b>Place:</b> BARINGO<br><b>Deaths:</b> 0.0<br><b>Injuries:</b> 1.0<br><b>Severity:</b> 2.0</div>`)[0];
+                popup_6be8d44b312ea549dcfd9ce37612a4b0.setContent(html_e3299ff0bc67f1cea369a5722b9172a5);
+            
+        
+
+        circle_marker_e56b63c45bfb15b4bbb3af8e6f47f72c.bindPopup(popup_6be8d44b312ea549dcfd9ce37612a4b0)
+        ;
+
+        
+    
+    
+            var circle_marker_4518153a924717ab84f56cfe4fe3b6b5 = L.circleMarker(
+                [1.0060601, 38.7478954],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.456, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_2ef450fc8ab355b0023ec0fcd4844c76 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8881c8b9a47f0e728d1d1ad1efd75b6d = $(`<div id="html_8881c8b9a47f0e728d1d1ad1efd75b6d" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N057<br><b>Year:</b> 2019.0<br><b>Month:</b> OCT<br><b>Place:</b> ISIOLO<br><b>Deaths:</b> 2.0<br><b>Injuries:</b> 0.0<br><b>Severity:</b> 32.28</div>`)[0];
+                popup_2ef450fc8ab355b0023ec0fcd4844c76.setContent(html_8881c8b9a47f0e728d1d1ad1efd75b6d);
+            
+        
+
+        circle_marker_4518153a924717ab84f56cfe4fe3b6b5.bindPopup(popup_2ef450fc8ab355b0023ec0fcd4844c76)
+        ;
+
+        
+    
+    
+            var circle_marker_593af679308ec14f98fdd66f98c86829 = L.circleMarker(
+                [1.0060601, 38.7478954],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_94dae6cbecd54ae31414c02c50b01f61 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b4b4d1ef32c4fabbf16b9401dfb7849a = $(`<div id="html_b4b4d1ef32c4fabbf16b9401dfb7849a" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N063<br><b>Year:</b> 2021.0<br><b>Month:</b> APR<br><b>Place:</b> ISIOLO<br><b>Deaths:</b> 1.0<br><b>Injuries:</b> 0.0<br><b>Severity:</b> 3.0</div>`)[0];
+                popup_94dae6cbecd54ae31414c02c50b01f61.setContent(html_b4b4d1ef32c4fabbf16b9401dfb7849a);
+            
+        
+
+        circle_marker_593af679308ec14f98fdd66f98c86829.bindPopup(popup_94dae6cbecd54ae31414c02c50b01f61)
+        ;
+
+        
+    
+    
+            var circle_marker_1b48f30280be76389c872bd1b424c225 = L.circleMarker(
+                [1.0060601, 38.7478954],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.548, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_e77305b641bac76327bd1288b37b8463 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5949be6ad32c2361517b2cee01c1e411 = $(`<div id="html_5949be6ad32c2361517b2cee01c1e411" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N064<br><b>Year:</b> 2021.0<br><b>Month:</b> JUN<br><b>Place:</b> ISIOLO<br><b>Deaths:</b> 0.0<br><b>Injuries:</b> 3.0<br><b>Severity:</b> 7.74</div>`)[0];
+                popup_e77305b641bac76327bd1288b37b8463.setContent(html_5949be6ad32c2361517b2cee01c1e411);
+            
+        
+
+        circle_marker_1b48f30280be76389c872bd1b424c225.bindPopup(popup_e77305b641bac76327bd1288b37b8463)
+        ;
+
+        
+    
+    
+            var circle_marker_e63e8679fd6eefe19cb5763fd5984af1 = L.circleMarker(
+                [1.0060601, 38.7478954],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_cfdfd221af872945c42b59a3c0216a49 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_24cfb4b19917d66d2f6c85dfaaa5db9c = $(`<div id="html_24cfb4b19917d66d2f6c85dfaaa5db9c" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N070<br><b>Year:</b> 2023.0<br><b>Month:</b> MAR<br><b>Place:</b> ISIOLO<br><b>Deaths:</b> 0.0<br><b>Injuries:</b> 0.0<br><b>Severity:</b> 1.96</div>`)[0];
+                popup_cfdfd221af872945c42b59a3c0216a49.setContent(html_24cfb4b19917d66d2f6c85dfaaa5db9c);
+            
+        
+
+        circle_marker_e63e8679fd6eefe19cb5763fd5984af1.bindPopup(popup_cfdfd221af872945c42b59a3c0216a49)
+        ;
+
+        
+    
+    
+            var circle_marker_e0de8a49e1485e946be8a9cebf561108 = L.circleMarker(
+                [0.71401, 36.0172739],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_da182a29e8500ff0e7ff23e67801415b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b839811b478ff9ef4fdd44c87b3d2bf0 = $(`<div id="html_b839811b478ff9ef4fdd44c87b3d2bf0" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N072<br><b>Year:</b> 2023.0<br><b>Month:</b> NOV<br><b>Place:</b> BARINGO<br><b>Deaths:</b> 0.0<br><b>Injuries:</b> 0.0<br><b>Severity:</b> 0.8</div>`)[0];
+                popup_da182a29e8500ff0e7ff23e67801415b.setContent(html_b839811b478ff9ef4fdd44c87b3d2bf0);
+            
+        
+
+        circle_marker_e0de8a49e1485e946be8a9cebf561108.bindPopup(popup_da182a29e8500ff0e7ff23e67801415b)
+        ;
+
+        
+    
+    
+            var circle_marker_8669a06eff3ab7ef0f9bc3f9d3380c90 = L.circleMarker(
+                [1.0060601, 38.7478954],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.2, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_549a753960c8b98c3f9a19341350536d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_06944035b9861fdc834a04d870d85616 = $(`<div id="html_06944035b9861fdc834a04d870d85616" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N078<br><b>Year:</b> 2024.0<br><b>Month:</b> APR<br><b>Place:</b> ISIOLO<br><b>Deaths:</b> 2.0<br><b>Injuries:</b> 0.0<br><b>Severity:</b> 6.0</div>`)[0];
+                popup_549a753960c8b98c3f9a19341350536d.setContent(html_06944035b9861fdc834a04d870d85616);
+            
+        
+
+        circle_marker_8669a06eff3ab7ef0f9bc3f9d3380c90.bindPopup(popup_549a753960c8b98c3f9a19341350536d)
+        ;
+
+        
+    
+    
+            var circle_marker_ff42f8172b04e42e094f6e96475127d7 = L.circleMarker(
+                [0.71401, 36.0172739],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12.0, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_09aae9b9c6050ea3236769178602e56e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6157313ff124d59e416911649cfb8b5c = $(`<div id="html_6157313ff124d59e416911649cfb8b5c" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N080<br><b>Year:</b> 2024.0<br><b>Month:</b> MAR<br><b>Place:</b> BARINGO<br><b>Deaths:</b> 15.0<br><b>Injuries:</b> 0.0<br><b>Severity:</b> 45.0</div>`)[0];
+                popup_09aae9b9c6050ea3236769178602e56e.setContent(html_6157313ff124d59e416911649cfb8b5c);
+            
+        
+
+        circle_marker_ff42f8172b04e42e094f6e96475127d7.bindPopup(popup_09aae9b9c6050ea3236769178602e56e)
+        ;
+
+        
+    
+    
+            var circle_marker_ce206ac5bcdba2bd661f5031a129bd9d = L.circleMarker(
+                [1.8798608, 35.210613],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.2, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_0d1edce863c67bacbdcc0b724bcb531f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b4864e756ce8576c812afac93cc90a8a = $(`<div id="html_b4864e756ce8576c812afac93cc90a8a" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N091<br><b>Year:</b> 2023.0<br><b>Month:</b> DEC<br><b>Place:</b> WEST POKOT<br><b>Deaths:</b> 7.0<br><b>Injuries:</b> 0.0<br><b>Severity:</b> 21.0</div>`)[0];
+                popup_0d1edce863c67bacbdcc0b724bcb531f.setContent(html_b4864e756ce8576c812afac93cc90a8a);
+            
+        
+
+        circle_marker_ce206ac5bcdba2bd661f5031a129bd9d.bindPopup(popup_0d1edce863c67bacbdcc0b724bcb531f)
+        ;
+
+        
+    
+    
+            var circle_marker_b4c5487f1e7ec9b5494e795747c04451 = L.circleMarker(
+                [0.71401, 36.0172739],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_73c23675bbcd8a2647691093a16229c9 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_def2f2b9047536c629b8c10a1475cc59 = $(`<div id="html_def2f2b9047536c629b8c10a1475cc59" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N094<br><b>Year:</b> 2023.0<br><b>Month:</b> OCT<br><b>Place:</b> BARINGO<br><b>Deaths:</b> 1.0<br><b>Injuries:</b> 0.0<br><b>Severity:</b> 3.0</div>`)[0];
+                popup_73c23675bbcd8a2647691093a16229c9.setContent(html_def2f2b9047536c629b8c10a1475cc59);
+            
+        
+
+        circle_marker_b4c5487f1e7ec9b5494e795747c04451.bindPopup(popup_73c23675bbcd8a2647691093a16229c9)
+        ;
+
+        
+    
+    
+            var circle_marker_39f063a3bfcc1021931446d7256ea101 = L.circleMarker(
+                [0.71401, 36.0172739],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.0, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_ce41e1762004c100d30b884238658604 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_695f2cfde1b71dbffead92612fb46aa8 = $(`<div id="html_695f2cfde1b71dbffead92612fb46aa8" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N123<br><b>Year:</b> 2022.0<br><b>Month:</b> MAR<br><b>Place:</b> BARINGO<br><b>Deaths:</b> 3.0<br><b>Injuries:</b> 3.0<br><b>Severity:</b> 15.0</div>`)[0];
+                popup_ce41e1762004c100d30b884238658604.setContent(html_695f2cfde1b71dbffead92612fb46aa8);
+            
+        
+
+        circle_marker_39f063a3bfcc1021931446d7256ea101.bindPopup(popup_ce41e1762004c100d30b884238658604)
+        ;
+
+        
+    
+    
+            var circle_marker_a3b7e14025aaa4a30ffaf658c9fd613b = L.circleMarker(
+                [1.0060601, 38.7478954],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_238451d4f8d359d9fd3424bbf1422c11 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_90659ceee434b9fdbf0deb82ca5bd8ef = $(`<div id="html_90659ceee434b9fdbf0deb82ca5bd8ef" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N126<br><b>Year:</b> 2022.0<br><b>Month:</b> FEB<br><b>Place:</b> ISIOLO<br><b>Deaths:</b> 1.0<br><b>Injuries:</b> 0.0<br><b>Severity:</b> 3.2</div>`)[0];
+                popup_238451d4f8d359d9fd3424bbf1422c11.setContent(html_90659ceee434b9fdbf0deb82ca5bd8ef);
+            
+        
+
+        circle_marker_a3b7e14025aaa4a30ffaf658c9fd613b.bindPopup(popup_238451d4f8d359d9fd3424bbf1422c11)
+        ;
+
+        
+    
+    
+            var circle_marker_c03e303ba88dba18665eb774813abfa9 = L.circleMarker(
+                [0.71401, 36.0172739],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_7c38e4444fe7aad0118e5b429d86d8ea = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_adcf083a99ca85fff0e217a9f1bdba20 = $(`<div id="html_adcf083a99ca85fff0e217a9f1bdba20" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N127<br><b>Year:</b> 2022.0<br><b>Month:</b> JAN<br><b>Place:</b> BARINGO<br><b>Deaths:</b> 0.0<br><b>Injuries:</b> 2.0<br><b>Severity:</b> 4.0</div>`)[0];
+                popup_7c38e4444fe7aad0118e5b429d86d8ea.setContent(html_adcf083a99ca85fff0e217a9f1bdba20);
+            
+        
+
+        circle_marker_c03e303ba88dba18665eb774813abfa9.bindPopup(popup_7c38e4444fe7aad0118e5b429d86d8ea)
+        ;
+
+        
+    
+    
+            var circle_marker_0cd100de9c3ac72a652617efa25ef5e1 = L.circleMarker(
+                [1.0060601, 38.7478954],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.0, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_5b87b04db30ff9a9063379f60a3cc20f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a7a131f8c7b839de538a3fdfab3a68eb = $(`<div id="html_a7a131f8c7b839de538a3fdfab3a68eb" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N134<br><b>Year:</b> 2021.0<br><b>Month:</b> JUL<br><b>Place:</b> ISIOLO<br><b>Deaths:</b> 3.0<br><b>Injuries:</b> 0.0<br><b>Severity:</b> 15.0</div>`)[0];
+                popup_5b87b04db30ff9a9063379f60a3cc20f.setContent(html_a7a131f8c7b839de538a3fdfab3a68eb);
+            
+        
+
+        circle_marker_0cd100de9c3ac72a652617efa25ef5e1.bindPopup(popup_5b87b04db30ff9a9063379f60a3cc20f)
+        ;
+
+        
+    
+    
+            var circle_marker_5725acc45313f1eae0db946255aa2650 = L.circleMarker(
+                [0.71401, 36.0172739],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_e5abfa31ed4d77f8114006b1261f9390 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d4f574a3a80b32b00be1aeac6245ac91 = $(`<div id="html_d4f574a3a80b32b00be1aeac6245ac91" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N141<br><b>Year:</b> 2017.0<br><b>Month:</b> DEC<br><b>Place:</b> BARINGO<br><b>Deaths:</b> 1.0<br><b>Injuries:</b> 0.0<br><b>Severity:</b> 3.0</div>`)[0];
+                popup_e5abfa31ed4d77f8114006b1261f9390.setContent(html_d4f574a3a80b32b00be1aeac6245ac91);
+            
+        
+
+        circle_marker_5725acc45313f1eae0db946255aa2650.bindPopup(popup_e5abfa31ed4d77f8114006b1261f9390)
+        ;
+
+        
+    
+    
+            var circle_marker_68091e0ef78a2d2e137cdfce4b5bd007 = L.circleMarker(
+                [0.71401, 36.0172739],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.8, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_87a5908b931d47bb644d7de929d8cd0c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3d42a304b242f9f91346413f56759ce9 = $(`<div id="html_3d42a304b242f9f91346413f56759ce9" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N143<br><b>Year:</b> 2017.0<br><b>Month:</b> JUL<br><b>Place:</b> BARINGO<br><b>Deaths:</b> 1.0<br><b>Injuries:</b> 0.0<br><b>Severity:</b> 24.0</div>`)[0];
+                popup_87a5908b931d47bb644d7de929d8cd0c.setContent(html_3d42a304b242f9f91346413f56759ce9);
+            
+        
+
+        circle_marker_68091e0ef78a2d2e137cdfce4b5bd007.bindPopup(popup_87a5908b931d47bb644d7de929d8cd0c)
+        ;
+
+        
+    
+    
+            var circle_marker_eb17757033551106e389031500af896f = L.circleMarker(
+                [0.71401, 36.0172739],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_d669c781332b93bca3aafc5755fa6fe9 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_12bbc09b929cc33ee9b1e49b56d13a66 = $(`<div id="html_12bbc09b929cc33ee9b1e49b56d13a66" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N156<br><b>Year:</b> 2016.0<br><b>Month:</b> DEC<br><b>Place:</b> BARINGO<br><b>Deaths:</b> 0.0<br><b>Injuries:</b> 1.0<br><b>Severity:</b> 2.0</div>`)[0];
+                popup_d669c781332b93bca3aafc5755fa6fe9.setContent(html_12bbc09b929cc33ee9b1e49b56d13a66);
+            
+        
+
+        circle_marker_eb17757033551106e389031500af896f.bindPopup(popup_d669c781332b93bca3aafc5755fa6fe9)
+        ;
+
+        
+    
+    
+            var circle_marker_0f1423607101293b4ab7e3abac6e3194 = L.circleMarker(
+                [0.71401, 36.0172739],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_2540a5ee41ad5ce965aaf86cce47ad6f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c9cbc73c9385b1b489b5365667630997 = $(`<div id="html_c9cbc73c9385b1b489b5365667630997" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N158<br><b>Year:</b> 2015.0<br><b>Month:</b> JUN<br><b>Place:</b> BARINGO<br><b>Deaths:</b> 1.0<br><b>Injuries:</b> 0.0<br><b>Severity:</b> 3.0</div>`)[0];
+                popup_2540a5ee41ad5ce965aaf86cce47ad6f.setContent(html_c9cbc73c9385b1b489b5365667630997);
+            
+        
+
+        circle_marker_0f1423607101293b4ab7e3abac6e3194.bindPopup(popup_2540a5ee41ad5ce965aaf86cce47ad6f)
+        ;
+
+        
+    
+    
+            var circle_marker_5f3c25736b60395ae8a1d8ccadea222a = L.circleMarker(
+                [0.71401, 36.0172739],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_c89a1f04143d2ea99f3f5c5eff8b9136 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_dc4f9395a3ade8f3140e0c5a6177d172 = $(`<div id="html_dc4f9395a3ade8f3140e0c5a6177d172" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N164<br><b>Year:</b> 2014.0<br><b>Month:</b> OCT<br><b>Place:</b> BARINGO<br><b>Deaths:</b> 0.0<br><b>Injuries:</b> 0.0<br><b>Severity:</b> 0.0</div>`)[0];
+                popup_c89a1f04143d2ea99f3f5c5eff8b9136.setContent(html_dc4f9395a3ade8f3140e0c5a6177d172);
+            
+        
+
+        circle_marker_5f3c25736b60395ae8a1d8ccadea222a.bindPopup(popup_c89a1f04143d2ea99f3f5c5eff8b9136)
+        ;
+
+        
+    
+    
+            var circle_marker_f122308eb29d08dfbebe298906fa1112 = L.circleMarker(
+                [0.71401, 36.0172739],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.76, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_49a7beac4e2a917a9730bf0b59f23d56 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_59b19e40fe283136a580a2e8cce6151f = $(`<div id="html_59b19e40fe283136a580a2e8cce6151f" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N167<br><b>Year:</b> 2024.0<br><b>Month:</b> MAY<br><b>Place:</b> BARINGO<br><b>Deaths:</b> 0.0<br><b>Injuries:</b> 3.0<br><b>Severity:</b> 28.8</div>`)[0];
+                popup_49a7beac4e2a917a9730bf0b59f23d56.setContent(html_59b19e40fe283136a580a2e8cce6151f);
+            
+        
+
+        circle_marker_f122308eb29d08dfbebe298906fa1112.bindPopup(popup_49a7beac4e2a917a9730bf0b59f23d56)
+        ;
+
+        
+    
+    
+            var circle_marker_9fae9e0d78d440494b64341f8a4504ed = L.circleMarker(
+                [0.71401, 36.0172739],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_6c766e5db5b693f48f145d32d276519f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_fc65915469378b0bad734a906468dc62 = $(`<div id="html_fc65915469378b0bad734a906468dc62" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N171<br><b>Year:</b> 2024.0<br><b>Month:</b> MAR<br><b>Place:</b> BARINGO<br><b>Deaths:</b> 31.0<br><b>Injuries:</b> 0.0<br><b>Severity:</b> 93.0</div>`)[0];
+                popup_6c766e5db5b693f48f145d32d276519f.setContent(html_fc65915469378b0bad734a906468dc62);
+            
+        
+
+        circle_marker_9fae9e0d78d440494b64341f8a4504ed.bindPopup(popup_6c766e5db5b693f48f145d32d276519f)
+        ;
+
+        
+    
+    
+            var circle_marker_671e049980e801e239f680b16715f580 = L.circleMarker(
+                [0.71401, 36.0172739],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.8, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_fb953e48f0db580132895678db3b458f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8329f8c4d71eaf6b8e109587370deaf7 = $(`<div id="html_8329f8c4d71eaf6b8e109587370deaf7" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N182<br><b>Year:</b> 2023.0<br><b>Month:</b> DEC<br><b>Place:</b> BARINGO<br><b>Deaths:</b> 3.0<br><b>Injuries:</b> 0.0<br><b>Severity:</b> 9.0</div>`)[0];
+                popup_fb953e48f0db580132895678db3b458f.setContent(html_8329f8c4d71eaf6b8e109587370deaf7);
+            
+        
+
+        circle_marker_671e049980e801e239f680b16715f580.bindPopup(popup_fb953e48f0db580132895678db3b458f)
+        ;
+
+        
+    
+    
+            var circle_marker_b5d6dfc15257242f91cb27cdd12e1a78 = L.circleMarker(
+                [0.71401, 36.0172739],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_22cd8a168b7948cb524f5ecf87ce5f8b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_61a92fa241696c6c9648d501d42b89b0 = $(`<div id="html_61a92fa241696c6c9648d501d42b89b0" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N186<br><b>Year:</b> 2023.0<br><b>Month:</b> NOV<br><b>Place:</b> BARINGO<br><b>Deaths:</b> 0.0<br><b>Injuries:</b> 1.0<br><b>Severity:</b> 2.4</div>`)[0];
+                popup_22cd8a168b7948cb524f5ecf87ce5f8b.setContent(html_61a92fa241696c6c9648d501d42b89b0);
+            
+        
+
+        circle_marker_b5d6dfc15257242f91cb27cdd12e1a78.bindPopup(popup_22cd8a168b7948cb524f5ecf87ce5f8b)
+        ;
+
+        
+    
+    
+            var circle_marker_8f134a9b0e9d52d20e47ab511240d2c8 = L.circleMarker(
+                [0.71401, 36.0172739],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.6, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_934bc9aea4ba5e2636f059914c25bd7b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5d99eb5a63446794d91bb9e44e5f2d86 = $(`<div id="html_5d99eb5a63446794d91bb9e44e5f2d86" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N193<br><b>Year:</b> 2023.0<br><b>Month:</b> MAY<br><b>Place:</b> BARINGO<br><b>Deaths:</b> 0.0<br><b>Injuries:</b> 1.0<br><b>Severity:</b> 8.0</div>`)[0];
+                popup_934bc9aea4ba5e2636f059914c25bd7b.setContent(html_5d99eb5a63446794d91bb9e44e5f2d86);
+            
+        
+
+        circle_marker_8f134a9b0e9d52d20e47ab511240d2c8.bindPopup(popup_934bc9aea4ba5e2636f059914c25bd7b)
+        ;
+
+        
+    
+    
+            var circle_marker_9b9bacac8f233cdd2f2f5254d9de05d4 = L.circleMarker(
+                [0.71401, 36.0172739],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12.4, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_4909320bf8e546f134fa46bb8d3d8dbb = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_88ebe17d090181c0ed75a62ee44a2103 = $(`<div id="html_88ebe17d090181c0ed75a62ee44a2103" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N199<br><b>Year:</b> 2023.0<br><b>Month:</b> MAR<br><b>Place:</b> BARINGO<br><b>Deaths:</b> 1.0<br><b>Injuries:</b> 0.0<br><b>Severity:</b> 47.0</div>`)[0];
+                popup_4909320bf8e546f134fa46bb8d3d8dbb.setContent(html_88ebe17d090181c0ed75a62ee44a2103);
+            
+        
+
+        circle_marker_9b9bacac8f233cdd2f2f5254d9de05d4.bindPopup(popup_4909320bf8e546f134fa46bb8d3d8dbb)
+        ;
+
+        
+    
+    
+            var circle_marker_4773039bddcf9333226b32f412f304b1 = L.circleMarker(
+                [1.0060601, 38.7478954],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.8, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_18c071078175495795179a9b9590a7ea = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_42755e9547b376046d914774a6f9f2ee = $(`<div id="html_42755e9547b376046d914774a6f9f2ee" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N209<br><b>Year:</b> 2023.0<br><b>Month:</b> FEB<br><b>Place:</b> ISIOLO<br><b>Deaths:</b> 10.0<br><b>Injuries:</b> 0.0<br><b>Severity:</b> 34.0</div>`)[0];
+                popup_18c071078175495795179a9b9590a7ea.setContent(html_42755e9547b376046d914774a6f9f2ee);
+            
+        
+
+        circle_marker_4773039bddcf9333226b32f412f304b1.bindPopup(popup_18c071078175495795179a9b9590a7ea)
+        ;
+
+        
+    
+    
+            var circle_marker_34c87394f25bc8c82d5d933c336fa941 = L.circleMarker(
+                [1.0060601, 38.7478954],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_ea3d57406a1df7ace4d53c5f7d12e47c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_02f5b3a20b0032e20e0f7bd3cb71ad64 = $(`<div id="html_02f5b3a20b0032e20e0f7bd3cb71ad64" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N210<br><b>Year:</b> 2023.0<br><b>Month:</b> FEB<br><b>Place:</b> ISIOLO<br><b>Deaths:</b> 0.0<br><b>Injuries:</b> 0.0<br><b>Severity:</b> 2.0</div>`)[0];
+                popup_ea3d57406a1df7ace4d53c5f7d12e47c.setContent(html_02f5b3a20b0032e20e0f7bd3cb71ad64);
+            
+        
+
+        circle_marker_34c87394f25bc8c82d5d933c336fa941.bindPopup(popup_ea3d57406a1df7ace4d53c5f7d12e47c)
+        ;
+
+        
+    
+    
+            var circle_marker_79c9f4cdb9340d7da69f58063b9593c3 = L.circleMarker(
+                [0.71401, 36.0172739],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5.2, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_241a69ed81ae78703516df5bf40bb944 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c58e007135ec7ed826029408b4922ac3 = $(`<div id="html_c58e007135ec7ed826029408b4922ac3" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N223<br><b>Year:</b> 2022.0<br><b>Month:</b> NOV<br><b>Place:</b> BARINGO<br><b>Deaths:</b> 1.0<br><b>Injuries:</b> 0.0<br><b>Severity:</b> 11.0</div>`)[0];
+                popup_241a69ed81ae78703516df5bf40bb944.setContent(html_c58e007135ec7ed826029408b4922ac3);
+            
+        
+
+        circle_marker_79c9f4cdb9340d7da69f58063b9593c3.bindPopup(popup_241a69ed81ae78703516df5bf40bb944)
+        ;
+
+        
+    
+    
+            var circle_marker_c3111683502c2d3ec286347e080c62cb = L.circleMarker(
+                [0.71401, 36.0172739],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_45b6af77ef02a9b7f94fd75d51738d70 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_021bde50e2300e268d1bbd742ff7a1a3 = $(`<div id="html_021bde50e2300e268d1bbd742ff7a1a3" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N236<br><b>Year:</b> 2022.0<br><b>Month:</b> AUG<br><b>Place:</b> BARINGO<br><b>Deaths:</b> 0.0<br><b>Injuries:</b> 0.0<br><b>Severity:</b> 0.0</div>`)[0];
+                popup_45b6af77ef02a9b7f94fd75d51738d70.setContent(html_021bde50e2300e268d1bbd742ff7a1a3);
+            
+        
+
+        circle_marker_c3111683502c2d3ec286347e080c62cb.bindPopup(popup_45b6af77ef02a9b7f94fd75d51738d70)
+        ;
+
+        
+    
+    
+            var circle_marker_5665edca4bb254201c0dcbe06b2e4817 = L.circleMarker(
+                [1.0060601, 38.7478954],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_990183efec3062c997ef0990dd93470a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d10ff3fd7ed55976abfe7bba37cc2ec3 = $(`<div id="html_d10ff3fd7ed55976abfe7bba37cc2ec3" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N239<br><b>Year:</b> 2022.0<br><b>Month:</b> JUL<br><b>Place:</b> ISIOLO<br><b>Deaths:</b> 1.0<br><b>Injuries:</b> 1.0<br><b>Severity:</b> 5.0</div>`)[0];
+                popup_990183efec3062c997ef0990dd93470a.setContent(html_d10ff3fd7ed55976abfe7bba37cc2ec3);
+            
+        
+
+        circle_marker_5665edca4bb254201c0dcbe06b2e4817.bindPopup(popup_990183efec3062c997ef0990dd93470a)
+        ;
+
+        
+    
+    
+            var circle_marker_36d7d5d79cc00bf00fcd8968b2167858 = L.circleMarker(
+                [1.0060601, 38.7478954],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.2, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_9c06adf65887d976fdb816c0153a790c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_44039ea6630ffce4d10ae85dae08cfdc = $(`<div id="html_44039ea6630ffce4d10ae85dae08cfdc" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N244<br><b>Year:</b> 2022.0<br><b>Month:</b> JUN<br><b>Place:</b> ISIOLO<br><b>Deaths:</b> 4.0<br><b>Injuries:</b> 0.0<br><b>Severity:</b> 16.0</div>`)[0];
+                popup_9c06adf65887d976fdb816c0153a790c.setContent(html_44039ea6630ffce4d10ae85dae08cfdc);
+            
+        
+
+        circle_marker_36d7d5d79cc00bf00fcd8968b2167858.bindPopup(popup_9c06adf65887d976fdb816c0153a790c)
+        ;
+
+        
+    
+    
+            var circle_marker_61c7652de862597c2790bfff14f3a147 = L.circleMarker(
+                [1.0060601, 38.7478954],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_53c8f32cb0b20c1bfc477f0c0e344629 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_32499f97cbe045d2d9c67057ddb1faf7 = $(`<div id="html_32499f97cbe045d2d9c67057ddb1faf7" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N245<br><b>Year:</b> 2022.0<br><b>Month:</b> JUN<br><b>Place:</b> ISIOLO<br><b>Deaths:</b> 11.0<br><b>Injuries:</b> 18.0<br><b>Severity:</b> 69.0</div>`)[0];
+                popup_53c8f32cb0b20c1bfc477f0c0e344629.setContent(html_32499f97cbe045d2d9c67057ddb1faf7);
+            
+        
+
+        circle_marker_61c7652de862597c2790bfff14f3a147.bindPopup(popup_53c8f32cb0b20c1bfc477f0c0e344629)
+        ;
+
+        
+    
+    
+            var circle_marker_4e02e2b04ac81a9cce9d88bfbb609828 = L.circleMarker(
+                [0.71401, 36.0172739],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_ee3bee1d48c2d27012b35491465c16d7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4f0224155e85c94b5f5841ce7dc4e7be = $(`<div id="html_4f0224155e85c94b5f5841ce7dc4e7be" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N246<br><b>Year:</b> 2022.0<br><b>Month:</b> JUN<br><b>Place:</b> BARINGO<br><b>Deaths:</b> 20.0<br><b>Injuries:</b> 0.0<br><b>Severity:</b> 60.0</div>`)[0];
+                popup_ee3bee1d48c2d27012b35491465c16d7.setContent(html_4f0224155e85c94b5f5841ce7dc4e7be);
+            
+        
+
+        circle_marker_4e02e2b04ac81a9cce9d88bfbb609828.bindPopup(popup_ee3bee1d48c2d27012b35491465c16d7)
+        ;
+
+        
+    
+    
+            var circle_marker_811df86f38da822957f9d4c27c0a8d58 = L.circleMarker(
+                [1.0060601, 38.7478954],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_448dcaf0b1b7541ab98478dc4ae1b8b2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_74dc57e0507847a507468547db5a3157 = $(`<div id="html_74dc57e0507847a507468547db5a3157" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N256<br><b>Year:</b> 2022.0<br><b>Month:</b> APR<br><b>Place:</b> ISIOLO<br><b>Deaths:</b> 20.0<br><b>Injuries:</b> 2.0<br><b>Severity:</b> 84.5</div>`)[0];
+                popup_448dcaf0b1b7541ab98478dc4ae1b8b2.setContent(html_74dc57e0507847a507468547db5a3157);
+            
+        
+
+        circle_marker_811df86f38da822957f9d4c27c0a8d58.bindPopup(popup_448dcaf0b1b7541ab98478dc4ae1b8b2)
+        ;
+
+        
+    
+    
+            var circle_marker_5e1e81ff59a6e357512d6e506f558422 = L.circleMarker(
+                [0.71401, 36.0172739],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.84, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_123500d90f0ad3e1a3c1afa954586789 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_fb6da9deb0d879e6ffc825c53dbd26e6 = $(`<div id="html_fb6da9deb0d879e6ffc825c53dbd26e6" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N265<br><b>Year:</b> 2022.0<br><b>Month:</b> MAR<br><b>Place:</b> BARINGO<br><b>Deaths:</b> 1.0<br><b>Injuries:</b> 3.0<br><b>Severity:</b> 9.2</div>`)[0];
+                popup_123500d90f0ad3e1a3c1afa954586789.setContent(html_fb6da9deb0d879e6ffc825c53dbd26e6);
+            
+        
+
+        circle_marker_5e1e81ff59a6e357512d6e506f558422.bindPopup(popup_123500d90f0ad3e1a3c1afa954586789)
+        ;
+
+        
+    
+    
+            var circle_marker_3475d86b73b0e6b5a10dc0f0ad79e08f = L.circleMarker(
+                [0.71401, 36.0172739],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_eb0325f23e4079f3bc98132ecf6aef5c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_56a84c61b419230f6fcafae0eb3a3a57 = $(`<div id="html_56a84c61b419230f6fcafae0eb3a3a57" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N266<br><b>Year:</b> 2022.0<br><b>Month:</b> MAR<br><b>Place:</b> BARINGO<br><b>Deaths:</b> nan<br><b>Injuries:</b> nan<br><b>Severity:</b> 0.0</div>`)[0];
+                popup_eb0325f23e4079f3bc98132ecf6aef5c.setContent(html_56a84c61b419230f6fcafae0eb3a3a57);
+            
+        
+
+        circle_marker_3475d86b73b0e6b5a10dc0f0ad79e08f.bindPopup(popup_eb0325f23e4079f3bc98132ecf6aef5c)
+        ;
+
+        
+    
+    
+            var circle_marker_82e2414fbffb61ab42b214992c7d0669 = L.circleMarker(
+                [0.71401, 36.0172739],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.768, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_e7a08a0caec309e2985dc80cf875a1a5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_fa12eaac60944a159f8bf63a388fec10 = $(`<div id="html_fa12eaac60944a159f8bf63a388fec10" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N283<br><b>Year:</b> 2022.0<br><b>Month:</b> JAN<br><b>Place:</b> BARINGO<br><b>Deaths:</b> 3.0<br><b>Injuries:</b> 0.0<br><b>Severity:</b> 33.84</div>`)[0];
+                popup_e7a08a0caec309e2985dc80cf875a1a5.setContent(html_fa12eaac60944a159f8bf63a388fec10);
+            
+        
+
+        circle_marker_82e2414fbffb61ab42b214992c7d0669.bindPopup(popup_e7a08a0caec309e2985dc80cf875a1a5)
+        ;
+
+        
+    
+    
+            var circle_marker_51f7695bd1ee30bea06219f542c8c795 = L.circleMarker(
+                [1.8798608, 35.210613],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.056, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_df2afbe226358b6b6a9580e9e6fb43a8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f80453e48e3ae28c7d194a39d62a029e = $(`<div id="html_f80453e48e3ae28c7d194a39d62a029e" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N292<br><b>Year:</b> 2022.0<br><b>Month:</b> JAN<br><b>Place:</b> WEST POKOT<br><b>Deaths:</b> 0.0<br><b>Injuries:</b> 2.0<br><b>Severity:</b> 5.28</div>`)[0];
+                popup_df2afbe226358b6b6a9580e9e6fb43a8.setContent(html_f80453e48e3ae28c7d194a39d62a029e);
+            
+        
+
+        circle_marker_51f7695bd1ee30bea06219f542c8c795.bindPopup(popup_df2afbe226358b6b6a9580e9e6fb43a8)
+        ;
+
+        
+    
+    
+            var circle_marker_6d19217137efbba7f3fd2c220b2d69a2 = L.circleMarker(
+                [1.8798608, 35.210613],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_4f65ab0d0f111fbbbc516a4821a606ae = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_79efdad2013ccc73cdabe72a16499e6b = $(`<div id="html_79efdad2013ccc73cdabe72a16499e6b" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N293<br><b>Year:</b> 2021.0<br><b>Month:</b> DEC<br><b>Place:</b> WEST POKOT<br><b>Deaths:</b> nan<br><b>Injuries:</b> nan<br><b>Severity:</b> 0.0</div>`)[0];
+                popup_4f65ab0d0f111fbbbc516a4821a606ae.setContent(html_79efdad2013ccc73cdabe72a16499e6b);
+            
+        
+
+        circle_marker_6d19217137efbba7f3fd2c220b2d69a2.bindPopup(popup_4f65ab0d0f111fbbbc516a4821a606ae)
+        ;
+
+        
+    
+    
+            var circle_marker_a7b9bd9b407ca98c4f65f092a1ec17ee = L.circleMarker(
+                [1.0060601, 38.7478954],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.6, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_e3b986f1cdb64f234d8d7520037525b8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a630e04f82c04b99346c6ff58d26c3c9 = $(`<div id="html_a630e04f82c04b99346c6ff58d26c3c9" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N303<br><b>Year:</b> 2021.0<br><b>Month:</b> JUN<br><b>Place:</b> ISIOLO<br><b>Deaths:</b> 6.0<br><b>Injuries:</b> 0.0<br><b>Severity:</b> 18.0</div>`)[0];
+                popup_e3b986f1cdb64f234d8d7520037525b8.setContent(html_a630e04f82c04b99346c6ff58d26c3c9);
+            
+        
+
+        circle_marker_a7b9bd9b407ca98c4f65f092a1ec17ee.bindPopup(popup_e3b986f1cdb64f234d8d7520037525b8)
+        ;
+
+        
+    
+    
+            var circle_marker_1b5a799949296c6c2de1530a5d679802 = L.circleMarker(
+                [0.71401, 36.0172739],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_ad83f7347550197eb31a22f1cb97cad8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d4bbb8da693c8bfba2f9928ee6776734 = $(`<div id="html_d4bbb8da693c8bfba2f9928ee6776734" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N351<br><b>Year:</b> 2023.0<br><b>Month:</b> OCT<br><b>Place:</b> BARINGO<br><b>Deaths:</b> 0.0<br><b>Injuries:</b> 0.0<br><b>Severity:</b> 0.0</div>`)[0];
+                popup_ad83f7347550197eb31a22f1cb97cad8.setContent(html_d4bbb8da693c8bfba2f9928ee6776734);
+            
+        
+
+        circle_marker_1b5a799949296c6c2de1530a5d679802.bindPopup(popup_ad83f7347550197eb31a22f1cb97cad8)
+        ;
+
+        
+    
+    
+            var circle_marker_1d882780a11192399c855fd2f08555d5 = L.circleMarker(
+                [1.0060601, 38.7478954],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.8, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_b6a0d8e911f22437c47c0ddde7d92c8a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6ab5014dc093a9829dfe30fa6fabcdb5 = $(`<div id="html_6ab5014dc093a9829dfe30fa6fabcdb5" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N354<br><b>Year:</b> 2023.0<br><b>Month:</b> FEB<br><b>Place:</b> ISIOLO<br><b>Deaths:</b> 3.0<br><b>Injuries:</b> 0.0<br><b>Severity:</b> 9.0</div>`)[0];
+                popup_b6a0d8e911f22437c47c0ddde7d92c8a.setContent(html_6ab5014dc093a9829dfe30fa6fabcdb5);
+            
+        
+
+        circle_marker_1d882780a11192399c855fd2f08555d5.bindPopup(popup_b6a0d8e911f22437c47c0ddde7d92c8a)
+        ;
+
+        
+    
+    
+            var circle_marker_132dc2a8600b60e0feb63ce9567ec1df = L.circleMarker(
+                [0.71401, 36.0172739],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5.4, "stroke": true, "weight": 3}
+            ).addTo(marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32);
+        
+    
+        var popup_927ca8e8e4c4e50f6f477064e3d584c4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f14a8492e7aff6701aa131cccef78998 = $(`<div id="html_f14a8492e7aff6701aa131cccef78998" style="width: 100.0%; height: 100.0%;"><b>Doc Code:</b> BED_N362<br><b>Year:</b> 2022.0<br><b>Month:</b> MAR<br><b>Place:</b> BARINGO<br><b>Deaths:</b> 4.0<br><b>Injuries:</b> 0.0<br><b>Severity:</b> 12.0</div>`)[0];
+                popup_927ca8e8e4c4e50f6f477064e3d584c4.setContent(html_f14a8492e7aff6701aa131cccef78998);
+            
+        
+
+        circle_marker_132dc2a8600b60e0feb63ce9567ec1df.bindPopup(popup_927ca8e8e4c4e50f6f477064e3d584c4)
+        ;
+
+        
+    
+    
+            marker_cluster_8bebeb30ef94bf72a67d95e6a8f25e32.addTo(map_4cc751ff5bc49baabd6ef2818dcf90bc);
+        
+</script>
+</html>
